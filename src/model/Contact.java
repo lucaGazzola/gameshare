@@ -4,7 +4,7 @@ package model;
 import javax.persistence.*;
 
 @Entity(name="Contact") 
-@TableGenerator(name="contactGen",pkColumnName="key",pkColumnValue="productID",initialValue=0,table="counters",valueColumnName="value")
+@TableGenerator(name="contactGen",pkColumnName="key",pkColumnValue="contactID",initialValue=0,table="counters",valueColumnName="value")
 public class Contact {
 	
 	@Column(name="firstname")
@@ -16,7 +16,7 @@ public class Contact {
 	@Column(name="address")
 	private String address;
 	
-	@Id @Column(name="Id")
+	@Id @Column(name="contactID")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="contactGen") 
 	private long id;
 	

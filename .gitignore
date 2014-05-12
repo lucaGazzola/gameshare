@@ -1,0 +1,7 @@
+/bin/
+# ignoro librerie
+/WebContent/WEB-INF/lib/
+/.settings/
+.classpath
+.project
+/build/

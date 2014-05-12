@@ -3,6 +3,7 @@ package model;
 import javax.persistence.*;
 
 @Entity
+@TableGenerator(name="userGen",pkColumnName="key",pkColumnValue="userID",initialValue=0,table="counters",valueColumnName="value")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="USER_TYPE")
 @Table(name="USER")
@@ -14,7 +15,7 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
-	@Id @Column(name="Id")
+	@Id @Column(name="userID")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="userGen") 
 	private long id;
 	
