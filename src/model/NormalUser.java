@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,7 +11,7 @@ public class NormalUser extends SystemUser {
 	
 	public NormalUser() {}
 	
-	public NormalUser(String email, String password, String birthdate, String firstname, String lastname, char gender, String job, String residence, String school, String hometown) {
+	public NormalUser(String email, String password, Date birthdate, String firstname, String lastname, char gender, String job, String residence, String school, String hometown) {
 		super(email,password, birthdate, firstname, lastname, gender, job, residence, school, hometown);	
 	}
 

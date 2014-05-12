@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @DiscriminatorValue("S")
@@ -10,7 +11,7 @@ import javax.persistence.*;
 public class SystemUser extends User{
 
 	@Column(name="birthdate")
-	private String birthdate;
+	private Date birthdate;
 	
 	@Column(name="firstname")
 	private String firstname;
@@ -35,7 +36,7 @@ public class SystemUser extends User{
 	
 	public SystemUser() {}
 	
-	public SystemUser(String email, String password, String birthdate, String firstname, String lastname, char gender, String job, String residence, String school, String hometown) {
+	public SystemUser(String email, String password, Date birthdate, String firstname, String lastname, char gender, String job, String residence, String school, String hometown) {
 		super(email,password);
 		this.birthdate = birthdate;
 		this.firstname = firstname;
@@ -48,11 +49,11 @@ public class SystemUser extends User{
 		
 	}
 
-	public String getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
 

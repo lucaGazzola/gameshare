@@ -3,7 +3,7 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@TableGenerator(name="gameGen",pkColumnName="key",pkColumnValue="gameID",initialValue=0,table="counters",valueColumnName="value")
+@TableGenerator(name="gameGen",pkColumnName="key",pkColumnValue="ID_game",initialValue=0,table="counters",valueColumnName="value")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="GAME_TYPE")
 @Table(name="GAME")
@@ -27,9 +27,9 @@ public class Game {
 	@Column(name="published")
 	private boolean published;
 	
-	@Id @Column(name="gameID")
+	@Id @Column(name="ID_game")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="gameGen") 
-	private long id;
+	private long ID_game;
 	
 	public Game() {}
 	
@@ -42,13 +42,13 @@ public class Game {
 		this.published = false;
 	}
 		
-	
-	public long getId() {
-		return id;
+
+	public long getID_game() {
+		return ID_game;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setID_game(long iD_game) {
+		ID_game = iD_game;
 	}
 
 	public int getAcceptCount() {
