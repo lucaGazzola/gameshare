@@ -9,6 +9,7 @@
 		<class>src.model.Moderator</class>
 		<class>src.model.Analyst</class>
 		<class>src.model.NormalUser</class>
+		<class>src.model.Game</class>
   
 		<properties>
 			<property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
