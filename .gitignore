@@ -1,5 +1,6 @@
 /bin/
 # ignoro librerie
+/WebContent/WEB-INF/.DS_Store
 /WebContent/WEB-INF/lib/
 /.settings/
 .classpath
