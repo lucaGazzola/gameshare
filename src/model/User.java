@@ -3,7 +3,7 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@TableGenerator(name="userGen",pkColumnName="key",pkColumnValue="userID",initialValue=0,table="counters",valueColumnName="value")
+@TableGenerator(name="userGen",pkColumnName="key",pkColumnValue="ID_user",initialValue=0,table="counters",valueColumnName="value")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="USER_TYPE")
 @Table(name="USER")
@@ -15,9 +15,9 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
-	@Id @Column(name="userID")
+	@Id @Column(name="ID_user")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="userGen") 
-	private long id;
+	private long ID_user;
 	
 	public User() {}
 	
@@ -25,16 +25,15 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
-		
 	
-	public long getId() {
-		return id;
+	public long getID_user() {
+		return ID_user;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setID_user(long iD_user) {
+		ID_user = iD_user;
 	}
-	
+
 	public void setEmail(String email){
 		this.email = email;
 	}
