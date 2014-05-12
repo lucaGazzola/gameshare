@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<constant name="struts.devMode" value="false"/>
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources"/>
+
+	<package name="default" extends="struts-default" namespace="/">
+
+		<action name="add" class="actions.AddAction">
+			<result name="success">confirm.jsp</result>
+			<result name="errorField">index.jsp</result>
+			<result name="errorDuplicate">index.jsp</result>
+		</action>
+	</package>
+</struts>
