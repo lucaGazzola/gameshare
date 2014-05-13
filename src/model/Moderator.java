@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("M")
-@Table(name="Moderator")
+@Table(name="MODERATOR")
 public class Moderator extends SystemUser {
 	
 	public Moderator() {}

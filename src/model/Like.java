@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
-@Entity(name="Like") 
+@Entity(name="LIKE") 
 public class Like {
     @EmbeddedId
     private LikePK ID_like;

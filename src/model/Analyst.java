@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("A")
-@Table(name="Analyst")
+@Table(name="ANALYST")
 public class Analyst extends User{
 	
 	public Analyst() {}

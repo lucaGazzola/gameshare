@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.*;
 
-@Entity(name="Contact") 
+@Entity(name="PLATFORM") 
 @TableGenerator(name="platformGen",pkColumnName="key",pkColumnValue="ID_platform",initialValue=0,table="counters",valueColumnName="value")
 public class Platform {
 	
@@ -16,7 +16,7 @@ public class Platform {
 	private long ID_platform;
 	
 	@ManyToMany(mappedBy="platforms")
-	private Collection<Game> games;
+	private Collection<Videogame> videogames;
 	
 	public Platform() {}
 	
@@ -32,12 +32,12 @@ public class Platform {
 		ID_platform = iD_platform;
 	}
 	
-	public Collection<Game> getGames() {
-		return games;
+	public Collection<Videogame> getVideogames() {
+		return videogames;
 	}
 
-	public void setGames(Collection<Game> games) {
-		this.games = games;
+	public void setVideogames(Collection<Videogame> videogames) {
+		this.videogames = videogames;
 	}
 
 	public String getName() {

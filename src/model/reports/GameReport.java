@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
-@Entity(name="GameReport") 
+@Entity(name="GAME_REPORT") 
 @TableGenerator(name="gameReportGen",pkColumnName="key",pkColumnValue="ID_game_report",initialValue=0,table="counters",valueColumnName="value")
 public class GameReport {
 	

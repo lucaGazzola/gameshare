@@ -10,6 +10,16 @@
 		<class>model.Analyst</class>
 		<class>model.NormalUser</class>
 		<class>model.Game</class>
+		<class>model.BoardGame</class>
+		<class>model.CardGame</class>
+		<class>model.ClassicGame</class>
+		<class>model.Like</class>
+		<class>model.Platform</class>
+		<class>model.Sport</class>
+		<class>model.Videogame</class>
+		<class>model.reports.GameReport</class>
+		<class>model.reports.UserReport</class>
+		
   
 		<properties>
 			<property name="eclipselink.jdbc.batch-writing" value="JDBC"/>

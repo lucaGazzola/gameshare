@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("N")
-@Table(name="NormalUser")
+@Table(name="NORMAL_USER")
 public class NormalUser extends SystemUser {
 	
 	public NormalUser() {}

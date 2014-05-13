@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @DiscriminatorValue("A")
-@Table(name="Administrator")
+@Table(name="ADMINISTRATOR")
 public class Administrator extends SystemUser {
 	
 	public Administrator() {}

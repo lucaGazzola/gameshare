@@ -3,7 +3,7 @@ package model;
 
 import javax.persistence.*;
 
-@Entity(name="Contact") 
+@Entity(name="CONTACT") 
 @TableGenerator(name="contactGen",pkColumnName="key",pkColumnValue="contactID",initialValue=0,table="counters",valueColumnName="value")
 public class Contact {
 	

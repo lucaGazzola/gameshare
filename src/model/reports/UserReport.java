@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
-@Entity(name="UserReport") 
+@Entity(name="USER_REPORT") 
 @TableGenerator(name="userReportGen",pkColumnName="key",pkColumnValue="ID_user_report",initialValue=0,table="counters",valueColumnName="value")
 public class UserReport {
 	
