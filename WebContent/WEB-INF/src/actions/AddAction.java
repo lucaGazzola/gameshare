@@ -25,6 +25,8 @@ public class AddAction extends ActionSupport {
 	
 	NormalUser u;
 	CardGame g;
+	Like l;
+	LikePK lpk;
 	Book b = Book.getInstance();
 	Contact c;
 	
@@ -59,7 +61,13 @@ public class AddAction extends ActionSupport {
 		u = new NormalUser("franco@franco", "prolol", now, "luca", "franchi", 'M', "troz", "sov", "bicocca", "frenk");
 		em.persist(u);
 		//fine test insert
-		
+		lpk = new LikePK(1,1);
+		l = new Like();
+		l.setID_like(lpk);
+		l.setPlay(true);
+		l.setReview("fwdadwad");
+		l.setScore(5);
+		em.persist(l);
 		
 		if (!firstname.equals("") && !lastname.equals("")){
 			if(!(b.isPresent(firstname, lastname))){
@@ -83,6 +91,7 @@ public class AddAction extends ActionSupport {
 					System.out.println(itu.next());
 				} 
 				//fine test query
+				
 				
 				
 				return "success";

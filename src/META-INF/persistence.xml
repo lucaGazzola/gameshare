@@ -12,7 +12,8 @@
 		<class>model.BoardGame</class>
 		<class>model.CardGame</class>
 		<class>model.ClassicGame</class>
-		<!-- <class>model.Like</class> -->
+		<class>model.Like</class>
+		<class>model.LikePK</class>
 		<class>model.Platform</class>
 		<class>model.Sport</class>
 		<class>model.Videogame</class>

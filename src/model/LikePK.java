@@ -1,11 +1,16 @@
 package model;
 
-import javax.persistence.*;
-// chiave primaria composta da 2 chiavi esterne
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
 @Embeddable
-class LikePK {
+public class LikePK implements Serializable{
 	
-    @Column(name = "ID_user", nullable = false)
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "ID_user", nullable = false)
     private long ID_user;
 
 	@Column(name = "ID_game", nullable = false)
@@ -50,3 +55,4 @@ class LikePK {
 		ID_game = iD_game;
 	}
 }
+
