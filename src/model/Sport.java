@@ -3,7 +3,7 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("S")
+@DiscriminatorValue("SP")
 @Table(name="SPORT")
 public class Sport extends ClassicGame {
 	

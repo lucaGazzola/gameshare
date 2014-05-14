@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@DiscriminatorValue("A")
+@DiscriminatorValue("AU")
 @Table(name="ADMINISTRATOR")
 public class Administrator extends SystemUser {
 	

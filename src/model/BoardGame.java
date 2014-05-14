@@ -3,7 +3,7 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("B")
+@DiscriminatorValue("BG")
 @Table(name="BOARD_GAME")
 public class BoardGame extends ClassicGame {
 	

@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("M")
+@DiscriminatorValue("MU")
 @Table(name="MODERATOR")
 public class Moderator extends SystemUser {
 	

@@ -4,8 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("C")
-@Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="CLASSIC_GAME_TYPE")
 @Table(name="CLASSIC_GAME")
 public class ClassicGame extends Game{
 
@@ -51,6 +49,9 @@ public class ClassicGame extends Game{
 		this.suggestedPlayers = suggestedPlayers;
 	}
 
+	public String toString(){
+		return super.toString()+" "+requiredPlayers+" "+suggestedPlayers+" "+duration;
+	}
 
 		
 

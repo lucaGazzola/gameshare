@@ -5,7 +5,7 @@ import java.util.Collection;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("V")
+@DiscriminatorValue("VG")
 @Table(name="VIDEOGAME")
 public class Videogame extends Game {
 	

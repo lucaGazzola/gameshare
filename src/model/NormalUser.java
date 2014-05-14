@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("N")
+@DiscriminatorValue("NU")
 @Table(name="NORMAL_USER")
 public class NormalUser extends SystemUser {
 	
@@ -15,4 +15,10 @@ public class NormalUser extends SystemUser {
 		super(email,password, birthdate, firstname, lastname, gender, job, residence, school, hometown);	
 	}
 
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	
 }

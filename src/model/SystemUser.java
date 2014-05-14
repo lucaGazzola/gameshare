@@ -4,12 +4,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@DiscriminatorValue("S")
-@Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="SYSTEM_USER_TYPE")
+@DiscriminatorValue("SU")
 @Table(name="SYSTEM_USER")
 public class SystemUser extends User{
 
+	@Temporal(TemporalType.DATE)
 	@Column(name="birthdate")
 	private Date birthdate;
 	
@@ -112,6 +111,16 @@ public class SystemUser extends User{
 	public void setSchool(String school) {
 		this.school = school;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString()+"SystemUser [birthdate=" + birthdate + ", firstname="
+				+ firstname + ", lastname=" + lastname + ", gender=" + gender
+				+ ", hometown=" + hometown + ", job=" + job + ", residence="
+				+ residence + ", school=" + school + "]";
+	}
+	
+	
 		
 
 }

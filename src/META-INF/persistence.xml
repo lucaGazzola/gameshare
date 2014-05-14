@@ -3,7 +3,6 @@
 	<persistence-unit name="gameshareExample" transaction-type="RESOURCE_LOCAL">
  	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>model.Contact</class>
-		<class>model.User</class>
 		<class>model.Administrator</class>
 		<class>model.SystemUser</class>
 		<class>model.Moderator</class>
@@ -13,10 +12,11 @@
 		<class>model.BoardGame</class>
 		<class>model.CardGame</class>
 		<class>model.ClassicGame</class>
-		<class>model.Like</class>
+		<!-- <class>model.Like</class> -->
 		<class>model.Platform</class>
 		<class>model.Sport</class>
 		<class>model.Videogame</class>
+		<class>model.User</class>
 		<class>model.reports.GameReport</class>
 		<class>model.reports.UserReport</class>
 		

@@ -6,7 +6,7 @@ import javax.persistence.*;
 @TableGenerator(name="userGen",pkColumnName="key",pkColumnValue="ID_user",initialValue=0,table="counters",valueColumnName="value")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="USER_TYPE")
-@Table(name="USER")
+@Table(name="USER_")
 public class User {
 	
 	@Column(name="email")
@@ -19,7 +19,7 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="userGen") 
 	private long ID_user;
 	
-	public User() {}
+	public User(){}
 	
 	public User(String email, String password) {
 		this.email = email;
@@ -50,5 +50,13 @@ public class User {
 	public String getPassword(){
 		return this.password;
 	}
+
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", password=" + password + ", ID_user="
+				+ ID_user + "]";
+	}
+	
+	
 
 }

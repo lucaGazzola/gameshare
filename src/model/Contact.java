@@ -61,4 +61,8 @@ public class Contact {
 		return this.address;
 	}
 	
+	public String toString(){
+		return this.firstname;
+	}
+	
 }

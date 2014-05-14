@@ -3,7 +3,7 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("C")
+@DiscriminatorValue("CG")
 @Table(name="CARD_GAME")
 public class CardGame extends ClassicGame {
 	
@@ -25,6 +25,9 @@ public class CardGame extends ClassicGame {
 		this.deck = deck;
 	}
 	
+	public String toString(){
+		return super.toString()+" "+deck;
+	}
 	
 
 	

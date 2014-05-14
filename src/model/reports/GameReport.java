@@ -2,12 +2,7 @@ package model.reports;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.TableGenerator;
+import javax.persistence.*;
 
 @Entity(name="GAME_REPORT") 
 @TableGenerator(name="gameReportGen",pkColumnName="key",pkColumnValue="ID_game_report",initialValue=0,table="counters",valueColumnName="value")
@@ -17,6 +12,7 @@ public class GameReport {
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="gameReportGen")
 	private long ID_game_report;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="date")
 	private Date date;
 	

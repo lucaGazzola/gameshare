@@ -3,7 +3,7 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("A")
+@DiscriminatorValue("AN")
 @Table(name="ANALYST")
 public class Analyst extends User{
 	

@@ -4,12 +4,7 @@ package model.reports;
 import java.util.Date;
 //import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.TableGenerator;
+import javax.persistence.*;
 
 @Entity(name="USER_REPORT") 
 @TableGenerator(name="userReportGen",pkColumnName="key",pkColumnValue="ID_user_report",initialValue=0,table="counters",valueColumnName="value")
@@ -19,6 +14,7 @@ public class UserReport {
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="userReportGen") 
 	private int ID_user_report;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="date")
 	private Date date;
 	

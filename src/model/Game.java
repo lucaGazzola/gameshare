@@ -98,6 +98,15 @@ public class Game {
 	public void setPublished(boolean published) {
 		this.published = published;
 	}
+
+	@Override
+	public String toString() {
+		return "Game [acceptCount=" + acceptCount + ", avgScore=" + avgScore
+				+ ", description=" + description + ", name=" + name
+				+ ", priceRange=" + priceRange + ", published=" + published
+				+ ", ID_game=" + ID_game + "]";
+	}
+	
 	
 	
 }
