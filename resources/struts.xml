@@ -15,5 +15,11 @@
 			<result name="errorField">index.jsp</result>
 			<result name="errorDuplicate">index.jsp</result>
 		</action>
+		
+		<action name="register" class="actions.RegisterUserAction">
+			<result name="success">registerConfirm.jsp</result>
+			<result name="errorField">register.jsp</result>
+			<result name="errorDuplicate">register.jsp</result>
+		</action>
 	</package>
 </struts>

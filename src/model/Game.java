@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="GAME_TYPE")
 @Table(name="GAME")
+@MappedSuperclass
 public class Game {
 	
 	@Column(name="acceptCount")

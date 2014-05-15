@@ -7,7 +7,9 @@ import javax.persistence.*;
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="USER_TYPE")
 @Table(name="USER_")
+@MappedSuperclass
 public class User {
+	
 	
 	@Column(name="email")
 	private String email;

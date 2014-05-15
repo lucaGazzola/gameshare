@@ -18,6 +18,8 @@
 		<class>model.Sport</class>
 		<class>model.Videogame</class>
 		<class>model.User</class>
+		<class>model.Friendship</class>
+		<class>model.FriendshipPK</class>
 		<class>model.reports.GameReport</class>
 		<class>model.reports.UserReport</class>
 		

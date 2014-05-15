@@ -6,6 +6,7 @@ import java.util.Date;
 @Entity
 @DiscriminatorValue("SU")
 @Table(name="SYSTEM_USER")
+@MappedSuperclass
 public class SystemUser extends User{
 
 	@Temporal(TemporalType.DATE)

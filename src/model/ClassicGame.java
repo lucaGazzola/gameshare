@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("C")
 @Table(name="CLASSIC_GAME")
+@MappedSuperclass
 public class ClassicGame extends Game{
 
 	@Column(name="duration")
