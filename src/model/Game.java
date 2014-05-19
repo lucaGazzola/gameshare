@@ -16,7 +16,7 @@ public class Game {
 	@Column(name="avgScore")
 	private float avgScore;
 	
-	@Column(name="description")
+	@Column(name="description", columnDefinition = "TEXT")
 	private String description;
 	
 	@Column(name="name")

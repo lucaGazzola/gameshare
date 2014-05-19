@@ -12,12 +12,9 @@ public class EntityManagerUtil {
 		return factory.createEntityManager();
 	}
 	
-	/*
 	
-	public void closeEntityManager(EntityManager em) {
+	public static void closeEntityManager(EntityManager em) {
 		em.close();
 		factory.close();
 	}
-	
-	*/
 }

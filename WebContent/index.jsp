@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@  page 
+import="util.Populator" 
+%> 
 
 <html>
 <head>
@@ -11,6 +14,12 @@
 
 <h2>Add Contact</h2>
 <s:actionerror />
+
+<% 
+	// popola il database ad ogni avvio dell'applicazione
+	Populator pop = new Populator();
+	pop.popolate();
+%>
 
 <s:form action="add.action" method="post">
 	<s:textfield name="firstname" key="label.firstname" size="20"/>
