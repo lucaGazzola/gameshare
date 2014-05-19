@@ -35,5 +35,14 @@
 			<result name="success">addGameConfirm.jsp</result>
 			<result name="errorField">addGame.jsp</result>
 		</action>
+				<action name="ViewLikeUsers" class="actions.ViewLikeUsersAction">
+			<result name="success">viewusers.jsp</result>
+			<result name="errorField">login.jsp</result>
+		</action>
+		
+		<action name="ViewPlayUsers" class="actions.ViewPlayUsersAction">
+			<result name="success">viewusers.jsp</result>
+			<result name="errorField">login.jsp</result>
+		</action>
 	</package>
 </struts>
