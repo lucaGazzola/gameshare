@@ -17,7 +17,6 @@ public class RegisterUserAction extends ActionSupport {
 	EntityManager em = EntityManagerUtil.getEntityManager();
 	
 	User u;
-	boolean alreadyRegisteredFlag = false;
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -117,18 +116,13 @@ public class RegisterUserAction extends ActionSupport {
 	//Default method invoked by STRUTS2
 	public String execute() {
 
-		alreadyRegisteredFlag = false;
+		System.out.println(gender);
 		
 		if (!email.equals("") && !password.equals("")){
-			List<String> emailList = (List<String>) em.createQuery("SELECT p.email FROM NormalUser p",String.class).getResultList();
-			Iterator<String> it = emailList.iterator();
-			while(it.hasNext()) {
-				if(it.next().equals(email)){
-					alreadyRegisteredFlag = true;
-				}
-			}
-			if(!alreadyRegisteredFlag){
-				
+	
+			List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getResultList();
+			if(results.isEmpty()){
+
 				//user object creation
 				u = new NormalUser(email, password, birthdate, firstname, lastname, gender, job, residence, school, hometown);
 				

@@ -1,6 +1,8 @@
 package actions;
 
 
+import java.util.List;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.*;
@@ -41,10 +43,11 @@ public class LoginAction extends ActionSupport {
 	public String execute() {
 		
 		
-		
+
 		if (!email.equals("") && !password.equals("")){
-			u = (User)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getSingleResult();
-			if(u != null){
+			List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getResultList();
+			if(!results.isEmpty()){
+				u = results.get(0);
 				if(password.equals(u.getPassword())){
 					return "success";
 				}else{

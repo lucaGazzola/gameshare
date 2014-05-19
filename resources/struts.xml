@@ -27,5 +27,13 @@
 			<result name="errorWrongLogin">login.jsp</result>
 			<result name="errorField">login.jsp</result>
 		</action>
+		<action name="searchGame" class="actions.SearchGameAction">
+			<result name="showList">searchGameResult.jsp</result>
+			<result name="errorMissingField">searchGame.jsp</result>
+		</action>
+		<action name="addGame" class="actions.AddGameAction">
+			<result name="success">addGameConfirm.jsp</result>
+			<result name="errorField">addGame.jsp</result>
+		</action>
 	</package>
 </struts>

@@ -20,7 +20,7 @@ public class Videogame extends Game {
 	
 	public Videogame() {}
 	
-	public Videogame(String name, String description, String priceRange, int duration, int requiredPlayers, int suggestedPlayers, boolean online, String type) {
+	public Videogame(String name, String description, String priceRange, boolean online, String type) {
 		super(name, description, priceRange);
 		this.online = online;
 		this.type = type;
