@@ -17,12 +17,24 @@ public class Like implements Serializable {
     @Column(name = "play")
     private boolean play;
     
-    @Column(name = "review")
+    @Column(name = "review", columnDefinition = "TEXT")
     private String review;
     
     @Column(name = "score")
     private int score;
     
+    public Like(){
+    	
+    }
+    
+	public Like(LikePK iD_like, boolean play, String review, int score) {
+		super();
+		ID_like = iD_like;
+		this.play = play;
+		this.review = review;
+		this.score = score;
+	}
+
 	public LikePK getID_like() {
 		return ID_like;
 	}
