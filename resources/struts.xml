@@ -21,5 +21,11 @@
 			<result name="errorField">register.jsp</result>
 			<result name="errorDuplicate">register.jsp</result>
 		</action>
+		<action name="login" class="actions.LoginAction">
+			<result name="success">loginConfirm.jsp</result>
+			<result name="errorUserNotRegistered">login.jsp</result>
+			<result name="errorWrongLogin">login.jsp</result>
+			<result name="errorField">login.jsp</result>
+		</action>
 	</package>
 </struts>
