@@ -44,7 +44,6 @@ public class SearchGameAction extends ActionSupport {
 	public String execute() {
 		String nextGame;
 		Game g;
-		
 		if (!game.equals("")){
 			similarGames = new ArrayList<Game>();
 			List<Game> gamesList = (List<Game>) em.createQuery("SELECT p FROM Game p",Game.class).getResultList();

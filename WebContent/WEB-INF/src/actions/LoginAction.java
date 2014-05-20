@@ -45,7 +45,7 @@ public class LoginAction extends ActionSupport {
 		
 
 		if (!email.equals("") && !password.equals("")){
-			List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getResultList();
+			List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value",User.class).setParameter("value", email).getResultList();
 			if(!results.isEmpty()){
 				u = results.get(0);
 				if(password.equals(u.getPassword())){

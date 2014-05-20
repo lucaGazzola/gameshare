@@ -44,5 +44,6 @@
 			<result name="success">viewusers.jsp</result>
 			<result name="errorField">login.jsp</result>
 		</action>
+		
 	</package>
 </struts>
