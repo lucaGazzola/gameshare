@@ -33,7 +33,13 @@ public class Populator {
 		CardGame cg = new CardGame("briscola", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
 		CardGame cg2 = new CardGame("scopa", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
 		CardGame cg3 = new CardGame("tresette", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
+		CardGame cg4 = new CardGame("brascola", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
+		CardGame cg5 = new CardGame("brucola", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
+		CardGame cg6 = new CardGame("brisafuccola", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
 		pu.saveCardGame(cg, em);pu.saveCardGame(cg2, em);pu.saveCardGame(cg3, em);
+		pu.saveCardGame(cg4, em);
+		pu.saveCardGame(cg5, em);
+		pu.saveCardGame(cg6, em);
 	
 		//populate di alcuni board game
 		BoardGame bg = new BoardGame("Risiko", 

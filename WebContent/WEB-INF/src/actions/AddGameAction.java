@@ -141,7 +141,6 @@ public class AddGameAction extends ActionSupport {
 	//Default method invoked by STRUTS2
 	public String execute() {
 
-		System.out.println(name+" "+gameType+" "+online);
 		if (!name.equals("")){
 			switch(gameType){
 			case VIDEOGAME:

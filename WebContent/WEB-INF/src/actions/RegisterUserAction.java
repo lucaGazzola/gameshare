@@ -115,8 +115,6 @@ public class RegisterUserAction extends ActionSupport {
 
 	//Default method invoked by STRUTS2
 	public String execute() {
-
-		System.out.println(gender);
 		
 		if (!email.equals("") && !password.equals("")){
 	

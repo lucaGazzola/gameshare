@@ -82,13 +82,11 @@ public class AddAction extends ActionSupport {
 				List<CardGame> list = (List<CardGame>) em.createQuery("SELECT p FROM CardGame p",CardGame.class).getResultList();
 				Iterator<CardGame> it = list.iterator();
 				while(it.hasNext()) {
-					System.out.println(it.next());
 				} 
 				
 				List<NormalUser> listu = (List<NormalUser>) em.createQuery("SELECT p FROM NormalUser p",NormalUser.class).getResultList();
 				Iterator<NormalUser> itu = listu.iterator();
 				while(itu.hasNext()) {
-					System.out.println(itu.next());
 				} 
 				//fine test query
 				

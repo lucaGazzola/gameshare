@@ -18,35 +18,42 @@ public class SearchGameAction extends ActionSupport {
 
 	EntityManager em = EntityManagerUtil.getEntityManager();
 	
-	Game g;
-	List<String> similarGames;
-	
 	private static final long serialVersionUID = 1L;
 	
 	//Data coming from the form, automatically injected by STRUTS
 
-	private String name;
+	private String game;
+	List<Game> similarGames;
 	
-	public String getName() {
-		return name;
+	
+	public List<Game> getSimilarGames() {
+		return similarGames;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getGame() {
+		return game;
 	}
+
+
+	public void setGame(String game) {
+		this.game = game;
+	}
+
 
 	//Default method invoked by STRUTS2
 	public String execute() {
+		String nextGame;
+		Game g;
 		
-		if (!name.equals("")){
-			similarGames = new ArrayList<String>();
-			String game;
-			List<String> gamesList = (List<String>) em.createQuery("SELECT p.name FROM Game p",String.class).getResultList();
-			Iterator<String> it = gamesList.iterator();
+		if (!game.equals("")){
+			similarGames = new ArrayList<Game>();
+			List<Game> gamesList = (List<Game>) em.createQuery("SELECT p FROM Game p",Game.class).getResultList();
+			Iterator<Game> it = gamesList.iterator();
 			while(it.hasNext()) {
-				game = it.next();
-				if(StringUtils.getLevenshteinDistance(game, name) < 2){
-					similarGames.add(game);
+				g = it.next();
+				nextGame = g.getName();		
+				if(StringUtils.getLevenshteinDistance(nextGame, game) <= 2){
+					similarGames.add(g);
 				}
 			}
 			return "showList";
