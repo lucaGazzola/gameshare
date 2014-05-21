@@ -32,7 +32,6 @@ public class AcceptGameAction extends ActionSupport {
 
 	//Default method invoked by STRUTS2
 	public String execute() {
-		System.out.println(gameName);
 		if (!gameName.equals("")){
 			List<Game> results =  (List<Game>)em.createQuery("SELECT p FROM Game p WHERE p.name = :value",Game.class).setParameter("value", gameName).getResultList();
 			g = results.get(0);

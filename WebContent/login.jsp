@@ -12,7 +12,7 @@
 <h2>Login</h2>
 <s:actionerror />
 
-<s:form action="login.action" method="post">
+<s:form action="login" method="post" namespace="/">
 	<s:textfield name="email" key="label.email" size="20"/>
 	<s:password name="password" key="label.password" size="20"/>
 	

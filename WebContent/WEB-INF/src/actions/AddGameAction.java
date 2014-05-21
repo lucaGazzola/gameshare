@@ -1,28 +1,29 @@
 package actions;
 
 
+import java.util.Hashtable;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.*;
 
 import javax.persistence.*;
 
+import service.GameService;
 import util.EntityManagerUtil;
 
 public class AddGameAction extends ActionSupport {
 
 	EntityManager em = EntityManagerUtil.getEntityManager();
 	
-	Game g;
+	GameService gs = new GameService();
 	
 	private static final long serialVersionUID = 1L;
 	
 	//Data coming from the form, automatically injected by STRUTS
-	private enum games {VIDEOGAME,CARD,SPORT,BOARD};
-
 	private String description;
 	private String name;
-	private games gameType;
+	private String gameType;
 	private String priceRange;
 	
 	//Videogame attributes
@@ -57,13 +58,12 @@ public class AddGameAction extends ActionSupport {
 		this.name = name;
 	}
 
-
-	public games getGameType() {
+	public String getGameType() {
 		return gameType;
 	}
 
 
-	public void setGameType(games gameType) {
+	public void setGameType(String gameType) {
 		this.gameType = gameType;
 	}
 
@@ -142,29 +142,32 @@ public class AddGameAction extends ActionSupport {
 	public String execute() {
 
 		if (!name.equals("")){
+			
+			Game g = null;
+			
 			switch(gameType){
-			case VIDEOGAME:
+			case "videogame":
 				g = new Videogame(name,description,priceRange, online, videogameType);
 			
 				em.persist(g);
 				em.getTransaction().begin();
 				em.getTransaction().commit();
 			break;
-			case CARD:
+			case "card":
 				g = new CardGame(name, description, priceRange, duration, requiredPlayers, suggestedPlayers, deck);
 			
 				em.persist(g);
 				em.getTransaction().begin();
 				em.getTransaction().commit();
 			break;
-			case SPORT:
+			case "sport":
 				g = new Sport(name, description, priceRange, duration, requiredPlayers, suggestedPlayers);
 			
 				em.persist(g);
 				em.getTransaction().begin();
 				em.getTransaction().commit();
 			break;
-			case BOARD:
+			case "board":
 				g = new BoardGame(name, description, priceRange, duration, requiredPlayers, suggestedPlayers);
 			
 				em.persist(g);
@@ -172,7 +175,12 @@ public class AddGameAction extends ActionSupport {
 				em.getTransaction().commit();
 			break;
 			}
+			
+			gs.save(g, em);
+			
 			return "success";
+			
+			
 		}else{
 			addActionError(getText("error.missingField"));
 			return "errorField";

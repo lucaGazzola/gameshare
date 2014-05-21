@@ -12,7 +12,7 @@
 <h2>Register</h2>
 <s:actionerror />
 
-<s:form action="register.action" method="post">
+<s:form action="register" method="post" namespace="/">
 	<s:textfield name="email" key="label.email" size="20"/>
 	<s:password name="password" key="label.password" size="20"/>
 	<s:date name="birthdate" var="formattedVal"/>

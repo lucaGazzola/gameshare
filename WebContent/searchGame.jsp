@@ -12,7 +12,7 @@
 <h2>Search Game</h2>
 <s:actionerror />
 
-<s:form action="searchGame.action" method="post">
+<s:form action="searchGame" method="post" namespace="/">
 	<s:textfield name="game" key="label.gameName" size="20"/>
 	<s:submit method="execute" key="label.search" align="center"/>
 </s:form>
