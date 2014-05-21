@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Collection;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,9 @@ public class User {
 	@Id @Column(name="ID_user")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="userGen") 
 	private long ID_user;
+	
+	@OneToMany(mappedBy="ID_user")
+	private Collection<Like> likes;
 	
 	public User(){}
 	
