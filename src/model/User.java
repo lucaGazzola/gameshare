@@ -26,6 +26,12 @@ public class User {
 	@OneToMany(mappedBy="ID_user")
 	private Collection<Like> likes;
 	
+	@OneToMany(mappedBy="ID_source")
+	private Collection<Friendship> sentRequests;
+	
+	@OneToMany(mappedBy="ID_target")
+	private Collection<Friendship> receivedRequests;
+	
 	public User(){}
 	
 	public User(String email, String password) {

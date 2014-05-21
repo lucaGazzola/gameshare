@@ -55,7 +55,7 @@ public class SearchGameAction extends ActionSupport {
 					similarGames.add(g);
 				}
 			}
-			return "showList";
+			return "success";
 		}else{
 			addActionError(getText("error.missingField"));
 			return "errorMissingField";

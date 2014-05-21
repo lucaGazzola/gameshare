@@ -4,15 +4,18 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 
 @Embeddable
 public class FriendshipPK implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	@ManyToOne
 	@Column(name = "ID_sourceUser", nullable = false)
     private long ID_sourceUser;
 
+	@ManyToOne
 	@Column(name = "ID_targetUser", nullable = false)
     private long ID_targetUser;
 	
