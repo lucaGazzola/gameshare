@@ -15,7 +15,7 @@ import="util.Populator"
 <h2>Add Contact</h2>
 <s:actionerror />
 
-<s:form action="add" method="post">
+<s:form action="add" method="post" namespace="/">
 	<s:textfield name="firstname" key="label.firstname" size="20"/>
 	<s:textfield name="lastname" key="label.lastname" size="20"/>
 	<s:textfield name="address" key="label.address" size="20"/>
@@ -23,12 +23,12 @@ import="util.Populator"
 </s:form>
 
 
-<s:form action="viewGame" method="post">
+<s:form action="viewGame" method="post" namespace="/">
 	<s:textfield name="id_game" size="20"/>
 	<s:submit method="execute" value="View Game" align="center"/>
 </s:form>
 
-<s:form action="populateAction" method="post">
+<s:form action="populateAction" method="post" namespace="/">
 	<s:submit method="execute" value="Populate DB" align="center"/>
 </s:form>
 
