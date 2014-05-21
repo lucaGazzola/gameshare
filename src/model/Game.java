@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Collection;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,9 @@ import javax.persistence.*;
 @Table(name="GAME")
 @MappedSuperclass
 public class Game {
+	
+	@OneToMany(mappedBy="ID_game")
+	private Collection<Like> likes;
 	
 	@Column(name="acceptCount")
 	private int acceptCount;

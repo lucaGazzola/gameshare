@@ -11,9 +11,11 @@ public class LikePK implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+    @ManyToOne
 	@Column(name = "ID_user", nullable = false)
     private long ID_user;
 
+    @ManyToOne
 	@Column(name = "ID_game", nullable = false)
     private long ID_game;
 	
