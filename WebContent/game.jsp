@@ -11,21 +11,21 @@
 <table border=1 width=600 cellpadding=10 align="center">
 <tr>
 	<td width="22%">
-		<img alt="game_image" src="/Struts2Contacts/images/no-available-image.png" width="150" height="150"/>
+		<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="id_game"/>-game.jpg" width="150" height="150"/>
 	</td>
 	<td width="78%">
 		<table width="100%">
 			<tr>
 				<td width="100%">
-					<h2>Game title</h2>
+					<h2><s:property value="game.name"/></h2>
 					<p>game category</p>
-					<p>average score</p>
-					<p>price range</p>
+					<p><s:property value="game.avgScore"/></p>
+					<p><s:property value="game.priceRange"/></p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<s:form action="PlayLike.action" method="post" style="display: inline">
+					<s:form action="playLike" method="post">
 						<s:hidden name="id_game" value="1"></s:hidden>
 						<s:submit method="likeGame" key="label.like_button"/>				
 						<s:submit method="playGame" key="label.play_button"/>	
@@ -39,8 +39,7 @@
 	<td colspan=3>
 	    <div id="description_box">
 	    	<h3>Description</h3>
-	      <p>Descrizione del gioco loremipsum descrizione del gioco loremipsum
-	      descrizione del gioco loremipsum descrizione del gioco loremipsum descrizione del gioco loremipsum</p>
+	      <p><s:property value="game.description"/></p>
 	    </div>
     </td>	
 </tr>
@@ -49,14 +48,14 @@
 	<td colspan=3>
 	    <div id="social_box">
 	    	<h3>Social</h3>
-	    	<p>XXX users like this game
-    			<s:form action="ViewLikeUsers.action" method="post">
+	    	<p><s:property value="numLike"/> users like this game
+    			<s:form action="viewLikeUsers" method="post">
     				<s:hidden name="id_game" value="1"></s:hidden>			
 					<s:submit method="execute" key="label.view_button"/>
 				</s:form>
 	    	</p>
-	    	<p>XXX users play this game
-    			<s:form action="ViewPlayUsers.action" method="post">		
+	    	<p><s:property value="numPlay"/> users play this game
+    			<s:form action="viewPlayUsers" method="post">		
     				<s:hidden name="id_game" value="1"></s:hidden>			
 					<s:submit method="execute" key="label.view_button"/>
 				</s:form>

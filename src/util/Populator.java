@@ -30,12 +30,24 @@ public class Populator {
 		System.out.println("Inizio populate giochi:");
 		
 		//populate di alcuni giochi di carte
-		CardGame cg = new CardGame("briscola", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg2 = new CardGame("scopa", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg3 = new CardGame("tresette", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg4 = new CardGame("brascola", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg5 = new CardGame("brucola", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg6 = new CardGame("brisafuccola", "bello", "5-10 euro", 10, 2, 4, "carte regionali");
+		CardGame cg = new CardGame("briscola",
+				"Briscola one of Italy's most popular games together with Scopa and Tressette, and a little-changed descendant of Brusquembille, the ancestor of Briscan and Bezique,[1] is a Mediterranean trick-taking card game for two to six players played with a standard Italian 40-card deck.",
+				"5-10 euro", 10, 2, 4, "carte regionali");
+		CardGame cg2 = new CardGame("scopa",
+				"Scopa is an Italian card game, and one of the two major national card games in Italy.[1] It is also popular in Brazil, brought in by Italian immigrants, mostly in the Scopa di Quindici variation.[2] It is played with a standard Italian 40-card deck, mostly between two players or four in two partnerships, but it can also be played by 3, 5, or 6 players.",
+				"5-10 euro", 10, 2, 4, "carte regionali");
+		CardGame cg3 = new CardGame("tresette",
+				"Tressette or Tresette is one of Italy's major national trick-taking card games, together with Scopa and Briscola. It is recorded only from the early 18th century, though greater antiquity is suggested by its trumplessness. The name of the game, literally \"three Sevens\" may refer to a scoring combination no longer recognized, or to the fact that it is played up to twenty-one. There are many variants depending on the region of Italy the game is played in.[1]",
+				"5-10 euro", 10, 2, 4, "carte regionali");
+		CardGame cg4 = new CardGame("brascola",
+				"Briscola one of Italy's most popular games together with Scopa and Tressette, and a little-changed descendant of Brusquembille, the ancestor of Briscan and Bezique,[1] is a Mediterranean trick-taking card game for two to six players played with a standard Italian 40-card deck.",
+				"5-10 euro", 10, 2, 4, "carte regionali");
+		CardGame cg5 = new CardGame("brucola",
+				"Briscola one of Italy's most popular games together with Scopa and Tressette, and a little-changed descendant of Brusquembille, the ancestor of Briscan and Bezique,[1] is a Mediterranean trick-taking card game for two to six players played with a standard Italian 40-card deck.",
+				"5-10 euro", 10, 2, 4, "carte regionali");
+		CardGame cg6 = new CardGame("brisafuccola",
+				"Briscola one of Italy's most popular games together with Scopa and Tressette, and a little-changed descendant of Brusquembille, the ancestor of Briscan and Bezique,[1] is a Mediterranean trick-taking card game for two to six players played with a standard Italian 40-card deck.",
+				"5-10 euro", 10, 2, 4, "carte regionali");
 		pu.saveCardGame(cg, em);pu.saveCardGame(cg2, em);pu.saveCardGame(cg3, em);
 		pu.saveCardGame(cg4, em);
 		pu.saveCardGame(cg5, em);
@@ -125,8 +137,9 @@ public class Populator {
 		Like l2 = new Like(new LikePK(u2.getID_user(), sp.getID_game()), true, "Very good Really enjoy playing this, and can play with your friends too.", 4);
 		Like l3 = new Like(new LikePK(u3.getID_user(), cg3.getID_game()), true, "Brings back old times playing against my dad", 4);
 		Like l4 = new Like(new LikePK(u4.getID_user(), cg.getID_game()), true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
+		Like l5 = new Like(new LikePK(u3.getID_user(), cg2.getID_game()), true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
 		pu.saveLike(l,em);pu.saveLike(l1,em);pu.saveLike(l2,em);
-		pu.saveLike(l3,em);pu.saveLike(l4,em);
+		pu.saveLike(l3,em);pu.saveLike(l4,em);pu.saveLike(l5,em);
 		//---------- FINE POPULATE LIKE ----------------------------------------------------------
 		
 		EntityManagerUtil.closeEntityManager(em);

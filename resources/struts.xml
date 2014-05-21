@@ -35,14 +35,28 @@
 			<result name="success">addGameConfirm.jsp</result>
 			<result name="errorField">addGame.jsp</result>
 		</action>
-				<action name="ViewLikeUsers" class="actions.ViewLikeUsersAction">
+		
+		<action name="viewLikeUsers" class="actions.ViewLikeUsersAction">
 			<result name="success">viewusers.jsp</result>
 			<result name="errorField">login.jsp</result>
 		</action>
 		
-		<action name="ViewPlayUsers" class="actions.ViewPlayUsersAction">
+		<action name="viewPlayUsers" class="actions.ViewPlayUsersAction">
 			<result name="success">viewusers.jsp</result>
 			<result name="errorField">login.jsp</result>
+		</action>
+		
+		<action name="playLike" class="actions.PlayLikeAction">
+			<result name="success">viewusers.jsp</result>
+			<result name="errorField">login.jsp</result>
+		</action>
+		
+		<action name="viewGame" class="actions.ViewGameAction">
+			<result name="success">game.jsp</result>
+		</action>
+		
+		<action name="populateAction" class="actions.PopulateAction">
+			<result name="success">index.jsp</result>
 		</action>
 		
 	</package>
