@@ -47,8 +47,8 @@
 		</action>
 		
 		<action name="playLike" class="actions.PlayLikeAction">
-			<result name="success">viewusers.jsp</result>
-			<result name="errorField">login.jsp</result>
+			<result name="success">game.jsp</result>
+			<result name="errorField">game.jsp</result>
 		</action>
 		
 		<action name="viewGame" class="actions.ViewGameAction">
