@@ -23,14 +23,16 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="userGen") 
 	private long ID_user;
 	
-	@OneToMany(mappedBy="ID_user")
+	@OneToMany(mappedBy="user")
 	private Collection<Like> likes;
 	
-	@OneToMany(mappedBy="ID_source")
+	@OneToMany(mappedBy="sourceUser")
 	private Collection<Friendship> sentRequests;
 	
-	@OneToMany(mappedBy="ID_target")
+	@OneToMany(mappedBy="targetUser")
 	private Collection<Friendship> receivedRequests;
+	
+	
 	
 	public User(){}
 	

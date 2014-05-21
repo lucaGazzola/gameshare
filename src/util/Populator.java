@@ -15,7 +15,7 @@ import model.Platform;
 import model.Sport;
 import model.Videogame;
 import model.Like;
-import model.LikePK;
+
 import model.NormalUser;
 
 public class Populator {
@@ -133,12 +133,12 @@ public class Populator {
 		System.out.println();
 		System.out.println("Inizio populate likes: ");
 		
-		Like l = new Like(new LikePK(u.getID_user(), cg2.getID_game()), true, "Very good Really enjoy playing this, and can play with your friends too.", 5);
-		Like l1 = new Like(new LikePK(u.getID_user(), bg.getID_game()), false, "", 0);
-		Like l2 = new Like(new LikePK(u2.getID_user(), sp.getID_game()), true, "Very good Really enjoy playing this, and can play with your friends too.", 4);
-		Like l3 = new Like(new LikePK(u3.getID_user(), cg3.getID_game()), true, "Brings back old times playing against my dad", 4);
-		Like l4 = new Like(new LikePK(u4.getID_user(), cg.getID_game()), true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
-		Like l5 = new Like(new LikePK(u3.getID_user(), cg2.getID_game()), true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
+		Like l = new Like(u, cg2, true, "Very good Really enjoy playing this, and can play with your friends too.", 5);
+		Like l1 = new Like(u, bg, false, "", 0);
+		Like l2 = new Like(u2, sp, true, "Very good Really enjoy playing this, and can play with your friends too.", 4);
+		Like l3 = new Like(u3, cg3, true, "Brings back old times playing against my dad", 4);
+		Like l4 = new Like(u4, cg, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
+		Like l5 = new Like(u3, cg2, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
 		pu.saveLike(l,em);pu.saveLike(l1,em);pu.saveLike(l2,em);
 		pu.saveLike(l3,em);pu.saveLike(l4,em);pu.saveLike(l5,em);
 		//---------- FINE POPULATE LIKE ----------------------------------------------------------

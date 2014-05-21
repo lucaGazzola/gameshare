@@ -2,8 +2,9 @@ package actions;
 
 import javax.persistence.EntityManager;
 
+import model.Game;
 import model.Like;
-import model.LikePK;
+import model.User;
 import service.LikeService;
 import util.EntityManagerUtil;
 
@@ -14,13 +15,16 @@ public class PlayLikeAction extends ActionSupport{
 	private static final long serialVersionUID = 5976515590599826089L;
 	private int id_game;
 	private int id_user;
+	User u;
+	Game g;
 	private LikeService likeService = new LikeService();
 	
 	public String likeGame(){
 		EntityManager em = EntityManagerUtil.getEntityManager();
-		
 		//creo oggetto like, con play=false, review vuota e score=-1
-		Like like = new Like(new LikePK(id_user, id_game), false, "", -1);
+		u = em.find(User.class, id_user);
+		g = em.find(Game.class, id_game);
+		Like like = new Like(u, g, false, "", -1);
 		likeService.saveLike(like, em);
 		
 		EntityManagerUtil.closeEntityManager(em);;
@@ -29,9 +33,10 @@ public class PlayLikeAction extends ActionSupport{
 	
 	public String playGame(){
 		EntityManager em = EntityManagerUtil.getEntityManager();
-		
+		u = em.find(User.class, id_user);
+		g = em.find(Game.class, id_game);
 		//creo oggetto like, con play=true, review vuota e score=-1
-		Like like = new Like(new LikePK(id_user, id_game), true, "", -1);
+		Like like = new Like(u, g, true, "", -1);
 		likeService.saveLike(like, em);
 		
 		EntityManagerUtil.closeEntityManager(em);;

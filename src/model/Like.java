@@ -6,13 +6,25 @@ import javax.persistence.*;
 
 
 @Entity
+@TableGenerator(name="likeGen",pkColumnName="key",pkColumnValue="ID_like",initialValue=0,table="counters",valueColumnName="value")
 @Table(name="LIKE_")
 public class Like implements Serializable {
   
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-    private LikePK ID_like;
+	@Id @Column(name="ID_like")
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="likeGen") 
+    private long ID_like;
+   
+	
+	
+    @ManyToOne
+    private User user;
+    
+    @ManyToOne
+    private Game game;
+    
+    
     
     @Column(name = "play")
     private boolean play;
@@ -23,22 +35,42 @@ public class Like implements Serializable {
     @Column(name = "score")
     private int score;
     
-    public Like(){
-        	
+    public Like(){    	
     }   
-    public Like(LikePK iD_like, boolean play, String review, int score) {
-    	super();
-    	ID_like = iD_like;
-    	this.play = play;
-    	this.review = review;
-    	this.score = score;
-    }
+    
+
     	
-	public LikePK getID_like() {
+	public Like(User user, Game game, boolean play, String review,
+			int score) {
+		super();
+		this.user = user;
+		this.game = game;
+		this.play = play;
+		this.review = review;
+		this.score = score;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public long getID_like() {
 		return ID_like;
 	}
 
-	public void setID_like(LikePK iD_like) {
+	public void setID_like(long iD_like) {
 		ID_like = iD_like;
 	}
 

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @MappedSuperclass
 public class Game {
 	
-	@OneToMany(mappedBy="ID_game")
+	@OneToMany(mappedBy="game")
 	private Collection<Like> likes;
 	
 	@Column(name="acceptCount")

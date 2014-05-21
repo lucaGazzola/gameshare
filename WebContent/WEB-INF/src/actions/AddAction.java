@@ -26,7 +26,7 @@ public class AddAction extends ActionSupport {
 	NormalUser u;
 	CardGame g;
 	Like l;
-	LikePK lpk;
+
 	Book b = Book.getInstance();
 	Contact c;
 	
@@ -61,9 +61,9 @@ public class AddAction extends ActionSupport {
 		u = new NormalUser("franco@franco", "prolol", now, "luca", "franchi", 'M', "troz", "sov", "bicocca", "frenk");
 		em.persist(u);
 		//fine test insert
-		lpk = new LikePK(1,1);
 		l = new Like();
-		l.setID_like(lpk);
+		l.setUser(u);
+		l.setGame(g);
 		l.setPlay(true);
 		l.setReview("fwdadwad");
 		l.setScore(5);
