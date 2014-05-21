@@ -20,32 +20,33 @@ import model.NormalUser;
 
 public class Populator {
 	
-	private EntityManager em = EntityManagerUtil.getEntityManager();
-	private PersistUtil pu = new PersistUtil();
 	
 	public void popolate(){
+		
+		PersistUtil pu = new PersistUtil();
+		EntityManager em = EntityManagerUtil.getEntityManager();
 		
 		//---------- POPULATE GIOCHI ---------------------------------------------------------
 		System.out.println("*********** START POPULATE DB ***********");
 		System.out.println("Inizio populate giochi:");
 		
 		//populate di alcuni giochi di carte
-		CardGame cg = new CardGame("briscola",
+		CardGame cg = new CardGame("Briscola",
 				"Briscola one of Italy's most popular games together with Scopa and Tressette, and a little-changed descendant of Brusquembille, the ancestor of Briscan and Bezique,[1] is a Mediterranean trick-taking card game for two to six players played with a standard Italian 40-card deck.",
 				"5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg2 = new CardGame("scopa",
+		CardGame cg2 = new CardGame("Scopa",
 				"Scopa is an Italian card game, and one of the two major national card games in Italy.[1] It is also popular in Brazil, brought in by Italian immigrants, mostly in the Scopa di Quindici variation.[2] It is played with a standard Italian 40-card deck, mostly between two players or four in two partnerships, but it can also be played by 3, 5, or 6 players.",
 				"5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg3 = new CardGame("tresette",
+		CardGame cg3 = new CardGame("Tresette",
 				"Tressette or Tresette is one of Italy's major national trick-taking card games, together with Scopa and Briscola. It is recorded only from the early 18th century, though greater antiquity is suggested by its trumplessness. The name of the game, literally \"three Sevens\" may refer to a scoring combination no longer recognized, or to the fact that it is played up to twenty-one. There are many variants depending on the region of Italy the game is played in.[1]",
 				"5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg4 = new CardGame("brascola",
+		CardGame cg4 = new CardGame("Brascola",
 				"Briscola one of Italy's most popular games together with Scopa and Tressette, and a little-changed descendant of Brusquembille, the ancestor of Briscan and Bezique,[1] is a Mediterranean trick-taking card game for two to six players played with a standard Italian 40-card deck.",
 				"5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg5 = new CardGame("brucola",
+		CardGame cg5 = new CardGame("Brucola",
 				"Briscola one of Italy's most popular games together with Scopa and Tressette, and a little-changed descendant of Brusquembille, the ancestor of Briscan and Bezique,[1] is a Mediterranean trick-taking card game for two to six players played with a standard Italian 40-card deck.",
 				"5-10 euro", 10, 2, 4, "carte regionali");
-		CardGame cg6 = new CardGame("brisafuccola",
+		CardGame cg6 = new CardGame("Brisafuccola",
 				"Briscola one of Italy's most popular games together with Scopa and Tressette, and a little-changed descendant of Brusquembille, the ancestor of Briscan and Bezique,[1] is a Mediterranean trick-taking card game for two to six players played with a standard Italian 40-card deck.",
 				"5-10 euro", 10, 2, 4, "carte regionali");
 		pu.saveCardGame(cg, em);pu.saveCardGame(cg2, em);pu.saveCardGame(cg3, em);

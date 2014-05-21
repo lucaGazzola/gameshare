@@ -18,15 +18,14 @@
 			<tr>
 				<td width="100%">
 					<h2><s:property value="game.name"/></h2>
-					<p>game category</p>
-					<p><s:property value="game.avgScore"/></p>
-					<p><s:property value="game.priceRange"/></p>
+					<p>Game category: <s:property value="game.getClass().getName()"/></p>
+					<p>Average score: <s:property value="game.avgScore"/></p>
+					<p>Price range: <s:property value="game.priceRange"/></p>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<s:form action="playLike" method="post">
-						<s:hidden name="id_game" value="1"></s:hidden>
 						<s:submit method="likeGame" key="label.like_button"/>				
 						<s:submit method="playGame" key="label.play_button"/>	
 					</s:form>
@@ -50,13 +49,13 @@
 	    	<h3>Social</h3>
 	    	<p><s:property value="numLike"/> users like this game
     			<s:form action="viewLikeUsers" method="post">
-    				<s:hidden name="id_game" value="1"></s:hidden>			
+    				<s:hidden name="id_game"></s:hidden>	
 					<s:submit method="execute" key="label.view_button"/>
 				</s:form>
 	    	</p>
 	    	<p><s:property value="numPlay"/> users play this game
     			<s:form action="viewPlayUsers" method="post">		
-    				<s:hidden name="id_game" value="1"></s:hidden>			
+    				<s:hidden name="id_game"></s:hidden>			
 					<s:submit method="execute" key="label.view_button"/>
 				</s:form>
 	    	</p>
@@ -68,8 +67,10 @@
 	<td colspan=3>
 	    <div id="review_box">
 	    	<h3>Reviews</h3>
-	      <p>Descrizione del gioco loremipsum descrizione del gioco loremipsum
-	      descrizione del gioco loremipsum descrizione del gioco loremipsum descrizione del gioco loremipsum</p>
+				<s:iterator value="user_reviewList" status="stat">
+					<p><s:property value="user_reviewList[1]"/><s:property value="user_reviewList[2]"/>:
+					<s:property value="user_reviewList[3]"/></p>
+				</s:iterator> 
 	    </div>
     </td>
 </tr>

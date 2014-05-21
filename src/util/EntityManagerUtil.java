@@ -15,6 +15,10 @@ public class EntityManagerUtil {
 	
 	public static void closeEntityManager(EntityManager em) {
 		em.close();
+	}
+	
+	public static void closeAll(EntityManager em){
+		em.close();
 		factory.close();
 	}
 }
