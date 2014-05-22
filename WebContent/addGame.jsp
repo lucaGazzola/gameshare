@@ -4,12 +4,26 @@
 
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/Struts2Contacts/main.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>AddGame</title>
+<title>Game Share: Add game</title>
 </head>
 <body>
  
-<h2>AddGame</h2>
+	<!-- barra header fissa -->
+	<div style="position:fixed; height:30px; width:99%; top:0px; left:0px;
+	    background:#F0F0F0;
+	    border:1px solid #CCC;
+	    margin:0px auto;" >
+	     <b>GameShare</b> | 
+	     <a href="/Struts2Contacts/loginConfirm.jsp">Home</a> | 
+	     <a href="/Struts2Contacts/searchGame.jsp">Search</a> | 
+	     Messages | 
+	     Friends |
+	</div><br><br>
+	
+<div id="body" align="center" style="width=600;background:#F0F0F0; border:1px solid #CCC;">
+<h2>Add new game</h2>
 <s:actionerror />
 
 <s:form action="addGame" method="post" namespace="/">
@@ -26,6 +40,6 @@
 	
 	<s:submit method="execute" key="label.addGame" align="center"/>
 </s:form>
-
+</div>
 </body>
 </html>
