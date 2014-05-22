@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="/Struts2Contacts/main.css"/>
 <title>Game Share: Welcome</title>
 </head>
 <body>
@@ -15,14 +16,14 @@
 	    border:1px solid #CCC;
 	    margin:0px auto;" >
 	     <b>GameShare</b> | 
-	     <a href="/Struts2Contacts/loginConfirm.jsp" style="text-decoration:none; color:black;">Home</a> | 
-	     <a href="/Struts2Contacts/searchGame.jsp" style="text-decoration: none; color:black;">Search</a> | 
+	     <a href="/Struts2Contacts/loginConfirm.jsp">Home</a> | 
+	     <a href="/Struts2Contacts/searchGame.jsp">Search</a> | 
 	     Messages | 
 	     Friends |
 	</div>
 	
 	<br><br>
-	<h2>Welcome <s:property value="%{#session.loggedInUser.firstname}"/>!</h2>
+	<h2 align="center">Welcome <s:property value="%{#session.loggedInUser.firstname}"/>!</h2>
 	<div id="body" align="center">
 	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;">
 		<tr>

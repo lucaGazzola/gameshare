@@ -16,41 +16,54 @@
 	    border:1px solid #CCC;
 	    margin:0px auto;" >
 	     <b>GameShare</b> | 
-	     <a href="/Struts2Contacts/loginConfirm.jsp" style="text-decoration:none; color:black;">Home</a> | 
-	     <a href="/Struts2Contacts/searchGame.jsp" style="text-decoration: none; color:black;">Search</a> | 
+	     <a href="/Struts2Contacts/loginConfirm.jsp">Home</a> | 
+	     <a href="/Struts2Contacts/searchGame.jsp">Search</a> | 
 	     Messages | 
 	     Friends |
 	</div>
-
+	
+			<!-- tag url per le action via link  -->
+	    	<s:url action="playLike" method="likeGame" namespace="/" var="urlTagLike">
+			<s:param name="id_game" value="ID_game"></s:param>
+			<s:param name="id_user" value="ID_user"></s:param></s:url>
+			
+			<s:url action="playLike" method="playGame" namespace="/" var="urlTagPlay">
+			<s:param name="id_game" value="ID_game"></s:param>
+			<s:param name="id_user" value="ID_user"></s:param></s:url>
+			
+			<s:url action="viewLikeUsers" method="execute" namespace="/" var="urlTag">
+			<s:param name="id_game" value="ID_game"></s:param></s:url>
+			
+			<s:url action="viewPlayUsers" method="execute" namespace="/" var="urlTag2">
+			<s:param name="id_game" value="ID_game"></s:param></s:url>
+			
 <br><br>
-<table border=1 width=600 cellpadding=10 align="center" style="background-color:#F0F0F0;">
+<table width=600 cellpadding=10 align="center" style="background-color:#F0F0F0; border:1px solid #CCC;">
 <tr>
-	<td width="22%">
+	<td width="22%" style="border:1px solid #CCC;">
 		<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="id_game"/>-game.jpg" width="150" height="150"/>
 	</td>
-	<td width="78%">
+	<td width="78%" style="border:1px solid #CCC;">
 		<table width="100%">
 			<tr>
 				<td width="100%">
 					<h2><s:property value="game.name"/></h2>
-					<p>Game category: <s:property value="game.getClass().getName()"/></p>
-					<p>Average score: <s:property value="game.avgScore"/></p>
-					<p>Price range: <s:property value="game.priceRange"/></p>
+					<i><b>Game category:</b></i> <s:property value="gameCategory"/><br>
+					<i><b>Average score:</b></i> <s:property value="game.avgScore"/><br>
+					<i><b>Price range:</b></i> <s:property value="game.priceRange"/>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<s:form action="playLike" method="post">
-						<s:submit method="likeGame" key="label.like_button"/>				
-						<s:submit method="playGame" key="label.play_button"/>	
-					</s:form>
+						<s:a href="%{urlTagLike}"><button type="button">Like</button></s:a>				
+						<s:a href="%{urlTagPlay}"><button type="button">Play</button></s:a>
 				</td>
 			</tr>
 		</table>
 	</td>
 </tr>
 <tr>
-	<td colspan=3>
+	<td colspan=3 style="border:1px solid #CCC;">
 	    <div id="description_box">
 	    	<h3>Description</h3>
 	      <p><s:property value="game.description"/></p>
@@ -59,27 +72,17 @@
 </tr>
 
 <tr>
-	<td colspan=3>
+	<td colspan=3 style="border:1px solid #CCC;">
 	    <div id="social_box">
 	    	<h3>Social</h3>
-	    	<p><s:property value="numLike"/> users like this game
-    			<s:form action="viewLikeUsers" method="post">
-    				<s:hidden name="id_game"></s:hidden>	
-					<s:submit method="execute" key="label.view_button"/>
-				</s:form>
-	    	</p>
-	    	<p><s:property value="numPlay"/> users play this game
-    			<s:form action="viewPlayUsers" method="post">		
-    				<s:hidden name="id_game"></s:hidden>			
-					<s:submit method="execute" key="label.view_button"/>
-				</s:form>
-	    	</p>
+	    	<p><i><b><s:a href="%{urlTag}"><s:property value="numLike"/></s:a></b></i> users <i><b>like</b></i> this game</p>
+	    	<p><i><b><s:a href="%{urlTag2}"><s:property value="numPlay"/></s:a></b></i> users <i><b>play</b></i> this game</p>
 	    </div>
     </td>	
 </tr>
 
 <tr>
-	<td colspan=3>
+	<td colspan=3 style="border:1px solid #CCC;">
 	    <div id="review_box">
 	    	<h3>Reviews</h3>
 	    	<table width="100%">
@@ -88,7 +91,7 @@
 					<td width="100%">
 						<b><s:property value="%{#user_reviewSingle[0]}"/> <s:property value="%{#user_reviewSingle[1]}"/>:</b>
 						<br><s:property value="%{#user_reviewSingle[2]}"/>
-						<br>VOTO: <i><s:property value="%{#user_reviewSingle[3]}"/></i>
+						<br>SCORE: <b><i><s:property value="%{#user_reviewSingle[3]}"/></i></b>
 					</td>
 				</tr>
 				</s:iterator> 

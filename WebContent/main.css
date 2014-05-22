@@ -2,3 +2,7 @@
 .errorMessage {
 	color: red;
 } 
+a:link {color:black;text-decoration:none;}    /* unvisited link */
+a:visited {color:black;text-decoration:none;} /* visited link */
+a:hover {color:black;text-decoration:underline;}   /* mouse over link */
+a:active {color:black;text-decoration:underline;}  /* selected link */

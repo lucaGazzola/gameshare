@@ -24,17 +24,22 @@
 <tr>
 <s:if test="%{#session.containsKey(\"loggedInUser\")}">
 	<!-- colonna logout -->
-	<td>
-	<h3>You are already logged in</h3>
-<!-- 	<a href="/Struts2Contacts/loginConfirm.jsp" style="text-decoration:none; color:black;">Profile Page</a> -->
-		
-		
-		<s:url action="login" method="logout" namespace="/" var="urlTag">
-				<s:param name="id_game" value="ID_game"></s:param>
-		</s:url>
-		<a href="/Struts2Contacts/loginConfirm.jsp">Profile page</a>
-		<s:a href="%{urlTag}">Logout</s:a>
+	<td style="vertical-align:top;">
+	<h3>You are already logged in:</h3>
 	</td>
+	<tr>
+	<td align="center">
+		Go to your <b><i><a href="/Struts2Contacts/loginConfirm.jsp">Profile page</a></i></b>
+		 or 
+		<b><i>
+		<s:url action="login" method="logout" namespace="/" var="urlTag">
+		<s:param name="id_game" value="ID_game"></s:param></s:url>
+		<s:a href="%{urlTag}">Logout</s:a></i></b>
+	</td>
+	</tr>
+
+		
+	
 </s:if>
 <s:else>
 	<!-- 	colonna registrazione -->

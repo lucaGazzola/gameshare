@@ -8,7 +8,7 @@ public class ReturnGameCategory {
 	
 	public String gameCategory(Game game){
 		
-		switch(game.getDescription()){
+		switch(game.getClass().getName()){
 			case "model.CardGame": category = "Classic Game / Card Game"; break;
 			case "model.BoardGame": category = "Classic Game / Board Game"; break;
 			case "model.Sport": category = "Classic Game / Sport"; break;

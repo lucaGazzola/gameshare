@@ -4,6 +4,7 @@
 
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/Struts2Contacts/main.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Game Share: game search</title>
 </head>
@@ -15,8 +16,8 @@
 	    border:1px solid #CCC;
 	    margin:0px auto;" >
 	     <b>GameShare</b> | 
-	     <a href="/Struts2Contacts/loginConfirm.jsp" style="text-decoration:none; color:black;">Home</a> | 
-	     <a href="/Struts2Contacts/searchGame.jsp" style="text-decoration: none; color:black;">Search</a> | 
+	     <a href="/Struts2Contacts/loginConfirm.jsp">Home</a> | 
+	     <a href="/Struts2Contacts/searchGame.jsp">Search</a> | 
 	     Messages | 
 	     Friends |
 	</div>
