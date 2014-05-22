@@ -59,9 +59,17 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		this.password = password;
 	}
 
+	public String logout(){
+		if(session.remove("loggedInUser") != null){
+			return "successLogout";
+		}
+		else{
+			addActionError("Logout error");
+			return "errorLogout";
+		}
+	}
 	//Default method invoked by STRUTS2
-	public String execute() {
-		
+	public String login() {
 		if (!email.equals("") && !password.equals("")){
 			List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value",User.class).setParameter("value", email).getResultList();
 			if(!results.isEmpty()){

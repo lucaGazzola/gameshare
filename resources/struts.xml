@@ -4,7 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.0.dtd">
 	
 <struts>
-	<constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
 	<constant name="struts.devMode" value="false"/>
 	<constant name="struts.custom.i18n.resources" value="ApplicationResources"/>
 
@@ -23,9 +23,11 @@
 		</action>
 		<action name="login" class="actions.LoginAction">
 			<result name="success">loginConfirm.jsp</result>
-			<result name="errorUserNotRegistered">login.jsp</result>
-			<result name="errorWrongLogin">login.jsp</result>
-			<result name="errorField">login.jsp</result>
+			<result name="successLogout">index.jsp</result>
+			<result name="errorUserNotRegistered">index.jsp</result>
+			<result name="errorWrongLogin">index.jsp</result>
+			<result name="errorField">index.jsp</result>
+			<result name="errorLogout">index.jsp</result>
 		</action>
 		<action name="searchGame" class="actions.SearchGameAction">
 			<result name="success">searchGameResult.jsp</result>
@@ -43,7 +45,7 @@
 		
 		<action name="viewPlayUsers" class="actions.ViewPlayUsersAction">
 			<result name="success">viewusers.jsp</result>
-			<result name="errorField">login.jsp</result>
+			<result name="errorField">index.jsp</result>
 		</action>
 		
 		<action name="playLike" class="actions.PlayLikeAction">

@@ -21,7 +21,7 @@ public class SearchGameAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	//Data coming from the form, automatically injected by STRUTS
-
+	
 	private String game;
 	List<Game> similarGames;
 	

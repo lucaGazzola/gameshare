@@ -17,7 +17,7 @@
 	<s:textfield name="email" key="label.email" size="20"/>
 	<s:password name="password" key="label.password" size="20"/>
 	
-	<s:submit method="execute" key="label.login" align="center"/>
+	<s:submit method="login" key="label.login" align="center"/>
 </s:form>
 
 </body>

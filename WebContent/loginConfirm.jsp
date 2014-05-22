@@ -14,29 +14,34 @@
 	    background:#F0F0F0;
 	    border:1px solid #CCC;
 	    margin:0px auto;" >
-	     <b>GameShare</b> | Home | Search | Messages | Friends |
+	     <b>GameShare</b> | 
+	     <a href="/Struts2Contacts/loginConfirm.jsp" style="text-decoration:none; color:black;">Home</a> | 
+	     <a href="/Struts2Contacts/searchGame.jsp" style="text-decoration: none; color:black;">Search</a> | 
+	     Messages | 
+	     Friends |
 	</div>
+	
 	<br><br>
 	<h2>Welcome <s:property value="%{#session.loggedInUser.firstname}"/>!</h2>
 	<div id="body" align="center">
-	<table border=1 width=600px style="background-color:#F0F0F0;">
+	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;">
 		<tr>
-			<td style="vertical-align:top;">
+			<td style="vertical-align:top;border:1px solid #CCC;">
 				<b>Your Played games</b>
 			</td>
-			<td style="vertical-align:top;">
+			<td style="vertical-align:top;border:1px solid #CCC;">
 				<b>Social</b><br>
 				New messages: <br>
 				New friend requests: 
 			</td>
 		</tr>
 		<tr>
-			<td style="vertical-align:top;">
+			<td style="vertical-align:top;border:1px solid #CCC;">
 				<b>Suggested games</b><br>
 				- prova<br>
 				- prova
 			</td>
-			<td style="vertical-align:top;">
+			<td style="vertical-align:top;border:1px solid #CCC;">
 				<b>Suggested friends</b><br>
 				- prova<br>
 				- prova

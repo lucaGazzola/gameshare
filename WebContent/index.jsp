@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@  page 
-import="util.Populator" 
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,7 +11,7 @@ import="util.Populator"
 <body>
 
 <div id="body" align="center">
-<h2>Game Share, game social network</h2>
+<div style="background:#F0F0F0;border:1px solid #CCC;"><h2>Game Share, game social network</h2></div>
 
 <s:form action="populateAction" method="post" namespace="/">
 	<s:submit method="execute" value="Populate DB" align="center"/>
@@ -23,10 +20,25 @@ import="util.Populator"
 <s:actionerror />
 
 <!-- TABELLA GRIGIA PRINCIPALE -->
-<table border=1 width=600 style="background-color:#F0F0F0;">
+<table width=600 style="background-color:#F0F0F0;border:1px solid #CCC;">
 <tr>
-<!-- 	colonna registrazione -->
+<s:if test="%{#session.containsKey(\"loggedInUser\")}">
+	<!-- colonna logout -->
 	<td>
+	<h3>You are already logged in</h3>
+<!-- 	<a href="/Struts2Contacts/loginConfirm.jsp" style="text-decoration:none; color:black;">Profile Page</a> -->
+		
+		
+		<s:url action="login" method="logout" namespace="/" var="urlTag">
+				<s:param name="id_game" value="ID_game"></s:param>
+		</s:url>
+		<a href="/Struts2Contacts/loginConfirm.jsp">Profile page</a>
+		<s:a href="%{urlTag}">Logout</s:a>
+	</td>
+</s:if>
+<s:else>
+	<!-- 	colonna registrazione -->
+	<td style="border:1px solid #CCC;">
 	<h3>Register</h3>
 	<s:form action="register" method="post" namespace="/">
 	<s:textfield name="email" key="label.email" size="20"/>
@@ -44,24 +56,25 @@ import="util.Populator"
 	</s:form>
 	</td>
 	
-<!-- 	colonna login -->
-	<td style="vertical-align:top;">
+	<!-- 	colonna login -->
+	<td style="vertical-align:top; border:1px solid #CCC;">
 	<h3>Login</h3>
 	<s:form action="login" method="post" namespace="/">
 	<s:textfield name="email" key="label.email" size="20"/>
 	<s:password name="password" key="label.password" size="20"/>
-	<s:submit method="execute" key="label.login" align="right"/>
+	<s:submit method="login" key="label.login" align="right"/>
 	</s:form>
 	</td>
+</s:else>
 </tr>
 </table>
 
 </div>
 
-<s:form action="viewGame" method="post" namespace="/">
-	<s:textfield name="id_game" size="5"/>
-	<s:submit method="execute" value="View Game" align="center"/>
-</s:form>
+<%-- <s:form action="viewGame" method="post" namespace="/"> --%>
+<%-- 	<s:textfield name="id_game" size="5"/> --%>
+<%-- 	<s:submit method="execute" value="View Game" align="center"/> --%>
+<%-- </s:form> --%>
 
 <%-- <s:form action="add" method="post" namespace="/"> --%>
 <%-- 	<s:textfield name="firstname" key="label.firstname" size="20"/> --%>

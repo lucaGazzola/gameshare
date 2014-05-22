@@ -10,13 +10,17 @@
 </head>
 <body>
 
-<!-- barra header fissa -->
-<div style="position:fixed; height:30px; width:99%; top:0px; left:0px;
-    background:#F0F0F0;
-    border:1px solid #CCC;
-    margin:0px auto;" >
-	 <b>GameShare</b> | Home | Search | Messages | Friends |
-</div>
+	<!-- barra header fissa -->
+	<div style="position:fixed; height:30px; width:99%; top:0px; left:0px;
+	    background:#F0F0F0;
+	    border:1px solid #CCC;
+	    margin:0px auto;" >
+	     <b>GameShare</b> | 
+	     <a href="/Struts2Contacts/loginConfirm.jsp" style="text-decoration:none; color:black;">Home</a> | 
+	     <a href="/Struts2Contacts/searchGame.jsp" style="text-decoration: none; color:black;">Search</a> | 
+	     Messages | 
+	     Friends |
+	</div>
 
 <br><br>
 <table border=1 width=600 cellpadding=10 align="center" style="background-color:#F0F0F0;">
