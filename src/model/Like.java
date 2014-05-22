@@ -15,16 +15,12 @@ public class Like implements Serializable {
 	@Id @Column(name="ID_like")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="likeGen") 
     private long ID_like;
-   
-	
 	
     @ManyToOne
     private User user;
     
     @ManyToOne
     private Game game;
-    
-    
     
     @Column(name = "play")
     private boolean play;
@@ -36,12 +32,9 @@ public class Like implements Serializable {
     private int score;
     
     public Like(){    	
-    }   
-    
-
+    }
     	
-	public Like(User user, Game game, boolean play, String review,
-			int score) {
+	public Like(User user, Game game, boolean play, String review, int score) {
 		super();
 		this.user = user;
 		this.game = game;

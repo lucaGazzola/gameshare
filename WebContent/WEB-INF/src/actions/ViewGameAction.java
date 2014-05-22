@@ -2,13 +2,11 @@ package actions;
 
 import model.Game;
 import model.Like;
-import model.SystemUser;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
 import util.EntityManagerUtil;
 
@@ -26,27 +24,30 @@ public class ViewGameAction extends ActionSupport{
 	public String execute(){
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		
+		// estraggo il game
 		game = em.createQuery("SELECT g FROM Game g WHERE g.ID_game = :id",Game.class)
 				.setParameter("id",id_game)
 				.getSingleResult();
-		likeList = (List<Like>) em.createQuery("SELECT l FROM Like l WHERE l.ID_like.ID_game = :id",Like.class)
+		
+		// estraggo la lista dei like associati al game
+		likeList = (List<Like>) em.createQuery("SELECT l FROM Like l WHERE l.game.ID_game = :id",Like.class)
 				.setParameter("id",id_game)
 				.getResultList();
 		
+		// conto il numero dei like e dei play
 		Iterator<Like> it = likeList.iterator();
-		numLike = 0;
+		numLike = likeList.size();
 		numPlay = 0;
 		while(it.hasNext()) {
-			numLike++;
 			if(it.next().isPlay()) numPlay++;
 		} 
 		
-		TypedQuery<Object[]> query = em.createQuery(
-			      "SELECT su.firstname, su.lastname, l.review FROM Like l JOIN SystemUser su ON l.ID_user = su.ID_user WHERE l.ID_like.ID_game = :id",
-			      Object[].class);
-		query.setParameter("id",id_game);
-		user_reviewList = query.getResultList();
-		
+		// estraggo le REVIEW e i nomi utenti cui sono associati
+		user_reviewList =  (List<Object[]>)em.createQuery(
+			      "SELECT l.user.firstname, l.user.lastname, l.review, l.score FROM Like l WHERE l.game.ID_game = :id",
+			      Object[].class)
+			      .setParameter("id",id_game)
+			      .getResultList();
 		
 		EntityManagerUtil.closeEntityManager(em);
 		return "success";

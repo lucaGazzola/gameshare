@@ -106,9 +106,6 @@ public class Populator {
 				"Il tennis è uno sport che vede opposti due giocatori (uno contro uno, incontro singolare) o quattro (due contro due, incontro di doppio) in un campo diviso in due metà da una rete alta circa un metro dal terreno.",
 				"medio-alto", 60, 2, 2);
 		pu.saveSport(sp, em);pu.saveSport(sp2, em);
-		
-		//populate di alcuni giochi classici
-		//ClassicGame
 		//---------- FINE POPULATE GIOCHI ---------------------------------------------------------
 		
 		
@@ -123,7 +120,7 @@ public class Populator {
 		pu.saveNormalUser(u,em);pu.saveNormalUser(u2,em);pu.saveNormalUser(u3,em);pu.saveNormalUser(u4,em);
 		
 		Administrator a = new Administrator("topogigio@gmail.com", "strapazzami", now, "gigio", "topo", 'M', "presentatore-cantante", "roma", "asilo", "roma");
-		Analyst aa = new Analyst("ragionierugofantozzi@gmail.com", "uga");
+		Analyst aa = new Analyst("ragionierugofantozzi@gmail.com", "passworddd","ugo","fantozzi");
 		Moderator m = new Moderator("foobar@gmail.com", "foo", now, "foo", "bar", 'M', "esempio per i test", "massachusetts", "mit massachusetts", "massachusetts");
 		pu.saveAdministrator(a,em);pu.saveAnalyst(aa,em);pu.saveModerator(m,em);
 		//---------- FINE POPULATE UTENTI ----------------------------------------------------------

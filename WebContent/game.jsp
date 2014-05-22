@@ -5,10 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Game Share: <s:property value="game.name"/></title>
+<link rel="stylesheet" type="text/css" href="/Struts2Contacts/main.css"/>
 </head>
 <body>
 
-<table border=1 width=600 cellpadding=10 align="center">
+<!-- barra header fissa -->
+<div style="position:fixed; height:30px; width:99%; top:0px; left:0px;
+    background:#F0F0F0;
+    border:1px solid #CCC;
+    margin:0px auto;" >
+	 <b>GameShare</b> | Home | Search | Messages | Friends |
+</div>
+
+<br><br>
+<table border=1 width=600 cellpadding=10 align="center" style="background-color:#F0F0F0;">
 <tr>
 	<td width="22%">
 		<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="id_game"/>-game.jpg" width="150" height="150"/>
@@ -67,10 +78,17 @@
 	<td colspan=3>
 	    <div id="review_box">
 	    	<h3>Reviews</h3>
-				<s:iterator value="user_reviewList" status="stat">
-					<p><s:property value="user_reviewList[1]"/><s:property value="user_reviewList[2]"/>:
-					<s:property value="user_reviewList[3]"/></p>
+	    	<table width="100%">
+				<s:iterator value="user_reviewList" var="user_reviewSingle">
+				<tr>
+					<td width="100%">
+						<b><s:property value="%{#user_reviewSingle[0]}"/> <s:property value="%{#user_reviewSingle[1]}"/>:</b>
+						<br><s:property value="%{#user_reviewSingle[2]}"/>
+						<br>VOTO: <i><s:property value="%{#user_reviewSingle[3]}"/></i>
+					</td>
+				</tr>
 				</s:iterator> 
+			</table>
 	    </div>
     </td>
 </tr>

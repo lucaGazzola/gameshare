@@ -13,12 +13,6 @@ public class SystemUser extends User{
 	@Column(name="birthdate")
 	private Date birthdate;
 	
-	@Column(name="firstname")
-	private String firstname;
-	
-	@Column(name="lastname")
-	private String lastname;
-	
 	@Column(name="gender")
 	private char gender;
 	
@@ -37,10 +31,8 @@ public class SystemUser extends User{
 	public SystemUser() {}
 	
 	public SystemUser(String email, String password, Date birthdate, String firstname, String lastname, char gender, String job, String residence, String school, String hometown) {
-		super(email,password);
+		super(email,password,firstname,lastname);
 		this.birthdate = birthdate;
-		this.firstname = firstname;
-		this.lastname = lastname;
 		this.gender = gender;
 		this.hometown = hometown;
 		this.school = school;
@@ -58,19 +50,19 @@ public class SystemUser extends User{
 	}
 
 	public String getFirstname() {
-		return firstname;
+		return super.getFirstname();
 	}
 
 	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+		super.setFirstname(firstname);
 	}
 
 	public String getLastname() {
-		return lastname;
+		return super.getLastname();
 	}
 
 	public void setLastname(String lastname) {
-		this.lastname = lastname;
+		super.setLastname(lastname);
 	}
 
 	public char getGender() {
@@ -116,7 +108,7 @@ public class SystemUser extends User{
 	@Override
 	public String toString() {
 		return super.toString()+"SystemUser [birthdate=" + birthdate + ", firstname="
-				+ firstname + ", lastname=" + lastname + ", gender=" + gender
+				+ super.getFirstname() + ", lastname=" + super.getLastname() + ", gender=" + gender
 				+ ", hometown=" + hometown + ", job=" + job + ", residence="
 				+ residence + ", school=" + school + "]";
 	}

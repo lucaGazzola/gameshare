@@ -12,6 +12,9 @@ import javax.persistence.*;
 @MappedSuperclass
 public class User {
 	
+	@Id @Column(name="ID_user")
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="userGen") 
+	private long ID_user;
 	
 	@Column(name="email")
 	private String email;
@@ -19,9 +22,11 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
-	@Id @Column(name="ID_user")
-	@GeneratedValue(strategy=GenerationType.TABLE, generator="userGen") 
-	private long ID_user;
+	@Column(name="firstname")
+	private String firstname;
+	
+	@Column(name="lastname")
+	private String lastname;
 	
 	@OneToMany(mappedBy="user")
 	private Collection<Like> likes;
@@ -36,9 +41,11 @@ public class User {
 	
 	public User(){}
 	
-	public User(String email, String password) {
+	public User(String email, String password, String firstname, String lastname) {
 		this.email = email;
 		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
 	}
 	
 	public long getID_user() {
@@ -64,6 +71,46 @@ public class User {
 	
 	public String getPassword(){
 		return this.password;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public Collection<Like> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Collection<Like> likes) {
+		this.likes = likes;
+	}
+
+	public Collection<Friendship> getSentRequests() {
+		return sentRequests;
+	}
+
+	public void setSentRequests(Collection<Friendship> sentRequests) {
+		this.sentRequests = sentRequests;
+	}
+
+	public Collection<Friendship> getReceivedRequests() {
+		return receivedRequests;
+	}
+
+	public void setReceivedRequests(Collection<Friendship> receivedRequests) {
+		this.receivedRequests = receivedRequests;
 	}
 
 	@Override
