@@ -32,8 +32,7 @@
 		Go to your <b><i><a href="/Struts2Contacts/loginConfirm.jsp">Profile page</a></i></b>
 		 or 
 		<b><i>
-		<s:url action="login" method="logout" namespace="/" var="urlTag">
-		<s:param name="id_game" value="ID_game"></s:param></s:url>
+		<s:url action="login" method="logout" namespace="/" var="urlTag"></s:url>
 		<s:a href="%{urlTag}">Logout</s:a></i></b>
 	</td>
 	</tr>

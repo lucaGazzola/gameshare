@@ -23,21 +23,36 @@
 	</div>
 	
 			<!-- tag url per le action via link  -->
-	    	<s:url action="playLike" method="likeGame" namespace="/" var="urlTagLike">
-			<s:param name="id_game" value="ID_game"></s:param>
-			<s:param name="id_user" value="ID_user"></s:param></s:url>
+	    	<s:url action="likeAction" method="execute" namespace="/" var="urlTagLike">
+	    	<s:param name="id_game" value="game.ID_game"></s:param>
+			<s:param name="game" value="%{#game}"></s:param>
+			<s:param name="user_reviewList" value="%{#user_reviewList}"></s:param>
+			<s:param name="numPlay" value="numPlay"></s:param>
+			<s:param name="numLike" value="numLike"></s:param>
+						<s:param name="isPlay" value="isPlay"></s:param>
+			<s:param name="isLike" value="isLike"></s:param>
+			<s:param name="gameCategory" value="gameCategory"></s:param>
+			</s:url>
 			
-			<s:url action="playLike" method="playGame" namespace="/" var="urlTagPlay">
-			<s:param name="id_game" value="ID_game"></s:param>
-			<s:param name="id_user" value="ID_user"></s:param></s:url>
+			<s:url action="playAction" method="execute" namespace="/" var="urlTagPlay">
+			<s:param name="id_game" value="game.ID_game"></s:param>
+			<s:param name="game" value="%{#game}"></s:param>
+			<s:param name="user_reviewList" value="%{#user_reviewList}"></s:param>
+			<s:param name="numPlay" value="numPlay"></s:param>
+			<s:param name="numLike" value="numLike"></s:param>
+			<s:param name="isPlay" value="isPlay"></s:param>
+			<s:param name="isLike" value="isLike"></s:param>
+			<s:param name="gameCategory" value="gameCategory"></s:param>
+			</s:url>
 			
 			<s:url action="viewLikeUsers" method="execute" namespace="/" var="urlTag">
-			<s:param name="id_game" value="ID_game"></s:param></s:url>
+			<s:param name="id_game" value="game.ID_game"></s:param></s:url>
 			
 			<s:url action="viewPlayUsers" method="execute" namespace="/" var="urlTag2">
-			<s:param name="id_game" value="ID_game"></s:param></s:url>
+			<s:param name="id_game" value="game.ID_game"></s:param></s:url>
 			
 <br><br>
+<s:actionerror />
 <table width=600 cellpadding=10 align="center" style="background-color:#F0F0F0; border:1px solid #CCC;">
 <tr>
 	<td width="22%" style="border:1px solid #CCC;">
@@ -55,8 +70,8 @@
 			</tr>
 			<tr>
 				<td>
-						<s:a href="%{urlTagLike}"><button type="button">Like</button></s:a>				
-						<s:a href="%{urlTagPlay}"><button type="button">Play</button></s:a>
+					<s:a href="%{urlTagLike}"><button type="button">Like</button></s:a>
+					<s:a href="%{urlTagPlay}"><button type="button">Play</button></s:a>
 				</td>
 			</tr>
 		</table>

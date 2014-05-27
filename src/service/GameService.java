@@ -15,14 +15,14 @@ public class GameService{
 			em.getTransaction().commit();
     }
 
-    public void remove(int id, EntityManager em) {
+    public void remove(long id, EntityManager em) {
         Game g = find(id, em);
         if (g != null) {
             em.remove(g);
         }
     }
 
-    public Game find(int id, EntityManager em) {
+    public Game find(long id, EntityManager em) {
         return em.find(Game.class, id);
     }
     

@@ -2,18 +2,22 @@ package actions;
 
 import model.Game;
 import model.Like;
+import model.User;
 import util.ReturnGameCategory;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import util.EntityManagerUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ViewGameAction extends ActionSupport{
+public class ViewGameAction extends ActionSupport implements SessionAware{
 	private static final long serialVersionUID = 5976515590599826089L;
 	private int id_game;
 	private Game game;
@@ -23,11 +27,19 @@ public class ViewGameAction extends ActionSupport{
 	private int numLike;
 	private String gameCategory;
 	ReturnGameCategory util = new ReturnGameCategory();
+	private boolean isPlay;
+	private boolean isLike;
+	private User user;
+	
+	//usata per prelevare l'user loggato
+	private Map<String,Object> session; 
 	
 	public String execute(){
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		
 		try{
+			// estraggo user dalla session
+			user = (User)session.get("loggedInUser");
 			// estraggo il game
 			game = em.createQuery("SELECT g FROM Game g WHERE g.ID_game = :id",Game.class)
 					.setParameter("id",id_game)
@@ -43,19 +55,31 @@ public class ViewGameAction extends ActionSupport{
 			Iterator<Like> it = likeList.iterator();
 			numLike = likeList.size();
 			numPlay = 0;
+			isPlay = isLike = false;
 			while(it.hasNext()) {
-				if(it.next().isPlay()) numPlay++;
+				Like like = it.next();
+				if(((User)like.getUser()).getID_user() == user.getID_user())
+				{
+					isLike=true; //dice se l'utente ha già messo LIKE
+					if(like.isPlay()){	
+						isPlay=true; //dice se l'utente ha già messo PLAY
+					}
+				}
+				
+				if(like.isPlay()) numPlay++;
 			} 
 			
 			// estraggo le REVIEW e i nomi utenti cui sono associati
 			user_reviewList =  (List<Object[]>)em.createQuery(
-				      "SELECT l.user.firstname, l.user.lastname, l.review, l.score FROM Like l WHERE l.game.ID_game = :id",
+				      "SELECT l.user.firstname, l.user.lastname, l.review, l.score FROM Like l WHERE l.game.ID_game = :id  AND l.review IS NOT NULL",
 				      Object[].class)
 				      .setParameter("id",id_game)
 				      .getResultList();
 			
 		}catch(Exception e){
+			System.out.println("Errore");
 			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
 		}
 		
 		EntityManagerUtil.closeEntityManager(em);
@@ -122,4 +146,34 @@ public class ViewGameAction extends ActionSupport{
 	public void setGameCategory(String gameCategory) {
 		this.gameCategory = gameCategory;
 	}
+
+
+	public boolean getPlay() {
+		return isPlay;
+	}
+
+
+	public void setPlay(boolean isPlay) {
+		this.isPlay = isPlay;
+	}
+
+
+	public boolean getLike() {
+		return isLike;
+	}
+
+
+	public void setLike(boolean isLike) {
+		this.isLike = isLike;
+	}
+	
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		this.session = arg0;
+	}
+	
+	public Map<String,Object> getSession(){
+		return session;
+	}
+
 }

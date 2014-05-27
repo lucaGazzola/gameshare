@@ -48,9 +48,14 @@
 			<result name="errorField">index.jsp</result>
 		</action>
 		
-		<action name="playLike" class="actions.PlayLikeAction">
+		<action name="playAction" class="actions.PlayAction">
 			<result name="success">game.jsp</result>
-			<result name="errorField">game.jsp</result>
+			<result name="error">game.jsp</result>
+		</action>
+		
+		<action name="likeAction" class="actions.LikeAction">
+			<result name="success">game.jsp</result>
+			<result name="error">game.jsp</result>
 		</action>
 		
 		<action name="viewGame" class="actions.ViewGameAction">
