@@ -29,7 +29,7 @@
 			<s:param name="user_reviewList" value="%{#user_reviewList}"></s:param>
 			<s:param name="numPlay" value="numPlay"></s:param>
 			<s:param name="numLike" value="numLike"></s:param>
-						<s:param name="isPlay" value="isPlay"></s:param>
+			<s:param name="isPlay" value="isPlay"></s:param>
 			<s:param name="isLike" value="isLike"></s:param>
 			<s:param name="gameCategory" value="gameCategory"></s:param>
 			</s:url>
@@ -70,8 +70,18 @@
 			</tr>
 			<tr>
 				<td>
-					<s:a href="%{urlTagLike}"><button type="button">Like</button></s:a>
-					<s:a href="%{urlTagPlay}"><button type="button">Play</button></s:a>
+					<s:if test="isLike == 1">
+						<u><i><b>Liked</b></i></u>
+					</s:if>
+					<s:else>
+						<s:a href="%{urlTagLike}"><button type="button">Like</button></s:a>
+					</s:else>
+					<s:if test="isPlay == 1">
+						<u><i><b>Played</b></i></u>
+					</s:if>
+					<s:else>
+						<s:a href="%{urlTagPlay}"><button type="button">Play</button></s:a>
+					</s:else>
 				</td>
 			</tr>
 		</table>

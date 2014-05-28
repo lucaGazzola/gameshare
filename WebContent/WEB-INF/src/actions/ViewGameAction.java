@@ -25,10 +25,10 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 	private List<Object[]> user_reviewList;
 	private int numPlay;
 	private int numLike;
+	private int isPlay;
+	private int isLike;
 	private String gameCategory;
 	ReturnGameCategory util = new ReturnGameCategory();
-	private boolean isPlay;
-	private boolean isLike;
 	private User user;
 	
 	//usata per prelevare l'user loggato
@@ -55,14 +55,14 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 			Iterator<Like> it = likeList.iterator();
 			numLike = likeList.size();
 			numPlay = 0;
-			isPlay = isLike = false;
+			isPlay = isLike = 0;
 			while(it.hasNext()) {
 				Like like = it.next();
 				if(((User)like.getUser()).getID_user() == user.getID_user())
 				{
-					isLike=true; //dice se l'utente ha già messo LIKE
+					isLike=1; //dice se l'utente ha già messo LIKE
 					if(like.isPlay()){	
-						isPlay=true; //dice se l'utente ha già messo PLAY
+						isPlay=1; //dice se l'utente ha già messo PLAY
 					}
 				}
 				
@@ -146,26 +146,6 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 	public void setGameCategory(String gameCategory) {
 		this.gameCategory = gameCategory;
 	}
-
-
-	public boolean getPlay() {
-		return isPlay;
-	}
-
-
-	public void setPlay(boolean isPlay) {
-		this.isPlay = isPlay;
-	}
-
-
-	public boolean getLike() {
-		return isLike;
-	}
-
-
-	public void setLike(boolean isLike) {
-		this.isLike = isLike;
-	}
 	
 	@Override
 	public void setSession(Map<String, Object> arg0) {
@@ -174,6 +154,26 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 	
 	public Map<String,Object> getSession(){
 		return session;
+	}
+
+
+	public int getIsPlay() {
+		return isPlay;
+	}
+
+
+	public void setIsPlay(int isPlay) {
+		this.isPlay = isPlay;
+	}
+
+
+	public int getIsLike() {
+		return isLike;
+	}
+
+
+	public void setIsLike(int isLike) {
+		this.isLike = isLike;
 	}
 
 }

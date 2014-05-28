@@ -8,8 +8,9 @@ import model.Like;
 
 public class LikeService {
 	
-	
+	// ritorno true se ho creato una nuova entity, false se ho fatto solo l'update
 	public boolean savePlay(Like entity, EntityManager em) {
+		boolean newEntity = false;
 		try {
 			em.getTransaction().begin();
 			
@@ -23,6 +24,7 @@ public class LikeService {
 			
 			if(resultList.isEmpty()){
 				em.persist(entity);
+				newEntity = true;
 			}
 			else{
 				//si suppone che la lista sia vuota, o con size==1
@@ -37,10 +39,9 @@ public class LikeService {
 			//em.getTransaction().rollback();
 			System.out.println("Errore nel salvataggio, '"+entity.toString()+"'");
 			System.out.println(e.getMessage());
-			return false;
 		}
 		System.out.println("OK: '"+entity.toString()+"' salvato correttamente");
-		return true;
+		return newEntity;
 	}
 	
 	public boolean saveLike(Like entity, EntityManager em) {

@@ -30,8 +30,8 @@ public class PlayAction extends ActionSupport implements SessionAware{
 	private int numPlay;
 	private int numLike;
 	private String gameCategory;
-	private boolean isPlay;
-	private boolean isLike;
+	private int isPlay;
+	private int isLike;
 	
 	//usata per prelevare l'user loggato
 	private Map<String,Object> session; 
@@ -43,7 +43,11 @@ public class PlayAction extends ActionSupport implements SessionAware{
 		try{
 			game = gameService.find(id_game, em);
 			//creo oggetto like, con play=true, review vuota e score=-1
-			likeService.savePlay(new Like((User)session.get("loggedInUser"), game, true, null, -1), em);
+			boolean newEntity = likeService.savePlay(new Like((User)session.get("loggedInUser"), game, true, null, -1), em);
+			isPlay = 1;
+			isLike = 1;
+			numPlay++;
+			if(newEntity)numLike++;
 		}catch(Exception e){
 			EntityManagerUtil.closeEntityManager(em);
 			addActionError("Error saving play: "+e.getMessage());
@@ -127,19 +131,20 @@ public class PlayAction extends ActionSupport implements SessionAware{
 		this.id_game = id_game;
 	}
 
-	public boolean isPlay() {
+	public int getIsPlay() {
 		return isPlay;
 	}
 
-	public void setPlay(boolean isPlay) {
+	public void setIsPlay(int isPlay) {
 		this.isPlay = isPlay;
 	}
 
-	public boolean isLike() {
+	public int getIsLike() {
 		return isLike;
 	}
 
-	public void setLike(boolean isLike) {
+	public void setIsLike(int isLike) {
 		this.isLike = isLike;
 	}
+
 }
