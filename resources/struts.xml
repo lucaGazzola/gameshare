@@ -40,12 +40,10 @@
 		
 		<action name="viewLikeUsers" class="actions.ViewLikeUsersAction">
 			<result name="success">viewusers.jsp</result>
-			<result name="errorField">login.jsp</result>
 		</action>
 		
 		<action name="viewPlayUsers" class="actions.ViewPlayUsersAction">
 			<result name="success">viewusers.jsp</result>
-			<result name="errorField">index.jsp</result>
 		</action>
 		
 		<action name="playAction" class="actions.PlayAction">

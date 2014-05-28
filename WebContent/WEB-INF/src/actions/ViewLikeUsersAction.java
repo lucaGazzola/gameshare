@@ -5,51 +5,59 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import util.EntityManagerUtil;
-import model.SystemUser;
+import model.Game;
+import model.User;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ViewLikeUsersAction extends ActionSupport {
 	private static final long serialVersionUID = -7535988682705910155L;
-
-	private EntityManager em = EntityManagerUtil.getEntityManager();
 	private int id_game;
-	private List<SystemUser> userList;
-	
-//	public String viewPlayUsers() throws Exception{
-//		setUserList((List<SystemUser>) em
-//				.createQuery("SELECT su FROM Like l JOIN SystemUser su ON l.id_user = su.id_user WHERE l.id_game = :id_game AND l.play = 1",SystemUser.class)
-//				.setParameter("id_game", id_game)
-//				.getResultList());
-//		
-//		System.out.println("sono nel metodo viewPlayUsers()");
-//		return "success";
-//	}
+	private Game game;
+	private List<User> userList;
 
 	//Default method invoked by STRUTS2
 	public String execute() throws Exception{
-		System.out.println("sono nel metodo execute di view like users action");
+		EntityManager em = EntityManagerUtil.getEntityManager();
 		
-//		setUserList((List<SystemUser>) em
-//		.createQuery("SELECT su FROM Like l JOIN SystemUser su ON l.id_user = su.id_user WHERE l.id_game = :id_game",SystemUser.class)
-//		.setParameter("id_game", id_game)
-//		.getResultList());
+		try{
+			
+			userList = ((List<User>) em
+					.createQuery("SELECT l.user FROM Like l WHERE l.game.ID_game = :id_game",User.class)
+					.setParameter("id_game", id_game)
+					.getResultList());
+			
+		}catch(Exception e){
+			System.out.println("Exception while retrieving user list: "+ e.getMessage());
+		}
+
 		
+		
+		EntityManagerUtil.closeEntityManager(em);
 		return "success";
 	}
 
-	public List<SystemUser> getUserList() {
-		return userList;
-	}
-
-	public void setUserList(List<SystemUser> userList) {
-		this.userList = userList;
-	}
 	public int getId_game() {
 		return id_game;
 	}
 
 	public void setId_game(int id_game) {
 		this.id_game = id_game;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
 	}
 }

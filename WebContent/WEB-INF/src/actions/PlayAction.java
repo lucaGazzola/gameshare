@@ -41,13 +41,24 @@ public class PlayAction extends ActionSupport implements SessionAware{
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		
 		try{
+			//cerco il gioco (non si possono passare oggetti con struts2)
 			game = gameService.find(id_game, em);
+			
 			//creo oggetto like, con play=true, review vuota e score=-1
 			boolean newEntity = likeService.savePlay(new Like((User)session.get("loggedInUser"), game, true, null, -1), em);
+			
+			//aggiorno flag del gioco e contatore dei giocatori
 			isPlay = 1;
 			isLike = 1;
 			numPlay++;
 			if(newEntity)numLike++;
+			
+			// aggiungo il game alla lista dei played games nella session
+			@SuppressWarnings("unchecked")
+			List<Game> playGameList = (List<Game>) session.get("playGameList");
+			playGameList.add(game);
+			session.put("playGameList", playGameList);
+			
 		}catch(Exception e){
 			EntityManagerUtil.closeEntityManager(em);
 			addActionError("Error saving play: "+e.getMessage());

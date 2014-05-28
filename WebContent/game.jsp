@@ -29,8 +29,8 @@
 			<s:param name="user_reviewList" value="%{#user_reviewList}"></s:param>
 			<s:param name="numPlay" value="numPlay"></s:param>
 			<s:param name="numLike" value="numLike"></s:param>
-			<s:param name="isPlay" value="isPlay"></s:param>
-			<s:param name="isLike" value="isLike"></s:param>
+<%-- 			<s:param name="isPlay" value="isPlay"></s:param> --%>
+<%-- 			<s:param name="isLike" value="isLike"></s:param> --%>
 			<s:param name="gameCategory" value="gameCategory"></s:param>
 			</s:url>
 			
@@ -40,8 +40,8 @@
 			<s:param name="user_reviewList" value="%{#user_reviewList}"></s:param>
 			<s:param name="numPlay" value="numPlay"></s:param>
 			<s:param name="numLike" value="numLike"></s:param>
-			<s:param name="isPlay" value="isPlay"></s:param>
-			<s:param name="isLike" value="isLike"></s:param>
+<%-- 			<s:param name="isPlay" value="isPlay"></s:param> --%>
+<%-- 			<s:param name="isLike" value="isLike"></s:param> --%>
 			<s:param name="gameCategory" value="gameCategory"></s:param>
 			</s:url>
 			
@@ -100,8 +100,19 @@
 	<td colspan=3 style="border:1px solid #CCC;">
 	    <div id="social_box">
 	    	<h3>Social</h3>
-	    	<p><i><b><s:a href="%{urlTag}"><s:property value="numLike"/></s:a></b></i> users <i><b>like</b></i> this game</p>
-	    	<p><i><b><s:a href="%{urlTag2}"><s:property value="numPlay"/></s:a></b></i> users <i><b>play</b></i> this game</p>
+	    	<s:if test="numLike == 0">
+	    		<p><i><b><s:property value="numLike"/></b></i> users <i><b>like</b></i> this game</p>
+	    	</s:if>
+	    	<s:else>
+	    		<p><i><b><s:a href="%{urlTag}"><s:property value="numLike"/></s:a></b></i> users <i><b>like</b></i> this game</p>
+	    	</s:else>
+	    	
+	    	<s:if test="numPlay == 0">
+	    		<p><i><b><s:property value="numPlay"/></b></i> users <i><b>play</b></i> this game</p>
+	    	</s:if>
+	    	<s:else>
+	    		<p><i><b><s:a href="%{urlTag2}"><s:property value="numPlay"/></s:a></b></i> users <i><b>play</b></i> this game</p>
+	    	</s:else>
 	    </div>
     </td>	
 </tr>

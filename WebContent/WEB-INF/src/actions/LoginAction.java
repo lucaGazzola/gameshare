@@ -60,7 +60,8 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	}
 
 	public String logout(){
-		if(session.remove("loggedInUser") != null){
+		// rimuovo dalla session user e playgamelist
+		if(session.remove("loggedInUser") != null && session.remove("playGameList") != null){
 			return "successLogout";
 		}
 		else{
@@ -76,7 +77,16 @@ public class LoginAction extends ActionSupport implements SessionAware{
 				u = results.get(0);
 				if(password.equals(u.getPassword())){
 					user = u;
+					//inserisco l'utente nella session
 					session.put("loggedInUser", user);
+					
+					//inserisco nella session la lista dei played games
+					List<Game> playGameList = 
+							(List<Game>)em.createQuery("SELECT l.game FROM Like l WHERE l.user.ID_user = :id_user AND l.play = 'TRUE'",Game.class)
+							.setParameter("id_user", user.getID_user())
+							.getResultList();
+					session.put("playGameList", playGameList);
+					
 					return "success";
 				}else{
 					addActionError(getText("error.wrongLogin"));
