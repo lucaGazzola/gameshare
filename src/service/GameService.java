@@ -26,6 +26,13 @@ public class GameService{
         return em.find(Game.class, id);
     }
     
+    public List<Game> findAll(EntityManager em){
+    	List<Game> results =  (List<Game>)em
+    			.createQuery("SELECT g FROM Game g",Game.class)
+    			.getResultList();
+    	return results;
+    }
+    
     public Game findByName(String name, EntityManager em) {
     	List<Game> results =  (List<Game>)em.createQuery("SELECT p FROM Game p WHERE p.name = :value",Game.class).setParameter("value", name).getResultList();
 		return results.get(0);

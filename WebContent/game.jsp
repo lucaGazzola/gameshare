@@ -15,12 +15,23 @@
 	    background:#F0F0F0;
 	    border:1px solid #CCC;
 	    margin:0px auto;" >
-	     <b>GameShare</b> | 
+	    
+	    <div style="float: left; position:relative; top:5px; left:5px;">
+	    <s:url action="viewGameList" method="execute" namespace="/" var="urlTagGames"></s:url>
+	      <b>GameShare</b> | 
 	     <a href="/Struts2Contacts/loginConfirm.jsp">Home</a> | 
+	     <s:a href="%{urlTagGames}">Games</s:a> | 
 	     <a href="/Struts2Contacts/searchGame.jsp">Search</a> | 
 	     Messages | 
 	     Friends |
-	</div>
+	    </div>
+	    
+	    <div style="float: right; position:relative; top:5px; right:7px;">
+			<s:url action="login" method="logout" namespace="/" var="urlTag"></s:url>
+			<s:a href="%{urlTag}">| Logout </s:a>
+		</div>
+	</div><br><br><div style="clear: both;"></div>
+	<!-- fine barra header fissa -->
 	
 			<!-- tag url per le action via link  -->
 	    	<s:url action="likeAction" method="execute" namespace="/" var="urlTagLike">
@@ -29,8 +40,8 @@
 			<s:param name="user_reviewList" value="%{#user_reviewList}"></s:param>
 			<s:param name="numPlay" value="numPlay"></s:param>
 			<s:param name="numLike" value="numLike"></s:param>
-<%-- 			<s:param name="isPlay" value="isPlay"></s:param> --%>
-<%-- 			<s:param name="isLike" value="isLike"></s:param> --%>
+			<s:param name="isPlay" value="isPlay"></s:param>
+			<s:param name="isLike" value="isLike"></s:param>
 			<s:param name="gameCategory" value="gameCategory"></s:param>
 			</s:url>
 			
@@ -40,8 +51,8 @@
 			<s:param name="user_reviewList" value="%{#user_reviewList}"></s:param>
 			<s:param name="numPlay" value="numPlay"></s:param>
 			<s:param name="numLike" value="numLike"></s:param>
-<%-- 			<s:param name="isPlay" value="isPlay"></s:param> --%>
-<%-- 			<s:param name="isLike" value="isLike"></s:param> --%>
+			<s:param name="isPlay" value="isPlay"></s:param>
+			<s:param name="isLike" value="isLike"></s:param>
 			<s:param name="gameCategory" value="gameCategory"></s:param>
 			</s:url>
 			
@@ -51,7 +62,6 @@
 			<s:url action="viewPlayUsers" method="execute" namespace="/" var="urlTag2">
 			<s:param name="id_game" value="game.ID_game"></s:param></s:url>
 			
-<br><br>
 <s:actionerror />
 <table width=600 cellpadding=10 align="center" style="background-color:#F0F0F0; border:1px solid #CCC;">
 <tr>

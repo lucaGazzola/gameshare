@@ -67,5 +67,9 @@
 		<action name="AddGamePage" class="actions.AddGamePageAction">
 			<result name="success">addGame.jsp</result>
 		</action>
+		
+		<action name="viewGameList" class="actions.ViewGameListAction">
+			<result name="success">viewGames.jsp</result>
+		</action>
 	</package>
 </struts>

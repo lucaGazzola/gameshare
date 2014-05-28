@@ -9,21 +9,27 @@
 <title>Game Share: Welcome</title>
 </head>
 <body>
-<s:url action="searchGame" method="execute" namespace="/" var="urlSearchGame">
-<s:param name="id_game" value="ID_game"></s:param>
-</s:url>
-
 	<!-- barra header fissa -->
 	<div style="position:fixed; height:30px; width:99%; top:0px; left:0px;
 	    background:#F0F0F0;
 	    border:1px solid #CCC;
 	    margin:0px auto;" >
-	     <b>GameShare</b> | 
+	    
+	    <div style="float: left; position:relative; top:5px; left:5px;">
+	    <s:url action="viewGameList" method="execute" namespace="/" var="urlTagGames"></s:url>
+	      <b>GameShare</b> | 
 	     <a href="/Struts2Contacts/loginConfirm.jsp">Home</a> | 
+	     <s:a href="%{urlTagGames}">Games</s:a> | 
 	     <a href="/Struts2Contacts/searchGame.jsp">Search</a> | 
 	     Messages | 
 	     Friends |
-	</div><br><br>
+	    </div>
+	    
+	    <div style="float: right; position:relative; top:5px; right:7px;">
+			<s:url action="login" method="logout" namespace="/" var="urlTag"></s:url>
+			<s:a href="%{urlTag}">| Logout </s:a>
+		</div>
+	</div><br><br><div style="clear: both;"></div>
 	<!-- fine barra header fissa -->
 	
 	<!-- tabella foto profilo + welcome -->
@@ -48,6 +54,7 @@
 		<tr>
 			<td width="50%" style="vertical-align:top;border:1px solid #CCC;">
 				<b>Your Played games</b>
+				
 				<table width="100%">
 				<s:iterator value="#session.playGameList" var="game">
 				<tr>
@@ -55,11 +62,14 @@
 						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
 					</td>
 					<td width="85%">
-						<s:a href="%{urlSearchGame}"><s:property value="name"/></s:a>
+						<a href="<s:url action="viewGame" method="execute" namespace="/">
+							<s:param name="id_game" value="ID_game"></s:param></s:url>">
+						    <s:property value="name"/>
+						</a>
 					</td>
 				</tr>
 				</s:iterator> 
-			</table>
+				</table>
 			</td>
 			<td width="50%" style="vertical-align:top;border:1px solid #CCC;">
 				<b>Social</b><br>

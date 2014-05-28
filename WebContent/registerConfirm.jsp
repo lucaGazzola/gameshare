@@ -13,12 +13,24 @@
 	    background:#F0F0F0;
 	    border:1px solid #CCC;
 	    margin:0px auto;" >
-	     <b>GameShare</b> | 
-	     <a href="/Struts2Contacts/loginConfirm.jsp" style="text-decoration:none; color:black;">Home</a> | 
-	     <a href="/Struts2Contacts/searchGame.jsp" style="text-decoration: none; color:black;">Search</a> | 
+	    
+	    <div style="float: left; position:relative; top:5px; left:5px;">
+	    <s:url action="viewGameList" method="execute" namespace="/" var="urlTagGames"></s:url>
+	      <b>GameShare</b> | 
+	     <a href="/Struts2Contacts/loginConfirm.jsp">Home</a> | 
+	     <s:a href="%{urlTagGames}">Games</s:a> | 
+	     <a href="/Struts2Contacts/searchGame.jsp">Search</a> | 
 	     Messages | 
 	     Friends |
-	</div>
+	    </div>
+	    
+	    <div style="float: right; position:relative; top:5px; right:7px;">
+			<s:url action="login" method="logout" namespace="/" var="urlTag"></s:url>
+			<s:a href="%{urlTag}">| Logout </s:a>
+		</div>
+	</div><br><br><div style="clear: both;"></div>
+	<!-- fine barra header fissa -->
+	
 	<br><br>
 	<h2>User <s:property value="email"/> <s:property value="firstname"/> added!</h2>
 </body>
