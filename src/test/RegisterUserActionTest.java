@@ -1,10 +1,5 @@
 package test;
 
-import java.util.Date;
-
-
-
-import actions.*;
 
 import org.apache.struts2.StrutsTestCase;
 
@@ -14,7 +9,6 @@ public class RegisterUserActionTest extends StrutsTestCase{
 	
 	public void testFieldErrorMessage() throws Exception {
 		
-		Date now = new Date();
 		
     	request.setParameter("email", "");
     	request.setParameter("password", "frenk");
@@ -25,15 +19,12 @@ public class RegisterUserActionTest extends StrutsTestCase{
     	request.setParameter("hometown", "test");
     	request.setParameter("school", "test");
     	request.setParameter("residence", "test");
-    	//request.setParameter("birthdate","1111/22/22");   
+    	request.setParameter("birthdate","11-11-1111");   
     	
     	
     	ActionProxy proxy = getActionProxy("/register");
 
-    	RegisterUserAction action = (RegisterUserAction) proxy.getAction();
     	
-    	action.setBirthdate(now);
-
     	String result = proxy.execute();
         
         assertEquals("Result returned from executing the action should have been errorField", "errorField", result);
@@ -44,25 +35,19 @@ public class RegisterUserActionTest extends StrutsTestCase{
     }
 
     public void testRegisterCorrect() throws Exception {
-    	
-		Date now = new Date();
-    	
+    	    	
     	request.setParameter("email", "Bruc");
     	request.setParameter("password", "test");
     	request.setParameter("firstname", "test");
     	request.setParameter("lastname", "test");
-    	request.setParameter("gender", "f");
+    	request.setParameter("gender", "F");
     	request.setParameter("job", "test");
     	request.setParameter("hometown", "test");
     	request.setParameter("school", "test");
     	request.setParameter("residence", "test");
-    	//request.setParameter("birthdate","1111/22/22");
+    	request.setParameter("birthdate","11-11-1111");
     	
-    	ActionProxy proxy = getActionProxy("/register");
-
-    	RegisterUserAction action = (RegisterUserAction) proxy.getAction();
-    	
-    	action.setBirthdate(now);
+    	ActionProxy proxy = getActionProxy("/register");    	
 
         String result = proxy.execute();
 

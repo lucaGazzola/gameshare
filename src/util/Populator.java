@@ -121,7 +121,7 @@ public class Populator {
 		
 		Administrator a = new Administrator("topogigio@gmail.com", "strapazzami", now, "gigio", "topo", 'M', "presentatore-cantante", "roma", "asilo", "roma");
 		Analyst aa = new Analyst("ragionierugofantozzi@gmail.com", "passworddd","ugo","fantozzi");
-		Moderator m = new Moderator("foobar@gmail.com", "foo", now, "foo", "bar", 'M', "esempio per i test", "massachusetts", "mit massachusetts", "massachusetts");
+		Moderator m = new Moderator("foobar@gmail.com", "foo", now, "foo", "bar", 'M', "esempio per i test", "massachusetts", "mit massachusetts", "massachusetts", "card");
 		pu.saveAdministrator(a,em);pu.saveAnalyst(aa,em);pu.saveModerator(m,em);
 		//---------- FINE POPULATE UTENTI ----------------------------------------------------------
 		

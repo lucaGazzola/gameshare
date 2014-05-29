@@ -1,7 +1,12 @@
 package actions;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,7 +28,7 @@ public class RegisterUserAction extends ActionSupport {
 	private String firstname;
 	private String lastname;
 	private String hometown;
-	private Date birthdate;
+	private String birthdate;
 	private String residence;
 	private String email;
 	private String password;
@@ -56,11 +61,11 @@ public class RegisterUserAction extends ActionSupport {
 		this.hometown = hometown;
 	}
 
-	public Date getBirthdate() {
+	public String getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -111,17 +116,33 @@ public class RegisterUserAction extends ActionSupport {
 	public void setSchool(String school) {
 		this.school = school;
 	}
+	
+	public boolean containsIllegals(String toExamine) {
+	    Pattern pattern = Pattern.compile("[~#@*+%{}<>\\[\\]|\"\\_^]");
+	    Matcher matcher = pattern.matcher(toExamine);
+	    return matcher.find();
+	}
 
 	//Default method invoked by STRUTS2
 	public String execute() {
 		
-		if (!email.equals("") && !password.equals("")){
-	
+		String datePattern = "\\d{1,2}-\\d{1,2}-\\d{4}";
+		
+		
+		if (!email.equals("") && !password.equals("") && birthdate.matches(datePattern) && (gender == 'M' || gender == 'F')){
+			
 			List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getResultList();
 			if(results.isEmpty()){
 
+				DateFormat formatter = new SimpleDateFormat("DD-MM-YYYY");
+				Date date = null;
+				try {
+					date = formatter.parse(birthdate);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				//user object creation
-				u = new NormalUser(email, password, birthdate, firstname, lastname, gender, job, residence, school, hometown);
+				u = new NormalUser(email, password, date, firstname, lastname, gender, job, residence, school, hometown);
 				
 				//persist user
 				em.persist(u);
