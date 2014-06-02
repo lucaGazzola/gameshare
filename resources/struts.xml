@@ -19,7 +19,9 @@
 		<action name="register" class="actions.RegisterUserAction">
 			<result name="success">registerConfirm.jsp</result>
 			<result name="errorField">register.jsp</result>
-			<result name="errorDuplicate">register.jsp</result>
+			<result name="invalidDateFormat">register.jsp</result>
+			<result name="invalidEmailAddress">register.jsp</result>
+			<result name="invalidCharactersError">register.jsp</result>
 		</action>
 		<action name="login" class="actions.LoginAction">
 			<result name="success">loginConfirm.jsp</result>

@@ -35,7 +35,11 @@ public class RegisterUserAction extends ActionSupport {
 	private char gender;
 	private String job;
 	private String school;
-	
+	private Pattern pattern;
+	private Matcher matcher;
+	private static final String EMAIL_PATTERN = 
+		"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	public String getFirstname() {
 		return firstname;
@@ -117,19 +121,51 @@ public class RegisterUserAction extends ActionSupport {
 		this.school = school;
 	}
 	
-	public boolean containsIllegals(String toExamine) {
-	    Pattern pattern = Pattern.compile("[~#@*+%{}<>\\[\\]|\"\\_^]");
+	private boolean containsIllegals(String toExamine) {
+	    Pattern pattern = Pattern.compile("[~#*+%{}<>\\[\\]|\"\\_^]");
 	    Matcher matcher = pattern.matcher(toExamine);
 	    return matcher.find();
 	}
+	
+	private boolean checkIllegalFields(){
+		if(this.containsIllegals(firstname) || this.containsIllegals(email) || this.containsIllegals(lastname) || this.containsIllegals(job) || this.containsIllegals(school) || this.containsIllegals(hometown) || this.containsIllegals(residence) || this.containsIllegals(birthdate) || this.containsIllegals(password)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	private boolean validate(String mail) {
+		 
+		pattern = Pattern.compile(EMAIL_PATTERN);
+		matcher = pattern.matcher(mail);
+		return matcher.matches();
+ 
+	}
+	
+
 
 	//Default method invoked by STRUTS2
 	public String execute() {
 		
 		String datePattern = "\\d{1,2}-\\d{1,2}-\\d{4}";
 		
+		if(this.checkIllegalFields()){
+			addActionError(getText("error.invalidCharactersError"));
+			return "invalidCharactersError";
+		}
 		
-		if (!email.equals("") && !password.equals("") && birthdate.matches(datePattern) && (gender == 'M' || gender == 'F')){
+		if(!this.validate(email)){
+			addActionError(getText("error.invalidEmailAddress"));
+			return "invalidEmailAddress";
+		}
+		
+		if(!birthdate.matches(datePattern)){
+			addActionError(getText("error.invalidDateFormat"));
+			return "invalidDateFormat";
+		}
+		
+		if (!password.equals("") && (gender == 'M' || gender == 'F')){
 			
 			List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getResultList();
 			if(results.isEmpty()){
