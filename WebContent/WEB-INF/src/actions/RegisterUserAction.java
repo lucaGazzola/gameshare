@@ -155,6 +155,11 @@ public class RegisterUserAction extends ActionSupport {
 			return "invalidCharactersError";
 		}
 		
+		if(password.length() < 5){
+			addActionError(getText("error.passwordTooShort"));
+			return "passwordTooShort";
+		}
+		
 		if(!this.validate(email)){
 			addActionError(getText("error.invalidEmailAddress"));
 			return "invalidEmailAddress";
@@ -165,34 +170,34 @@ public class RegisterUserAction extends ActionSupport {
 			return "invalidDateFormat";
 		}
 		
-		if (!password.equals("") && (gender == 'M' || gender == 'F')){
-			
-			List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getResultList();
-			if(results.isEmpty()){
+		if (!(gender == 'M') && !(gender == 'F')){
+			addActionError(getText("error.missingGender"));
+			return "missingGender";
+		}
+		
+		List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getResultList();
+		if(results.isEmpty()){
 
-				DateFormat formatter = new SimpleDateFormat("DD-MM-YYYY");
-				Date date = null;
-				try {
-					date = formatter.parse(birthdate);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				//user object creation
-				u = new NormalUser(email, password, date, firstname, lastname, gender, job, residence, school, hometown);
-				
-				//persist user
-				em.persist(u);
-				em.getTransaction().begin();
-				em.getTransaction().commit();
-			
-				return "success";
-			}else{
-				addActionError(getText("error.userRegistered"));
-				return "errorDuplicate";
+			DateFormat formatter = new SimpleDateFormat("DD-MM-YYYY");
+			Date date = null;
+			try {
+				date = formatter.parse(birthdate);
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
+			//user object creation
+			u = new NormalUser(email, password, date, firstname, lastname, gender, job, residence, school, hometown);
+			
+			//persist user
+			em.persist(u);
+			em.getTransaction().begin();
+			em.getTransaction().commit();
+		
+			return "success";
 		}else{
-			addActionError(getText("error.missingField"));
-			return "errorField";
-		}	
+			addActionError(getText("error.userRegistered"));
+			return "errorDuplicate";
+		}
+
 	}	
 }

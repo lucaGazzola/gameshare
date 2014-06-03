@@ -1,59 +1,207 @@
 package test;
 
 
+
+import javax.persistence.EntityManager;
+
+import model.User;
+
 import org.apache.struts2.StrutsTestCase;
+
+import service.UserService;
+import util.EntityManagerUtil;
+import util.Populator;
 
 import com.opensymphony.xwork2.ActionProxy;
 
 public class RegisterUserActionTest extends StrutsTestCase{
 	
-	public void testFieldErrorMessage() throws Exception {
-		
-		
-    	request.setParameter("email", "");
-    	request.setParameter("password", "frenk");
+	EntityManager em = EntityManagerUtil.getEntityManager();
+	UserService us = new UserService();
+	
+	public void setUp() throws Exception{
+		super.setUp();
+		Populator pop = new Populator();
+		pop.popolate();
+        us.removeByEmail("franco@franchi.net",em);
+    	request.setParameter("email", "franco@franchi.net");
+    	request.setParameter("password", "frenko");
     	request.setParameter("firstname", "test");
     	request.setParameter("lastname", "test");
-    	request.setParameter("gender", "f");
+    	request.setParameter("gender", "M");
     	request.setParameter("job", "test");
     	request.setParameter("hometown", "test");
     	request.setParameter("school", "test");
     	request.setParameter("residence", "test");
-    	request.setParameter("birthdate","11-11-1111");   
-    	
+    	request.setParameter("birthdate","11-11-1111"); 
+	}
+	
+	public void testAlreadyInDatabase() throws Exception {
+		
+		request.setParameter("email", "franco@franco.net");
     	
     	ActionProxy proxy = getActionProxy("/register");
 
-    	
     	String result = proxy.execute();
         
-        assertEquals("Result returned from executing the action should have been errorField", "errorField", result);
+        assertEquals("Result returned from executing the action should have been errorDuplicate", "errorDuplicate", result);
+        User u = us.findByEmail("franco@franco.net",em);
+        assertEquals("query result should have been franco@franco.net but it wasn't",u.getEmail(),"franco@franco.net");
         
-        //assertTrue("Problem There were no errors present in fieldErrors but there should have been one error present", action.getFieldErrors().size() == 1);
-		//assertTrue("Problem field email not present in fieldErrors but it should have been", action.getFieldErrors().containsKey("email") );
-
     }
-
-    public void testRegisterCorrect() throws Exception {
-    	    	
-    	request.setParameter("email", "Bruc");
-    	request.setParameter("password", "test");
-    	request.setParameter("firstname", "test");
-    	request.setParameter("lastname", "test");
-    	request.setParameter("gender", "F");
-    	request.setParameter("job", "test");
-    	request.setParameter("hometown", "test");
-    	request.setParameter("school", "test");
-    	request.setParameter("residence", "test");
-    	request.setParameter("birthdate","11-11-1111");
+	
+	public void testPasswordTooShort() throws Exception {
+		
+		request.setParameter("password", "fren");
     	
-    	ActionProxy proxy = getActionProxy("/register");    	
+    	ActionProxy proxy = getActionProxy("/register");
 
-        String result = proxy.execute();
-
-        //assertTrue("Problem There were errors present in fieldErrors but there should not have been any errors present", action.getFieldErrors().size() == 0);
-        assertEquals("Result returned form executing the action was not success but it should have been.", "success", result);
-
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been passwordTooShort", "passwordTooShort", result);
+        User u = us.findByEmail("franco@franchi.net",em);
+        assertEquals("query result should have been empty but it wasn't",null,u);
     }
+	
+	public void testEmptyPasswordField() throws Exception {
+		
+		request.setParameter("password", "");
+    	
+    	ActionProxy proxy = getActionProxy("/register");
 
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been passwordTooShort", "passwordTooShort", result);
+  
+        User u = us.findByEmail("franco@franchi.net",em);
+        assertEquals("query result should have been empty but it wasn't",null,u);
+    }
+	
+	public void testEmptyEmailField() throws Exception {
+		
+		request.setParameter("email", "");
+    	
+    	ActionProxy proxy = getActionProxy("/register");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been invalidEmailAddress", "invalidEmailAddress", result);
+  
+        User u = us.findByEmail("",em);
+        assertEquals("query result should have been empty but it wasn't",null,u);
+    }
+	
+	public void testEmptyBirthdateField() throws Exception {
+		
+		request.setParameter("birthdate", "");
+    	
+    	ActionProxy proxy = getActionProxy("/register");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been invalidDateFormat", "invalidDateFormat", result);
+  
+        User u = us.findByEmail("franco@franchi.net",em);
+        assertEquals("query result should have been empty but it wasn't",null,u);
+    }
+	
+	public void testGenderNotSelected() throws Exception {
+		
+		request.setParameter("gender", "");
+    	
+    	ActionProxy proxy = getActionProxy("/register");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been missingGender", "missingGender", result);
+  
+        User u = us.findByEmail("franco@franchi.net",em);
+        assertEquals("query result should have been empty but it wasn't",null,u);
+    }
+	
+	public void testEmptyOptionalFields() throws Exception {
+		
+    	request.setParameter("firstname", "");
+    	request.setParameter("lastname", "");
+    	request.setParameter("job", "");
+    	request.setParameter("hometown", "");
+    	request.setParameter("school", "");
+    	request.setParameter("residence", "");
+    	
+    	ActionProxy proxy = getActionProxy("/register");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been success", "success", result);
+  
+        User u = us.findByEmail("franco@franchi.net",em);
+        assertEquals("query result should have been franco@franchi.net but it wasn't",u.getEmail(),"franco@franchi.net");
+	}
+	
+	public void testEverythingCorrect() throws Exception {
+		    	
+    	ActionProxy proxy = getActionProxy("/register");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been success", "success", result);
+        User u = us.findByEmail("franco@franchi.net",em);
+        assertEquals("query result should have been franco@franchi.net but it wasn't",u.getEmail(),"franco@franchi.net");
+    }
+	
+	public void testBirthdateBadFormat() throws Exception {
+		
+		request.setParameter("birthdate", "11-11-11");
+    	
+    	ActionProxy proxy = getActionProxy("/register");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been invalidDateFormat", "invalidDateFormat", result);
+        User u = us.findByEmail("franco@franchi.net",em);
+        assertEquals("query result should have been empty but it wasn't",null,u);
+    }
+	
+	public void testInvalidCharactersMandatory() throws Exception {
+		
+		request.setParameter("email", "franco@frenko.com{");
+    	
+    	ActionProxy proxy = getActionProxy("/register");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been invalidCharactersError", "invalidCharactersError", result);
+  
+        User u = us.findByEmail("franco@frenko.com{",em);
+        assertEquals("query result should have been empty but it wasn't",null,u);
+    }
+	
+	public void testInvalidCharactersOptional() throws Exception {
+		
+		request.setParameter("job", "test}");
+    	
+    	ActionProxy proxy = getActionProxy("/register");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been invalidCharactersError", "invalidCharactersError", result);
+  
+        User u = us.findByEmail("franco@franchi",em);
+        assertEquals("query result should have been empty but it wasn't",null,u);
+    }
+	
+	public void testBadEmailFormat() throws Exception {
+		
+		request.setParameter("email", "luca@luca");
+    	
+    	ActionProxy proxy = getActionProxy("/register");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been invalidEmailAddress", "invalidEmailAddress", result);
+  
+        User u = us.findByEmail("luca@luca",em);
+        assertEquals("query result should have been empty but it wasn't",null,u);
+    }
+	
 }
