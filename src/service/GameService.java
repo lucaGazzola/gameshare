@@ -35,12 +35,20 @@ public class GameService{
     
     public Game findByName(String name, EntityManager em) {
     	List<Game> results =  (List<Game>)em.createQuery("SELECT p FROM Game p WHERE p.name = :value",Game.class).setParameter("value", name).getResultList();
-		return results.get(0);
+		if(!results.isEmpty())
+    		return results.get(0);
+		else
+			return null;
     }
     
     public void removeByName(String name, EntityManager em) {
+    	
     	Game g = findByName(name, em);
-    	em.remove(g);
+    	if(g != null){
+    		em.remove(g);
+    		em.getTransaction().begin();
+			em.getTransaction().commit();
+    	}
     }
 
 }

@@ -2,6 +2,8 @@ package util;
 
 import javax.persistence.EntityManager;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import model.Administrator;
 import model.Analyst;
 import model.BoardGame;
@@ -19,6 +21,7 @@ public class PersistUtil {
 	
 	public boolean saveNormalUser(NormalUser entity, EntityManager em) {
 		try {
+			entity.setPassword(DigestUtils.md5Hex(entity.getPassword()));
 			em.getTransaction().begin();
 			em.persist(entity);
 			em.getTransaction().commit();
@@ -110,6 +113,7 @@ public class PersistUtil {
 
 	public boolean saveAdministrator(Administrator entity, EntityManager em) {
 		try {
+			entity.setPassword(DigestUtils.md5Hex(entity.getPassword()));
 			em.getTransaction().begin();
 			em.persist(entity);
 			em.getTransaction().commit();
@@ -125,6 +129,7 @@ public class PersistUtil {
 	
 	public boolean saveAnalyst(Analyst entity, EntityManager em) {
 		try {
+			entity.setPassword(DigestUtils.md5Hex(entity.getPassword()));
 			em.getTransaction().begin();
 			em.persist(entity);
 			em.getTransaction().commit();
@@ -140,6 +145,7 @@ public class PersistUtil {
 	
 	public boolean saveModerator(Moderator entity, EntityManager em) {
 		try {
+			entity.setPassword(DigestUtils.md5Hex(entity.getPassword()));
 			em.getTransaction().begin();
 			em.persist(entity);
 			em.getTransaction().commit();

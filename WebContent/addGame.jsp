@@ -44,6 +44,10 @@
     <s:textfield name="priceRange" key="label.priceRange" size="20"/>
 	<s:radio key="label.online" name="online" list="{true,false}" />
 	<s:textfield name="videogameType" key="label.videogameType" size="20"/>
+	<s:checkbox name="PC" fieldValue="true" label="PC"/>
+	<s:checkbox name="XBox" fieldValue="true" label="XBox"/>
+	<s:checkbox name="PS" fieldValue="true" label="PS"/>
+	<s:checkbox name="Wii" fieldValue="true" label="Wii"/>
 	<s:textfield name="duration" key="label.duration" size="20"/>
 	<s:textfield name="suggestedPlayers" key="label.suggested" size="20"/>
 	<s:textfield name="requiredPlayers" key="label.required" size="20"/>

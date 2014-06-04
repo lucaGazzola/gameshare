@@ -10,6 +10,7 @@ import model.*;
 
 import javax.persistence.*;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.struts2.interceptor.SessionAware;
 
 import util.EntityManagerUtil;
@@ -75,7 +76,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value",User.class).setParameter("value", email).getResultList();
 			if(!results.isEmpty()){
 				u = results.get(0);
-				if(password.equals(u.getPassword())){
+				if(DigestUtils.md5Hex(password).equals(u.getPassword())){
 					user = u;
 					//inserisco l'utente nella session
 					session.put("loggedInUser", user);

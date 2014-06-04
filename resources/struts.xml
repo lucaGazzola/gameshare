@@ -9,12 +9,6 @@
 	<constant name="struts.custom.i18n.resources" value="ApplicationResources"/>
 
 	<package name="default" extends="struts-default" namespace="/">
-
-		<action name="add" class="actions.AddAction">
-			<result name="success">confirm.jsp</result>
-			<result name="errorField">index.jsp</result>
-			<result name="errorDuplicate">index.jsp</result>
-		</action>
 		
 		<action name="register" class="actions.RegisterUserAction">
 			<result name="success">registerConfirm.jsp</result>
@@ -40,6 +34,9 @@
 		<action name="addGame" class="actions.AddGameAction">
 			<result name="success">addGameConfirm.jsp</result>
 			<result name="errorField">addGame.jsp</result>
+			<result name="invalidPriceRange">addGame.jsp</result>
+			<result name="missingOnlineField">addGame.jsp</result>
+			<result name="duplicate">addGame.jsp</result>
 		</action>
 		
 		<action name="viewLikeUsers" class="actions.ViewLikeUsersAction">

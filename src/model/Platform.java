@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.*;
 
-@Entity(name="PLATFORM") 
+@Entity
 @TableGenerator(name="platformGen",pkColumnName="key",pkColumnValue="ID_platform",initialValue=0,table="counters",valueColumnName="value")
 public class Platform {
 	
@@ -24,6 +24,14 @@ public class Platform {
 		this.name = name;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public long getID_platform() {
 		return ID_platform;
 	}
@@ -31,21 +39,13 @@ public class Platform {
 	public void setID_platform(long iD_platform) {
 		ID_platform = iD_platform;
 	}
-	
+
 	public Collection<Videogame> getVideogames() {
 		return videogames;
 	}
 
 	public void setVideogames(Collection<Videogame> videogames) {
 		this.videogames = videogames;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 }

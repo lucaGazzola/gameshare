@@ -14,6 +14,8 @@ import model.*;
 
 import javax.persistence.*;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import util.EntityManagerUtil;
 
 public class RegisterUserAction extends ActionSupport {
@@ -178,6 +180,7 @@ public class RegisterUserAction extends ActionSupport {
 		List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getResultList();
 		if(results.isEmpty()){
 
+			//date construction
 			DateFormat formatter = new SimpleDateFormat("DD-MM-YYYY");
 			Date date = null;
 			try {
@@ -185,8 +188,12 @@ public class RegisterUserAction extends ActionSupport {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+
+			String encodedPassword = DigestUtils.md5Hex(password) ;
+			System.out.println(encodedPassword);
+			
 			//user object creation
-			u = new NormalUser(email, password, date, firstname, lastname, gender, job, residence, school, hometown);
+			u = new NormalUser(email, encodedPassword, date, firstname, lastname, gender, job, residence, school, hometown);
 			
 			//persist user
 			em.persist(u);
