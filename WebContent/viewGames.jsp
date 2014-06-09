@@ -42,7 +42,7 @@
 			<td width="50%" style="vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
 				<b>Board Games</b>
 				
-				<table width="100%"">
+				<table width="100%">
 				<s:iterator value="boardgameList" var="game">
 				<tr>
 					<td width="15%">
