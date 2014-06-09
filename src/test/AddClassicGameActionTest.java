@@ -3,8 +3,7 @@ package test;
 import javax.persistence.EntityManager;
 
 import model.Game;
-import model.Platform;
-import model.Videogame;
+
 
 import org.apache.struts2.StrutsTestCase;
 
@@ -35,61 +34,51 @@ public class AddClassicGameActionTest extends StrutsTestCase{
     	
 	}
 	
-	public void testAlreadyInDatabase() throws Exception {
+	public void testEmptyGameType() throws Exception {
 		
-		request.setParameter("gameType","videogame");
+    	ActionProxy proxy = getActionProxy("/addGame");
+
+    	String result = proxy.execute();
+        
+        assertEquals("Result returned from executing the action should have been missingGameType", "missingGameType", result);
+        
+    }
+	
+	public void testCardGameAlreadyPresent() throws Exception {
+		
+		request.setParameter("gameType", "card");
+		request.setParameter("name", "Scopa");
     	
     	ActionProxy proxy = getActionProxy("/addGame");
 
     	String result = proxy.execute();
         
-        assertEquals("Result returned from executing the action should have been errorDuplicate", "duplicate", result);
-        Game g = gs.findByName("Counter-Strike",em);
-        assertEquals("query result should have been franco@franco.net but it wasn't",g.getName(),"Counter-Strike");
-        
-    }
-	
-	public void testEmptyName() throws Exception {
-		
-		request.setParameter("online", "true");
-		request.setParameter("name", "");
-    	
-    	ActionProxy proxy = getActionProxy("/addGame");
-
-    	String result = proxy.execute();
-        
-        assertEquals("Result returned from executing the action should have been errorField", "errorField", result);
+        assertEquals("Result returned from executing the action should have been duplicate", "duplicate", result);
+        Game g = gs.findByName("Scopa",em);
+        assertEquals("query result should have been Scopa but it wasn't",g.getName(),"Scopa");
         
     }
 
-	public void testPriceRangeBadFormat() throws Exception {
+	public void testCardGameEverythingCorrect() throws Exception {
 	
-		request.setParameter("online", "true");
-		request.setParameter("priceRange", "11");
+		request.setParameter("gameType", "card");
+		request.setParameter("deck","hearthstone");
 	
 		ActionProxy proxy = getActionProxy("/addGame");
 
 		String result = proxy.execute();
     
-		assertEquals("Result returned from executing the action should have been invalidPriceRange", "invalidPriceRange", result);
+		assertEquals("Result returned from executing the action should have been success", "success", result);
+		Game g = gs.findByName("Test",em);
+	    assertEquals("query result should have been Test but it wasn't",g.getName(),"Test");
     
 	}
 	
-	public void testOnlineNotSelected() throws Exception {
-	
-		ActionProxy proxy = getActionProxy("/addGame");
-
-		String result = proxy.execute();
-    
-		assertEquals("Result returned from executing the action should have been missingOnlineField", "missingOnlineField", result);
-    
-	}
-	
-	public void testEmptyPriceRange() throws Exception {
+	public void testCardGameEmptyDurationField() throws Exception {
 		
-		request.setParameter("online", "true");
-		request.setParameter("priceRange", "");
-		
+		request.setParameter("gameType", "card");
+		request.setParameter("duration", "");
+	
 		ActionProxy proxy = getActionProxy("/addGame");
 
 		String result = proxy.execute();
@@ -98,93 +87,101 @@ public class AddClassicGameActionTest extends StrutsTestCase{
     
 	}
 	
-	public void testEmptyDescription() throws Exception {
+	public void testCardGameEmptySuggestedPlayersField() throws Exception {
 		
-		request.setParameter("online", "true");
-		request.setParameter("description", "");
-		
+		request.setParameter("gameType", "card");
+		request.setParameter("suggestedPlayers", "");
+	
 		ActionProxy proxy = getActionProxy("/addGame");
 
 		String result = proxy.execute();
     
-		assertEquals("Result returned from executing the action should have been success", "success", result);
-        Game g = gs.findByName("World of Warcraft",em);
-        assertEquals("query result should have been World of Warcraft but it wasn't",g.getName(),"World of Warcraft");
+		assertEquals("Result returned from executing the action should have been errorField", "errorField", result);
     
 	}
 	
-	public void testNoPlatformsSelected() throws Exception {
+	public void testCardGameEmptyRequiredPlayersField() throws Exception {
 		
-		request.setParameter("online", "true");
-		request.setParameter("PC", "false");
-		
+		request.setParameter("gameType", "card");
+		request.setParameter("requiredPlayers", "");
+	
 		ActionProxy proxy = getActionProxy("/addGame");
 
 		String result = proxy.execute();
     
-		assertEquals("Result returned from executing the action should have been success", "success", result);
-        Game g = gs.findByName("World of Warcraft",em);
-        assertEquals("query result should have been World of Warcraft but it wasn't",g.getName(),"World of Warcraft");
-        assertEquals("there should have been no platforms linked to this game",((Videogame) g).getPlatforms().isEmpty(),true);
-
+		assertEquals("Result returned from executing the action should have been errorField", "errorField", result);
     
 	}
 	
-	public void testOnePlatformSelected() throws Exception {
+	public void testCardGameEmptyDeckField() throws Exception {
 		
-		request.setParameter("online", "true");
-		
-		Platform pc;
-		
+		request.setParameter("gameType", "card");
+		request.setParameter("deck", "");
+	
 		ActionProxy proxy = getActionProxy("/addGame");
 
 		String result = proxy.execute();
     
-		assertEquals("Result returned from executing the action should have been success", "success", result);
-        Game g = gs.findByName("World of Warcraft",em);
-        assertEquals("query result should have been World of Warcraft but it wasn't",g.getName(),"World of Warcraft");
-        pc = ps.findByName("PC",em);
-        assertEquals("PC should have been selected as platform for this game",((Videogame) g).getPlatforms().contains(pc),true);
-
+		assertEquals("Result returned from executing the action should have been errorField", "errorField", result);
+    
 	}
 	
-	public void testMorePlatformSelected() throws Exception {
+public void testBoardGameAlreadyPresent() throws Exception {
 		
-		request.setParameter("online", "true");
-		request.setParameter("PC", "false");
-		request.setParameter("XBox", "true");
-		request.setParameter("Wii", "true");
-		
-		Platform xbox;
-		Platform wii;
-		
-		ActionProxy proxy = getActionProxy("/addGame");
+		request.setParameter("gameType", "board");
+		request.setParameter("name", "Monopoly");
+    	
+    	ActionProxy proxy = getActionProxy("/addGame");
 
-		String result = proxy.execute();
-    
-		assertEquals("Result returned from executing the action should have been success", "success", result);
-        Game g = gs.findByName("World of Warcraft",em);
-        assertEquals("query result should have been World of Warcraft but it wasn't",g.getName(),"World of Warcraft");
-        wii = ps.findByName("Wii",em);
-        xbox = ps.findByName("XBox",em);
-        assertEquals("Xbox should have been selected as platform for this game",((Videogame) g).getPlatforms().contains(xbox),true);
-        assertEquals("Wii should have been selected as platform for this game",((Videogame) g).getPlatforms().contains(wii),true);
+    	String result = proxy.execute();
         
-	}
+        assertEquals("Result returned from executing the action should have been duplicate", "duplicate", result);
+        Game g = gs.findByName("Monopoly",em);
+        assertEquals("query result should have been Monopoly but it wasn't",g.getName(),"Monopoly");
+        
+    }
+
+	public void testBoardGameEverythingCorrect() throws Exception {
 	
-	public void testNoTypeSelected() throws Exception {
-		
-		request.setParameter("online", "true");
-		request.setParameter("videogameType", "");
-		
+		request.setParameter("gameType", "board");
+	
 		ActionProxy proxy = getActionProxy("/addGame");
 
 		String result = proxy.execute();
     
 		assertEquals("Result returned from executing the action should have been success", "success", result);
-        Game g = gs.findByName("World of Warcraft",em);
-        assertEquals("query result should have been World of Warcraft but it wasn't",g.getName(),"World of Warcraft");
+		Game g = gs.findByName("Test",em);
+	    assertEquals("query result should have been Test but it wasn't",g.getName(),"Test");
+    
+	}
+	
+	public void testSportAlreadyPresent() throws Exception {
+		
+		request.setParameter("gameType", "sport");
+		request.setParameter("name", "Tennis");
+    	
+    	ActionProxy proxy = getActionProxy("/addGame");
+
+    	String result = proxy.execute();
         
+        assertEquals("Result returned from executing the action should have been duplicate", "duplicate", result);
+        Game g = gs.findByName("Tennis",em);
+        assertEquals("query result should have been Tennis but it wasn't",g.getName(),"Tennis");
+        
+    }
+
+	public void testSportEverythingCorrect() throws Exception {
+	
+		request.setParameter("gameType", "sport");
+	
+		ActionProxy proxy = getActionProxy("/addGame");
+
+		String result = proxy.execute();
+    
+		assertEquals("Result returned from executing the action should have been success", "success", result);
+		Game g = gs.findByName("Test",em);
+	    assertEquals("query result should have been Test but it wasn't",g.getName(),"Test");
+    
 	}
 	
 }

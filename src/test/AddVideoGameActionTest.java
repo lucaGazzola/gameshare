@@ -51,7 +51,7 @@ public class AddVideoGameActionTest extends StrutsTestCase{
         
         assertEquals("Result returned from executing the action should have been errorDuplicate", "duplicate", result);
         Game g = gs.findByName("Counter-Strike",em);
-        assertEquals("query result should have been franco@franco.net but it wasn't",g.getName(),"Counter-Strike");
+        assertEquals("query result should have been Counter-Strike but it wasn't",g.getName(),"Counter-Strike");
         
     }
 	

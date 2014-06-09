@@ -88,6 +88,18 @@
 					</s:else>
 					<s:if test="isPlay == 1">
 						<u><i><b>Played</b></i></u>
+						<s:form action="voteGame" method="post" namespace="/">
+    						<s:select key="label.gameScore" name="vote" headerKey="0" headerValue="-- Please Select --" list="{'1', '2', '3', '4', '5'}" />
+							<s:hidden name="id_game" value="%{game.ID_game}"></s:hidden>
+							<s:hidden name="game" value="%{#game}"></s:hidden>
+							<s:hidden name="user_reviewList" value="%{#user_reviewList}"></s:hidden>
+							<s:hidden name="numPlay" value="%{numPlay}"></s:hidden>
+							<s:hidden name="numLike" value="%{numLike}"></s:hidden>
+							<s:hidden name="isPlay" value="%{isPlay}"></s:hidden>
+							<s:hidden name="isLike" value="%{isLike}"></s:hidden>
+							<s:hidden name="gameCategory" value="%{gameCategory}"></s:hidden>
+							<s:submit method="execute" key="label.voteGame" align="center"/>
+						</s:form>
 					</s:if>
 					<s:else>
 						<s:a href="%{urlTagPlay}"><button type="button">Play</button></s:a>

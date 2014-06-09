@@ -234,6 +234,12 @@ public class AddGameAction extends ActionSupport {
 		break;
 		case "card":
 			
+			if(suggestedPlayers.equals("") || requiredPlayers.equals("") || duration.equals("") || deck.equals("")){
+				addActionError(getText("error.missingField"));
+				return "errorField";
+			}
+				
+			
 			sp = Integer.parseInt(suggestedPlayers);
 			rp = Integer.parseInt(requiredPlayers);
 			d = Integer.parseInt(duration);
@@ -246,6 +252,11 @@ public class AddGameAction extends ActionSupport {
 		break;
 		case "sport":
 			
+			if(suggestedPlayers.equals("") || requiredPlayers.equals("") || duration.equals("")){
+				addActionError(getText("error.missingField"));
+				return "errorField";
+			}
+			
 			sp = Integer.parseInt(suggestedPlayers);
 			rp = Integer.parseInt(requiredPlayers);
 			d = Integer.parseInt(duration);
@@ -257,6 +268,11 @@ public class AddGameAction extends ActionSupport {
 			em.getTransaction().commit();
 		break;
 		case "board":
+			
+			if(suggestedPlayers.equals("") || requiredPlayers.equals("") || duration.equals("")){
+				addActionError(getText("error.missingField"));
+				return "errorField";
+			}
 			
 			sp = Integer.parseInt(suggestedPlayers);
 			rp = Integer.parseInt(requiredPlayers);

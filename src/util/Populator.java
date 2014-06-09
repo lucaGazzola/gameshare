@@ -110,9 +110,9 @@ public class Populator {
 		System.out.println("Inizio populate utenti:");
 		Date now = new Date();
 		NormalUser u = new NormalUser("franco@franco.net", "prolol", now, "luca", "franchi", 'M', "studente", "milano", "bicocca", "milano");
-		NormalUser u2 = new NormalUser("gigi@gmail.com", "antilol", now, "gigi", "rizzi", 'M', "impiegato", "roma", "roma 3", "roma");
-		NormalUser u3 = new NormalUser("pippo@gmail.com", "prorofl", now, "pippo", "labamba", 'M', "agricoltore", "amsterdam", "kingstone university", "jamaica");
-		NormalUser u4 = new NormalUser("gina@gmail.com", "antilol", now, "gina", "lollobrigida", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u2 = new NormalUser("gigi@gmail.com", "test", now, "gigi", "bianchi", 'M', "impiegato", "roma", "roma 3", "roma");
+		NormalUser u3 = new NormalUser("pippo@gmail.com", "test", now, "pippo", "franchi", 'M', "agricoltore", "amsterdam", "kingstone university", "jamaica");
+		NormalUser u4 = new NormalUser("gina@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
 		pu.saveNormalUser(u,em);pu.saveNormalUser(u2,em);pu.saveNormalUser(u3,em);pu.saveNormalUser(u4,em);
 		
 		Administrator a = new Administrator("topogigio@gmail.com", "strapazzami", now, "gigio", "topo", 'M', "presentatore-cantante", "roma", "asilo", "roma");

@@ -36,7 +36,13 @@
 			<result name="errorField">addGame.jsp</result>
 			<result name="invalidPriceRange">addGame.jsp</result>
 			<result name="missingOnlineField">addGame.jsp</result>
+			<result name="missingGameType">addGame.jsp</result>
 			<result name="duplicate">addGame.jsp</result>
+		</action>
+		
+		<action name="voteGame" class="actions.VoteAction">
+			<result name="success">game.jsp</result>
+			<result name="missingField">game.jsp</result>
 		</action>
 		
 		<action name="viewLikeUsers" class="actions.ViewLikeUsersAction">

@@ -8,6 +8,21 @@ import model.Like;
 
 public class LikeService {
 	
+	
+	public void saveVote(int id_game,long id_user,int score, EntityManager em){
+		Like l;
+		List<Like> resultList = (List<Like>)em.createQuery(
+			      "SELECT l FROM Like l WHERE l.game.ID_game = :id_game AND l.user.ID_user = :id_user",
+			      Like.class)
+			      .setParameter("id_game", id_game)
+			      .setParameter("id_user", id_user)
+			      .getResultList();
+		l = resultList.get(0);
+		l.setScore(score);
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+	}
+	
 	// ritorno true se ho creato una nuova entity, false se ho fatto solo l'update
 	public boolean savePlay(Like entity, EntityManager em) {
 		boolean newEntity = false;
@@ -89,12 +104,17 @@ public class LikeService {
 		return true;
 	}
 
-	public Like findLikeID_game(long id_game, EntityManager em){
-		return em.find(Like.class, id_game);
-	}
-	
-	public Like findLikeID_user(long id_user, EntityManager em){
-		return em.find(Like.class, id_user);
+	public Like findLike(long id_user, int id_game, EntityManager em){
+		Like l = null;
+		List<Like> resultList = (List<Like>)em.createQuery(
+			      "SELECT l FROM Like l WHERE l.game.ID_game = :id_game AND l.user.ID_user = :id_user",
+			      Like.class)
+			      .setParameter("id_game", id_game)
+			      .setParameter("id_user", id_user)
+			      .getResultList();
+		if(!resultList.isEmpty())
+			l = resultList.get(0);
+		return l;
 	}
 	
 	@SuppressWarnings("unchecked")
