@@ -55,7 +55,7 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 		if(acceptCount >= threshold){
 			game.setPublished(true);
 			gameService.update(game, em);
-			return "success";
+			return "published";
 		}
 		
 		
