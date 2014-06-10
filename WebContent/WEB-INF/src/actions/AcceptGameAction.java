@@ -25,7 +25,7 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 	private String gameCategory;
 	private AcceptLockService als;
 	
-	static int threshold = 1;
+	static int threshold = 2;
 	
 	private Map<String,Object> session;
 	
@@ -43,13 +43,18 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 	public String execute() {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		GameService gameService = new GameService();
+		als = new AcceptLockService();
 		
+
+		game = gameService.find(id_game, em);
+		
+
 		if(als.findLock((User)session.get("loggedInUser"), game, em) == null){
 			addActionError(getText("error.accepted"));
 			return "accepted";
 		}
+		
 		als.saveLock((User)session.get("loggedInUser"), game, em);
-		//game = gameService.find(id_game, em);
 		int acceptCount = game.getAcceptCount() + 1;
 		game.setAcceptCount(acceptCount);
 		if(acceptCount >= threshold){

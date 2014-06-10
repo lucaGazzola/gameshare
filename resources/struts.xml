@@ -89,7 +89,7 @@
 		</action>
 		
 		<action name="acceptGame" class="actions.AcceptGameAction">
-			<result name="success">viewGames.jsp</result>
+			<result name="success">game.jsp</result>
 			<result name="published">gameAccepted.jsp</result>
 		</action>
 	</package>
