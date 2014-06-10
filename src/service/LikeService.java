@@ -11,7 +11,7 @@ import model.Like;
 public class LikeService {
 	
 	
-	public void saveVote(int id_game,long id_user,int score, EntityManager em){
+	public void saveVote(long id_game,long id_user,int score, EntityManager em){
 		Like l;
 		em.getTransaction().begin();
 		
@@ -152,7 +152,7 @@ public class LikeService {
 		return true;
 	}
 
-	public Like findLike(long id_user, int id_game, EntityManager em){
+	public Like findLike(long id_user, long id_game, EntityManager em){
 		Like l = null;
 		List<Like> resultList = (List<Like>)em.createQuery(
 			      "SELECT l FROM Like l WHERE l.game.ID_game = :id_game AND l.user.ID_user = :id_user",

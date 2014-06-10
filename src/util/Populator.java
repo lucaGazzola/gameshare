@@ -3,6 +3,7 @@ package util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -10,12 +11,12 @@ import model.Administrator;
 import model.Analyst;
 import model.BoardGame;
 import model.CardGame;
+import model.Game;
 import model.Moderator;
 import model.Platform;
 import model.Sport;
 import model.Videogame;
 import model.Like;
-
 import model.NormalUser;
 
 public class Populator {
@@ -29,6 +30,38 @@ public class Populator {
 		//---------- POPULATE GIOCHI ---------------------------------------------------------
 		System.out.println("*********** START POPULATE DB ***********");
 		System.out.println("Inizio populate giochi:");
+		
+		em.getTransaction().begin();
+		
+		em.createQuery("DELETE FROM Like").executeUpdate();
+		em.createQuery("DELETE FROM NormalUser").executeUpdate();
+		em.createQuery("DELETE FROM Administrator").executeUpdate();
+		em.createQuery("DELETE FROM Moderator").executeUpdate();
+		em.createQuery("DELETE FROM SystemUser").executeUpdate();
+		em.createQuery("DELETE FROM Analyst").executeUpdate();
+		em.createQuery("DELETE FROM User").executeUpdate();
+		em.createQuery("DELETE FROM CardGame").executeUpdate();
+		em.createQuery("DELETE FROM BoardGame").executeUpdate();
+		em.createQuery("DELETE FROM Sport").executeUpdate();
+		em.createQuery("DELETE FROM Videogame").executeUpdate();
+		em.createQuery("DELETE FROM ClassicGame").executeUpdate();
+		em.createQuery("DELETE FROM Game").executeUpdate();
+		em.createQuery("DELETE FROM GameReport").executeUpdate();
+		em.createQuery("DELETE FROM Platform").executeUpdate();
+		em.createQuery("DELETE FROM UserReport").executeUpdate();
+
+
+
+		/*
+		em.createNativeQuery("UPDATE counters SET value = 0 WHERE key = 'ID_friendship'").executeUpdate();
+		em.createNativeQuery("UPDATE counters SET value = 0 WHERE key = 'ID_user'").executeUpdate();
+		em.createNativeQuery("UPDATE counters SET value = 0 WHERE key = 'ID_game'").executeUpdate();
+		em.createNativeQuery("UPDATE counters SET value = 0 WHERE key = 'ID_like'").executeUpdate();
+		em.createNativeQuery("UPDATE counters SET value = 0 WHERE key = 'ID_platform'").executeUpdate();
+		*/
+		em.getTransaction().commit();
+
+
 		
 		//populate di alcuni giochi di carte
 		CardGame cg = new CardGame("Briscola",
@@ -131,11 +164,12 @@ public class Populator {
 		Like l2 = new Like(u2, sp, true, "Very good Really enjoy playing this, and can play with your friends too.", 4);
 		Like l3 = new Like(u3, cg3, true, "Brings back old times playing against my dad", 4);
 		Like l4 = new Like(u4, cg, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
+		Like l7 = new Like(u4, sp2, true, "Very good Really enjoy playing this, and can play with your friends too.", -1);
 		Like l5 = new Like(u3, cg2, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
 		Like l6 = new Like(u, sp2, true, "I like it very much. I can enjoy my time with my friends during weekends", 4);
 		pu.saveLike(l,em);pu.saveLike(l1,em);pu.saveLike(l2,em);
 		pu.saveLike(l3,em);pu.saveLike(l4,em);pu.saveLike(l5,em);
-		pu.saveLike(l6,em);
+		pu.saveLike(l6,em);pu.saveLike(l7,em);
 		//---------- FINE POPULATE LIKE ----------------------------------------------------------
 		
 		EntityManagerUtil.closeEntityManager(em);

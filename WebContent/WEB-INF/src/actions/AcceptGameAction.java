@@ -1,15 +1,20 @@
 package actions;
 
+import java.util.Map;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.*;
 
 import javax.persistence.*;
 
+import org.apache.struts2.interceptor.SessionAware;
+
+import service.AcceptLockService;
 import service.GameService;
 import util.EntityManagerUtil;
 
-public class AcceptGameAction extends ActionSupport {
+public class AcceptGameAction extends ActionSupport implements SessionAware{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -18,22 +23,42 @@ public class AcceptGameAction extends ActionSupport {
 	private long id_game;
 	private Game game;
 	private String gameCategory;
+	private AcceptLockService als;
 	
 	static int threshold = 1;
+	
+	private Map<String,Object> session;
+	
+
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		session = arg0;
+	}
+	
+	public Map<String,Object> getSession(){
+		return session;
+	}
 
 	//Default method invoked by STRUTS2
 	public String execute() {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		GameService gameService = new GameService();
 		
-		game = gameService.find(id_game, em);
+		if(als.findLock((User)session.get("loggedInUser"), game, em) == null){
+			addActionError(getText("error.accepted"));
+			return "accepted";
+		}
+		als.saveLock((User)session.get("loggedInUser"), game, em);
+		//game = gameService.find(id_game, em);
 		int acceptCount = game.getAcceptCount() + 1;
 		game.setAcceptCount(acceptCount);
 		if(acceptCount >= threshold){
 			game.setPublished(true);
 			gameService.update(game, em);
-			return "accepted";
+			return "success";
 		}
+		
+		
 		
 		gameService.update(game, em);
 		EntityManagerUtil.closeEntityManager(em);

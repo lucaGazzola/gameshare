@@ -6,7 +6,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import javax.persistence.*;
 
-@Entity(name="USER_REPORT") 
+@Entity
 @TableGenerator(name="userReportGen",pkColumnName="key",pkColumnValue="ID_user_report",initialValue=0,table="counters",valueColumnName="value")
 public class UserReport {
 	

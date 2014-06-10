@@ -47,8 +47,14 @@ public class VoteAction extends ActionSupport implements SessionAware{
 			return "missingField";
 		}
 		
+		if(isPlay == 0){
+			addActionError(getText("error.notPlayed"));
+			return "notPlayed";
+		}
+		
 		score = Integer.parseInt(vote);
-		likeService.saveVote(id_game, ((User)session.get("loggedInUser")).getID_user(), score, em);
+		
+		likeService.saveVote(game.getID_game(), ((User)session.get("loggedInUser")).getID_user(), score, em);
 
 		// estraggo le REVIEW e i nomi utenti cui sono associati
 		user_reviewList =  (List<Object[]>)em.createQuery(

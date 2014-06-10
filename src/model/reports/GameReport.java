@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-@Entity(name="GAME_REPORT") 
+@Entity 
 @TableGenerator(name="gameReportGen",pkColumnName="key",pkColumnValue="ID_game_report",initialValue=0,table="counters",valueColumnName="value")
 public class GameReport {
 	

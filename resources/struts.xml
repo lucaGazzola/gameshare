@@ -51,6 +51,7 @@
 		<action name="voteGame" class="actions.VoteAction">
 			<result name="success">game.jsp</result>
 			<result name="missingField">game.jsp</result>
+			<result name="notPlayed">game.jsp</result>
 		</action>
 		
 		<action name="viewLikeUsers" class="actions.ViewLikeUsersAction">
@@ -89,7 +90,7 @@
 		
 		<action name="acceptGame" class="actions.AcceptGameAction">
 			<result name="success">viewGames.jsp</result>
-			<result name="accepted">gameAccepted.jsp</result>
+			<result name="published">gameAccepted.jsp</result>
 		</action>
 	</package>
 </struts>

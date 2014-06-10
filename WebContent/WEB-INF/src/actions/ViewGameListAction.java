@@ -3,8 +3,11 @@ package actions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import model.Game;
 import service.GameService;
@@ -12,7 +15,7 @@ import util.EntityManagerUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ViewGameListAction extends ActionSupport {
+public class ViewGameListAction extends ActionSupport implements SessionAware{
 	private static final long serialVersionUID = -7535988682705914155L;
 	private GameService gameService = new GameService();
 	private List<Game> gameList;
@@ -26,6 +29,18 @@ public class ViewGameListAction extends ActionSupport {
 	private List<Game> unaccepted_cardgameList;
 	private List<Game> unaccepted_sportList;
 	private List<Game> unaccepted_videogameList;
+	
+	private Map<String,Object> session;
+	
+
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		session = arg0;
+	}
+	
+	public Map<String,Object> getSession(){
+		return session;
+	}
 	
 	public String execute() throws Exception{
 		//istanzio entity manager
@@ -54,7 +69,7 @@ public class ViewGameListAction extends ActionSupport {
 			unaccepted_sportList = new ArrayList<Game>();
 			unaccepted_videogameList = new ArrayList<Game>();
 			
-			
+			System.out.println(session.get("loggedInUser"));
 			
 			while(it.hasNext()) {
 				tempGame = it.next();
