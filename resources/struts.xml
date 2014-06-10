@@ -32,6 +32,14 @@
 			<result name="errorMissingField">searchGame.jsp</result>
 		</action>
 		<action name="addGame" class="actions.AddGameAction">
+		    <interceptor-ref name="fileUpload">
+		        <param name="maximumSize">2097152</param>
+		        <param name="allowedTypes">
+		           image/png,image/gif,image/jpeg,image/pjpeg
+		        </param>
+		    </interceptor-ref>
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+		    <result name="input">addGame.jsp</result>
 			<result name="success">addGameConfirm.jsp</result>
 			<result name="errorField">addGame.jsp</result>
 			<result name="invalidPriceRange">addGame.jsp</result>

@@ -37,7 +37,7 @@
 <h2>Add new game</h2>
 <s:actionerror />
 
-<s:form action="addGame" method="post" namespace="/">
+<s:form action="addGame" method="post" namespace="/" enctype="multipart/form-data">
     <s:select key="label.gameType" name="gameType" headerKey="0" headerValue="-- Please Select --" list="{'videogame', 'card', 'sport', 'board'}" />
 	<s:textfield name="name" key="label.name" size="20"/>
 	<s:textfield name="description" key="label.description" size="20"/>
@@ -52,6 +52,7 @@
 	<s:textfield name="suggestedPlayers" key="label.suggested" size="20"/>
 	<s:textfield name="requiredPlayers" key="label.required" size="20"/>
 	<s:textfield name="deck" key="label.deck" size="20"/>
+	<s:file name="gameImage" key="label.uploadImage" label="User Image" />
 	
 	<s:submit method="execute" key="label.addGame" align="center"/>
 </s:form>
