@@ -27,6 +27,7 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 	private int numLike;
 	private int isPlay;
 	private int isLike;
+	private int score;
 	private String gameCategory;
 	ReturnGameCategory util = new ReturnGameCategory();
 	private User user;
@@ -60,9 +61,10 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 				Like like = it.next();
 				if(((User)like.getUser()).getID_user() == user.getID_user())
 				{
-					isLike=1; //dice se l'utente ha gi√† messo LIKE
-					if(like.isPlay()){	
-						isPlay=1; //dice se l'utente ha gi√† messo PLAY
+					isLike=1; //dice se l'utente ha gia'†messo LIKE
+					if(like.isPlay()){
+						score = like.getScore();
+						isPlay=1; //dice se l'utente ha gia'†messo PLAY
 					}
 				}
 				
@@ -174,6 +176,16 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 
 	public void setIsLike(int isLike) {
 		this.isLike = isLike;
+	}
+
+
+	public int getScore() {
+		return score;
+	}
+
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 }

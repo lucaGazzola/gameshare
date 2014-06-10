@@ -33,6 +33,7 @@ public class VoteAction extends ActionSupport implements SessionAware{
 	private int isPlay;
 	private int isLike;
 	private String vote;
+	private int score;
 	
 	//usata per prelevare l'user loggato
 	private Map<String,Object> session; 
@@ -40,17 +41,14 @@ public class VoteAction extends ActionSupport implements SessionAware{
 	public String execute(){
 		//istanzio entity manager
 		EntityManager em = EntityManagerUtil.getEntityManager();
-
-		game = gameService.find(id_game, em);
 		
 		if(vote.equals("")){
 			addActionError(getText("error.missingField"));
 			return "missingField";
 		}
-
-		System.out.println(session);
 		
-		likeService.saveVote(id_game, ((User)session.get("loggedInUser")).getID_user(), Integer.parseInt(vote), em);
+		score = Integer.parseInt(vote);
+		likeService.saveVote(id_game, ((User)session.get("loggedInUser")).getID_user(), score, em);
 
 		// estraggo le REVIEW e i nomi utenti cui sono associati
 		user_reviewList =  (List<Object[]>)em.createQuery(
@@ -58,6 +56,9 @@ public class VoteAction extends ActionSupport implements SessionAware{
 			      Object[].class)
 			      .setParameter("id",id_game)
 			      .getResultList();
+		
+		//aggiorno i valori di game
+		game = gameService.find(id_game, em);
 		
 		//chiudo entity manager
 		EntityManagerUtil.closeEntityManager(em);
@@ -143,6 +144,14 @@ public class VoteAction extends ActionSupport implements SessionAware{
 
 	public void setVote(String vote) {
 		this.vote = vote;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 }

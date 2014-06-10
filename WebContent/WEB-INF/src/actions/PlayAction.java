@@ -32,6 +32,7 @@ public class PlayAction extends ActionSupport implements SessionAware{
 	private String gameCategory;
 	private int isPlay;
 	private int isLike;
+	private int score;
 	
 	//usata per prelevare l'user loggato
 	private Map<String,Object> session; 
@@ -45,7 +46,8 @@ public class PlayAction extends ActionSupport implements SessionAware{
 			game = gameService.find(id_game, em);
 			
 			//creo oggetto like, con play=true, review vuota e score=-1
-			boolean newEntity = likeService.savePlay(new Like((User)session.get("loggedInUser"), game, true, null, -1), em);
+			score=-1;
+			boolean newEntity = likeService.savePlay(new Like((User)session.get("loggedInUser"), game, true, null, score), em);
 			
 			//aggiorno flag del gioco e contatore dei giocatori
 			isPlay = 1;
@@ -156,6 +158,14 @@ public class PlayAction extends ActionSupport implements SessionAware{
 
 	public void setIsLike(int isLike) {
 		this.isLike = isLike;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 }

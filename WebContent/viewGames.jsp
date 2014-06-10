@@ -33,9 +33,15 @@
 	</div><br><br><div style="clear: both;"></div>
 	<!-- fine barra header fissa -->
 
-	<!-- inizio tabella games separati x categoria -->
+	
 <div id="body" align="center">
-	<h2>Game List</h2><br>
+	<!-- inizio tabella games separati x categoria -->
+	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;z-index: 10;">
+		<tr>
+			<td align="center"><h2>Game List</h2></td>
+		</tr>
+	</table>
+	<br>
 	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;z-index: 10;">
 		<!--  riga 1 -->
 		<tr>
@@ -131,9 +137,124 @@
 				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
 			</td>
 		</tr>
-		<!-- fine riga2 -->
-		
+		<!-- fine riga2 -->		
 	</table>
+	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;z-index: 10;">
+		<tr>
+			<td>
+				Didn't find your game? <b><a href="/Struts2Contacts/addGame.jsp">Add new game</a></b>
+			</td>
+		</tr>
+	</table>
+	
+	
+	<br><br>
+	<!-- inizio tabella unaccepted games -->
+	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;z-index: 10;">
+		<tr>
+			<td align="center">
+				<h2>Games waiting approval</h2>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;z-index: 10;">
+		<!--  riga 1 -->
+		<tr>
+			<td width="50%" style="vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
+				<b>Board Games</b>
+				
+				<table width="100%">
+				<s:iterator value="unaccepted_boardgameList" var="game">
+				<tr>
+					<td width="15%">
+						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
+					</td>
+					<td width="85%">
+						<a href="<s:url action="viewGame" method="execute" namespace="/">
+							<s:param name="id_game" value="ID_game"></s:param></s:url>">
+						    <s:property value="name"/>
+						</a>
+					</td>
+				</tr>
+				</s:iterator> 
+				</table>
+				<br><p></p>
+				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+			</td>
+			
+			<td width="50%" style="vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
+				<b>Card Games</b>
+				
+				<table width="100%">
+				<s:iterator value="unaccepted_cardgameList" var="game">
+				<tr>
+					<td width="15%">
+						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
+					</td>
+					<td width="85%">
+						<a href="<s:url action="viewGame" method="execute" namespace="/">
+							<s:param name="id_game" value="ID_game"></s:param></s:url>">
+						    <s:property value="name"/>
+						</a>
+					</td>
+				</tr>
+				</s:iterator> 
+				</table>
+				<br><p></p>
+				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+			</td>
+		</tr>
+		<!-- fine riga1 -->
+		
+		<!-- riga2 -->
+		<tr>
+			<td width="50%" style="vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
+				<b>Video Games</b>
+				
+				<table width="100%">
+				<s:iterator value="unaccepted_videogameList" var="game">
+				<tr>
+					<td width="15%">
+						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
+					</td>
+					<td width="85%">
+						<a href="<s:url action="viewGame" method="execute" namespace="/">
+							<s:param name="id_game" value="ID_game"></s:param></s:url>">
+						    <s:property value="name"/>
+						</a>
+					</td>
+				</tr>
+				</s:iterator> 
+				</table>
+				<br><p></p>
+				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+			</td>
+			
+			<td width="50%" style="vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
+				<b>Sport</b>
+				
+				<table width="100%">
+				<s:iterator value="unaccepted_sportList" var="game">
+				<tr>
+					<td width="15%">
+						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
+					</td>
+					<td width="85%">
+						<a href="<s:url action="viewGame" method="execute" namespace="/">
+							<s:param name="id_game" value="ID_game"></s:param></s:url>">
+						    <s:property value="name"/>
+						</a>
+					</td>
+				</tr>
+				</s:iterator> 
+				</table>
+				<br><p></p>
+				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+			</td>
+		</tr>
+		<!-- fine riga2 -->
+</table>
 </div>
 
 </body>

@@ -33,7 +33,7 @@
 	</div><br><br><div style="clear: both;"></div>
 	<!-- fine barra header fissa -->
 	
-			<!-- tag url per le action via link  -->
+<!------------------- tag url per le action via link  ------------------->
 	    	<s:url action="likeAction" method="execute" namespace="/" var="urlTagLike">
 	    	<s:param name="id_game" value="game.ID_game"></s:param>
 			<s:param name="game" value="%{#game}"></s:param>
@@ -61,7 +61,9 @@
 			
 			<s:url action="viewPlayUsers" method="execute" namespace="/" var="urlTag2">
 			<s:param name="id_game" value="game.ID_game"></s:param></s:url>
-			
+<!------------------- FINE tag url per le action via link  ------------------->
+
+
 <s:actionerror />
 <table width=600 cellpadding=10 align="center" style="background-color:#F0F0F0; border:1px solid #CCC;">
 <tr>
@@ -74,10 +76,14 @@
 				<td width="100%">
 					<h2><s:property value="game.name"/></h2>
 					<i><b>Game category:</b></i> <s:property value="gameCategory"/><br>
-					<i><b>Average score:</b></i> <s:property value="game.avgScore"/><br>
+					<s:if test="game.published">
+						<i><b>Average score:</b></i> <s:property value="game.avgScore"/><br>
+					</s:if>
 					<i><b>Price range:</b></i> <s:property value="game.priceRange"/>
 				</td>
 			</tr>
+			
+			<s:if test="game.published">
 			<tr>
 				<td>
 					<s:if test="isLike == 1">
@@ -88,24 +94,56 @@
 					</s:else>
 					<s:if test="isPlay == 1">
 						<u><i><b>Played</b></i></u>
-						<s:form action="voteGame" method="post" namespace="/">
-    						<s:select key="label.gameScore" name="vote" headerKey="0" headerValue="-- Please Select --" list="{'1', '2', '3', '4', '5'}" />
-							<s:hidden name="id_game" value="%{game.ID_game}"></s:hidden>
-							<s:hidden name="game" value="%{#game}"></s:hidden>
-							<s:hidden name="user_reviewList" value="%{#user_reviewList}"></s:hidden>
-							<s:hidden name="numPlay" value="%{numPlay}"></s:hidden>
-							<s:hidden name="numLike" value="%{numLike}"></s:hidden>
-							<s:hidden name="isPlay" value="%{isPlay}"></s:hidden>
-							<s:hidden name="isLike" value="%{isLike}"></s:hidden>
-							<s:hidden name="gameCategory" value="%{gameCategory}"></s:hidden>
-							<s:submit method="execute" key="label.voteGame" align="center"/>
-						</s:form>
+						<s:if test="score == -1">
+							<s:form action="voteGame" method="post" namespace="/">
+	    						<s:select key="label.gameScore" name="vote" headerKey="0" headerValue="-- Please Select --" list="{'1', '2', '3', '4', '5'}" />
+								<s:hidden name="id_game" value="%{game.ID_game}"></s:hidden>
+								<s:hidden name="game" value="%{#game}"></s:hidden>
+								<s:hidden name="user_reviewList" value="%{#user_reviewList}"></s:hidden>
+								<s:hidden name="numPlay" value="%{numPlay}"></s:hidden>
+								<s:hidden name="numLike" value="%{numLike}"></s:hidden>
+								<s:hidden name="isPlay" value="%{isPlay}"></s:hidden>
+								<s:hidden name="isLike" value="%{isLike}"></s:hidden>
+								<s:hidden name="gameCategory" value="%{gameCategory}"></s:hidden>
+								<s:submit method="execute" key="label.voteGame" align="center"/>
+							</s:form>
+						</s:if>
+						<s:else>
+							<br>
+						    Your vote is: <b><i><s:property value="score"/></i></b> 
+							<s:form action="voteGame" method="post" namespace="/" style="align=center;">
+	    						<s:select key="label.editGameScore" name="vote" headerKey="0" headerValue="-" list="{'1', '2', '3', '4', '5'}" />
+								<s:hidden name="id_game" value="%{game.ID_game}"></s:hidden>
+								<s:hidden name="game" value="%{#game}"></s:hidden>
+								<s:hidden name="user_reviewList" value="%{#user_reviewList}"></s:hidden>
+								<s:hidden name="numPlay" value="%{numPlay}"></s:hidden>
+								<s:hidden name="numLike" value="%{numLike}"></s:hidden>
+								<s:hidden name="isPlay" value="%{isPlay}"></s:hidden>
+								<s:hidden name="isLike" value="%{isLike}"></s:hidden>
+								<s:hidden name="gameCategory" value="%{gameCategory}"></s:hidden>
+								<s:submit method="execute" key="label.editVoteGame" align="center"/>
+							</s:form>    
+						</s:else>
 					</s:if>
 					<s:else>
 						<s:a href="%{urlTagPlay}"><button type="button">Play</button></s:a>
 					</s:else>
 				</td>
 			</tr>
+			</s:if><!--  FINE IF "ISPUBLISHED" -->
+			<s:else>
+			<tr>
+				<td>
+					<i><b>Accept count:</b></i> <s:property value="game.acceptCount"/><br>
+					<s:form action="acceptGame" method="post" namespace="/" style="align=center;">
+						<s:hidden name="id_game" value="%{game.ID_game}"></s:hidden>
+						<s:hidden name="game" value="%{#game}"></s:hidden>
+						<s:hidden name="gameCategory" value="%{gameCategory}"></s:hidden>
+						<s:submit method="execute" key="label.acceptGame" align="center"/>
+					</s:form>
+				</td>
+			</tr>
+			</s:else>
 		</table>
 	</td>
 </tr>
@@ -118,6 +156,7 @@
     </td>	
 </tr>
 
+<s:if test="game.published">
 <tr>
 	<td colspan=3 style="border:1px solid #CCC;">
 	    <div id="social_box">
@@ -157,6 +196,7 @@
 	    </div>
     </td>
 </tr>
+</s:if>
 </table>
 
 

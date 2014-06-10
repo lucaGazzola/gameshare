@@ -183,6 +183,7 @@ public class AddGameAction extends ActionSupport {
 			return "invalidPriceRange";
 		}
 		
+		@SuppressWarnings("unchecked")
 		List<Game> results = (List<Game>)em.createQuery("SELECT p FROM Game p where p.name = :value").setParameter("value", name).getResultList();
 		if(!results.isEmpty()){
 			addActionError(getText("error.duplicate"));

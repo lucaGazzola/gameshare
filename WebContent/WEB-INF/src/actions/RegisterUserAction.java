@@ -177,6 +177,7 @@ public class RegisterUserAction extends ActionSupport {
 			return "missingGender";
 		}
 		
+		@SuppressWarnings("unchecked")
 		List<User> results = (List<User>)em.createQuery("SELECT p FROM NormalUser p where p.email = :value").setParameter("value", email).getResultList();
 		if(results.isEmpty()){
 

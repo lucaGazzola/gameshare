@@ -1,9 +1,11 @@
 package service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import model.Game;
 import model.Like;
 
 public class LikeService {
@@ -11,16 +13,62 @@ public class LikeService {
 	
 	public void saveVote(int id_game,long id_user,int score, EntityManager em){
 		Like l;
-		List<Like> resultList = (List<Like>)em.createQuery(
-			      "SELECT l FROM Like l WHERE l.game.ID_game = :id_game AND l.user.ID_user = :id_user",
-			      Like.class)
-			      .setParameter("id_game", id_game)
-			      .setParameter("id_user", id_user)
-			      .getResultList();
-		l = resultList.get(0);
-		l.setScore(score);
 		em.getTransaction().begin();
-		em.getTransaction().commit();
+		
+		try{
+			List<Like> resultList = (List<Like>)em.createQuery(
+				      "SELECT l FROM Like l WHERE l.game.ID_game = :id_game AND l.user.ID_user = :id_user",
+				      Like.class)
+				      .setParameter("id_game", id_game)
+				      .setParameter("id_user", id_user)
+				      .getResultList();
+			l = resultList.get(0);
+			
+			boolean newVote = false;
+			if(l.getScore()==-1) newVote=true;
+			
+			l.setScore(score);
+			
+			//inizio aggiornamento average score
+			List<Like> likeList = (List<Like>)em.createQuery("SELECT l FROM Like l WHERE l.game.ID_game = :id_game",Like.class)
+					.setParameter("id_game", id_game)
+					.getResultList();
+			
+			Game game = em.createQuery("SELECT g FROM Game g WHERE g.ID_game = :id_game", Game.class)
+					.setParameter("id_game", id_game)
+					.getSingleResult();
+			
+			//inizio calcolo avgscore -----------------------------------
+			int cummScore = 0;
+			Iterator<Like> it = likeList.iterator();
+			
+			while(it.hasNext()){
+				Like tempLike = it.next();
+				if(!(!newVote && tempLike.getUser().getID_user() == id_user))
+					cummScore =+ tempLike.getScore();
+			}
+			
+			float avgScore = 0;
+			if(newVote)
+				avgScore = (cummScore+score)/(likeList.size()+1);
+			else
+				avgScore = (cummScore+score)/likeList.size();
+			//fine calcolo avgscore -----------------------------------
+			
+			l.getGame().setAvgScore(avgScore);
+			game.setAvgScore(avgScore);
+			em.merge(game);
+			//fine aggiornamento average score ---------------------
+			
+			
+			
+
+			
+			em.getTransaction().commit();
+		}catch(Exception e){
+			em.getTransaction().rollback();
+			System.out.println("Errore nel salvataggio del voto: "+e.getMessage());
+		}
 	}
 	
 	// ritorno true se ho creato una nuova entity, false se ho fatto solo l'update
@@ -29,7 +77,7 @@ public class LikeService {
 		try {
 			em.getTransaction().begin();
 			
-			//controllo se l'utente non abbia gi√† messo like al gioco (getSingleResult ritorna eccezione)
+			//controllo se l'utente non abbia gia'† messo like al gioco (getSingleResult ritorna eccezione)
 			List<Like> resultList = (List<Like>)em.createQuery(
 				      "SELECT l FROM Like l WHERE l.game.ID_game = :id_game AND l.user.ID_user = :id_user",
 				      Like.class)

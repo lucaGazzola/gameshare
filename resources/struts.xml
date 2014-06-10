@@ -78,5 +78,10 @@
 		<action name="viewGameList" class="actions.ViewGameListAction">
 			<result name="success">viewGames.jsp</result>
 		</action>
+		
+		<action name="acceptGame" class="actions.AcceptGameAction">
+			<result name="success">viewGames.jsp</result>
+			<result name="accepted">gameAccepted.jsp</result>
+		</action>
 	</package>
 </struts>

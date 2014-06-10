@@ -9,6 +9,11 @@ import model.*;
 public class GameService{
 	    
 
+	public void update(Game g, EntityManager em){
+		em.merge(g);
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+	}
     public void save(Game g, EntityManager em) {
 			em.persist(g);
 			em.getTransaction().begin();
@@ -34,7 +39,7 @@ public class GameService{
     }
     
     public Game findByName(String name, EntityManager em) {
-    	List<Game> results =  (List<Game>)em.createQuery("SELECT p FROM Game p WHERE p.name = :value",Game.class).setParameter("value", name).getResultList();
+    	List<Game> results =  (List<Game>)em.createQuery("SELECT p FROM Game p WHERE p.name = :value ORDER BY p.name",Game.class).setParameter("value", name).getResultList();
 		if(!results.isEmpty())
     		return results.get(0);
 		else

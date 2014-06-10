@@ -21,6 +21,12 @@ public class ViewGameListAction extends ActionSupport {
 	private List<Game> sportList;
 	private List<Game> videogameList;
 	
+	private List<Game> unaccepted_gameList;
+	private List<Game> unaccepted_boardgameList;
+	private List<Game> unaccepted_cardgameList;
+	private List<Game> unaccepted_sportList;
+	private List<Game> unaccepted_videogameList;
+	
 	public String execute() throws Exception{
 		//istanzio entity manager
 		EntityManager em = EntityManagerUtil.getEntityManager();
@@ -36,17 +42,51 @@ public class ViewGameListAction extends ActionSupport {
 		if (!gameList.isEmpty()){
 			Game tempGame;
 			Iterator<Game> it = gameList.iterator();
+			
 			cardgameList = new ArrayList<Game>();
 			boardgameList = new ArrayList<Game>();
 			sportList = new ArrayList<Game>();
 			videogameList = new ArrayList<Game>();
+			
+			unaccepted_gameList = new ArrayList<Game>();
+			unaccepted_cardgameList = new ArrayList<Game>();
+			unaccepted_boardgameList = new ArrayList<Game>();
+			unaccepted_sportList = new ArrayList<Game>();
+			unaccepted_videogameList = new ArrayList<Game>();
+			
+			
+			
 			while(it.hasNext()) {
 				tempGame = it.next();
 				switch(tempGame.getClass().getName()){
-					case "model.CardGame": cardgameList.add(tempGame); break;
-					case "model.BoardGame": boardgameList.add(tempGame); break;
-					case "model.Sport": sportList.add(tempGame); break;
-					case "model.Videogame": videogameList.add(tempGame); break;	
+					case "model.CardGame": 
+						if(tempGame.isPublished()) cardgameList.add(tempGame);
+						else{
+							unaccepted_cardgameList.add(tempGame);
+							unaccepted_gameList.add(tempGame);
+						}
+						break;
+					case "model.BoardGame": 
+						if(tempGame.isPublished()) boardgameList.add(tempGame);
+						else{
+							unaccepted_boardgameList.add(tempGame);
+							unaccepted_gameList.add(tempGame);
+						}
+						break;
+					case "model.Sport": 
+						if(tempGame.isPublished()) sportList.add(tempGame); 
+						else{
+							unaccepted_sportList.add(tempGame);
+							unaccepted_gameList.add(tempGame);
+						}
+						break;
+					case "model.Videogame":
+						if(tempGame.isPublished()) videogameList.add(tempGame);
+						else{
+							unaccepted_videogameList.add(tempGame);
+							unaccepted_gameList.add(tempGame);
+						}
+						break;	
 				}
 			}
 		}
@@ -94,5 +134,45 @@ public class ViewGameListAction extends ActionSupport {
 
 	public void setVideogameList(List<Game> videogameList) {
 		this.videogameList = videogameList;
+	}
+
+	public List<Game> getUnaccepted_gameList() {
+		return unaccepted_gameList;
+	}
+
+	public void setUnaccepted_gameList(List<Game> unaccepted_gameList) {
+		this.unaccepted_gameList = unaccepted_gameList;
+	}
+
+	public List<Game> getUnaccepted_boardgameList() {
+		return unaccepted_boardgameList;
+	}
+
+	public void setUnaccepted_boardgameList(List<Game> unaccepted_boardgameList) {
+		this.unaccepted_boardgameList = unaccepted_boardgameList;
+	}
+
+	public List<Game> getUnaccepted_cardgameList() {
+		return unaccepted_cardgameList;
+	}
+
+	public void setUnaccepted_cardgameList(List<Game> unaccepted_cardgameList) {
+		this.unaccepted_cardgameList = unaccepted_cardgameList;
+	}
+
+	public List<Game> getUnaccepted_sportList() {
+		return unaccepted_sportList;
+	}
+
+	public void setUnaccepted_sportList(List<Game> unaccepted_sportList) {
+		this.unaccepted_sportList = unaccepted_sportList;
+	}
+
+	public List<Game> getUnaccepted_videogameList() {
+		return unaccepted_videogameList;
+	}
+
+	public void setUnaccepted_videogameList(List<Game> unaccepted_videogameList) {
+		this.unaccepted_videogameList = unaccepted_videogameList;
 	}
 }

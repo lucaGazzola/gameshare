@@ -40,7 +40,7 @@
 			</s:url>
 			<p><s:a href="%{urlTag}">- <s:property value="name"/></s:a></p>
 		</s:iterator> 
-		<a href="addGame.jsp"><s:submit value="Add New Game" align="center"/></a>
+		<b><a href="addGame.jsp" style="align=center;">Add New Game</a></b>
 	</div>
 </body>
 </html>
