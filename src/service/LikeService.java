@@ -16,6 +16,8 @@ public class LikeService {
 		em.getTransaction().begin();
 		
 		try{
+			
+			//prelevo il like dell'utente e gli aggiungo il voto
 			List<Like> resultList = (List<Like>)em.createQuery(
 				      "SELECT l FROM Like l WHERE l.game.ID_game = :id_game AND l.user.ID_user = :id_user",
 				      Like.class)
@@ -23,17 +25,14 @@ public class LikeService {
 				      .setParameter("id_user", id_user)
 				      .getResultList();
 			l = resultList.get(0);
-			
-			boolean newVote = false;
-			if(l.getScore()==-1) newVote=true;
-			
 			l.setScore(score);
-			
-			//inizio aggiornamento average score
-			List<Like> likeList = (List<Like>)em.createQuery("SELECT l FROM Like l WHERE l.game.ID_game = :id_game",Like.class)
+
+			//inizio aggiornamento average score (prelevo tutti i LIKE del GIOCO)
+			List<Like> likeList = (List<Like>)em.createQuery("SELECT l FROM Like l WHERE l.game.ID_game = :id_game AND l.score != -1",Like.class)
 					.setParameter("id_game", id_game)
 					.getResultList();
 			
+			// prelevo il GIOCO
 			Game game = em.createQuery("SELECT g FROM Game g WHERE g.ID_game = :id_game", Game.class)
 					.setParameter("id_game", id_game)
 					.getSingleResult();
@@ -44,25 +43,17 @@ public class LikeService {
 			
 			while(it.hasNext()){
 				Like tempLike = it.next();
-				if(!(!newVote && tempLike.getUser().getID_user() == id_user))
-					cummScore =+ tempLike.getScore();
+				int sscore = tempLike.getScore();
+				cummScore = cummScore + sscore;
 			}
 			
-			float avgScore = 0;
-			if(newVote)
-				avgScore = (cummScore+score)/(likeList.size()+1);
-			else
-				avgScore = (cummScore+score)/likeList.size();
+			float avgScore = (float)(cummScore)/ (float)likeList.size();
 			//fine calcolo avgscore -----------------------------------
 			
 			l.getGame().setAvgScore(avgScore);
 			game.setAvgScore(avgScore);
-			em.merge(game);
+			em.merge(l);em.merge(game);
 			//fine aggiornamento average score ---------------------
-			
-			
-			
-
 			
 			em.getTransaction().commit();
 		}catch(Exception e){

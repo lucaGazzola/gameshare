@@ -43,11 +43,6 @@ public class VoteAction extends ActionSupport implements SessionAware{
 		//istanzio entity manager
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		
-		if(vote.equals("")){
-			addActionError(getText("error.missingField"));
-			return "missingField";
-		}
-		
 		if(isPlay == 0){
 			addActionError(getText("error.notPlayed"));
 			return "notPlayed";
@@ -55,8 +50,7 @@ public class VoteAction extends ActionSupport implements SessionAware{
 		
 		score = Integer.parseInt(vote);
 		game = gameService.findByName(gameName, em);
-		System.out.println(game);
-		likeService.saveVote(game.getID_game(), ((User)session.get("loggedInUser")).getID_user(), score, em);
+		likeService.saveVote(id_game, ((User)session.get("loggedInUser")).getID_user(), score, em);
 
 		// estraggo le REVIEW e i nomi utenti cui sono associati
 		user_reviewList =  (List<Object[]>)em.createQuery(

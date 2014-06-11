@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/Struts2Contacts/main.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Game Share: view user list</title>
@@ -34,18 +35,28 @@
 	
 
 <table width=600 cellpadding=10 align="center" style="background-color:#F0F0F0; border:1px solid #CCC;">
-	<s:iterator value="userList">
-		<tr>
-			<td width="14%" style="border:1px solid #CCC;">
-				<img alt="profile_image" src="/Struts2Contacts/images/profile_images/<s:property value="ID_user"/>-profile.jpg" width="50" height="50"/>
-			</td>
-			<td width="86%" style="border:1px solid #CCC;">
-				<i><b><s:property value="firstname"/> <s:property value="lastname"/><br></b></i>
-				<br>
-				<button type="button">Add Friend</button> <button type="button">Send Message</button>
-			</td>
-		</tr>
-	</s:iterator>
+	<tr>
+		<td style="border:1px solid #CCC;">
+			<p align="left"><i><b>Show Grid</b></i>   <i><b>Show List</b></i> </p>
+		</td>
+	</tr>
+	<s:if test="userList.size <= 10">
+		<s:iterator value="userList">
+			<tr>
+				<td width="14%" style="border:1px solid #CCC;">
+					<img alt="profile_image" src="/Struts2Contacts/images/profile_images/<s:property value="ID_user"/>-profile.jpg" width="50" height="50"/>
+				</td>
+				<td width="86%" style="border:1px solid #CCC;">
+					<i><b><s:property value="firstname"/> <s:property value="lastname"/><br></b></i>
+					<br>
+					<button type="button">Add Friend</button> <button type="button">Send Message</button>
+				</td>
+			</tr>
+		</s:iterator>
+	</s:if>
+	<s:else>
+		
+	</s:else>
 </table>
 
 </body>

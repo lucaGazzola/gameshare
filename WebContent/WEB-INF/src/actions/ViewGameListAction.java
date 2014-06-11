@@ -69,8 +69,6 @@ public class ViewGameListAction extends ActionSupport implements SessionAware{
 			unaccepted_sportList = new ArrayList<Game>();
 			unaccepted_videogameList = new ArrayList<Game>();
 			
-			System.out.println(session.get("loggedInUser"));
-			
 			while(it.hasNext()) {
 				tempGame = it.next();
 				switch(tempGame.getClass().getName()){
