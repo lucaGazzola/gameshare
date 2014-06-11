@@ -191,7 +191,12 @@
 					<td width="100%">
 						<b><s:property value="%{#user_reviewSingle[0]}"/> <s:property value="%{#user_reviewSingle[1]}"/>:</b>
 						<br><s:property value="%{#user_reviewSingle[2]}"/>
-						<br>SCORE: <b><i><s:property value="%{#user_reviewSingle[3]}"/></i></b>
+						<s:if test="#user_reviewSingle[3] > -1">
+							<br>SCORE: <b><i><s:property value="%{#user_reviewSingle[3]}"/></i></b>
+						</s:if>
+						<s:else>
+							<br>SCORE: <i>not voted yet</i>
+						</s:else>
 					</td>
 				</tr>
 				</s:iterator> 

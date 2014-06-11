@@ -7,7 +7,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/Struts2Contacts/main.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Game Share: view user list</title>
+<title>Game Share: View User List</title>
 </head>
 <body>
 	<!-- barra header fissa -->
@@ -35,12 +35,6 @@
 	
 
 <table width=600 cellpadding=10 align="center" style="background-color:#F0F0F0; border:1px solid #CCC;">
-	<tr>
-		<td style="border:1px solid #CCC;">
-			<p align="left"><i><b>Show Grid</b></i>   <i><b>Show List</b></i> </p>
-		</td>
-	</tr>
-	<s:if test="userList.size <= 10">
 		<s:iterator value="userList">
 			<tr>
 				<td width="14%" style="border:1px solid #CCC;">
@@ -53,7 +47,6 @@
 				</td>
 			</tr>
 		</s:iterator>
-	</s:if>
 	<s:else>
 		
 	</s:else>
