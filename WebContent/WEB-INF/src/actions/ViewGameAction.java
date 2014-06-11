@@ -3,6 +3,7 @@ package actions;
 import model.Game;
 import model.Like;
 import model.User;
+import service.AcceptLockService;
 import util.ReturnGameCategory;
 
 import java.util.Iterator;
@@ -27,6 +28,7 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 	private int numLike;
 	private int isPlay;
 	private int isLike;
+	private int isAlreadyAccept;
 	private int score;
 	private String gameCategory;
 	ReturnGameCategory util = new ReturnGameCategory();
@@ -78,6 +80,13 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 				      .setParameter("id",id_game)
 				      .getResultList();
 			
+			
+			// verifico se ha gia' fatto accept sul gioco
+			AcceptLockService acceptService = new AcceptLockService();
+			isAlreadyAccept = 0;
+			if(acceptService.findLock(user, game, em) != null){
+				isAlreadyAccept = 1;
+			}
 		}catch(Exception e){
 			System.out.println("Errore");
 			System.out.println(e.getMessage());
@@ -186,6 +195,15 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public int getIsAlreadyAccept() {
+		return isAlreadyAccept;
+	}
+
+
+	public void setIsAlreadyAccept(int isAlreadyAccept) {
+		this.isAlreadyAccept = isAlreadyAccept;
 	}
 
 }

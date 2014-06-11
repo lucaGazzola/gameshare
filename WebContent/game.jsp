@@ -135,12 +135,14 @@
 			<tr>
 				<td>
 					<i><b>Accept count:</b></i> <s:property value="game.acceptCount"/><br>
-					<s:form action="acceptGame" method="post" namespace="/" style="align=center;">
-						<s:hidden name="id_game" value="%{game.ID_game}"></s:hidden>
-						<s:hidden name="game" value="%{#game}"></s:hidden>
-						<s:hidden name="gameCategory" value="%{gameCategory}"></s:hidden>
-						<s:submit method="execute" key="label.acceptGame" align="center"/>
-					</s:form>
+					<s:if test="isAlreadyAccept == 0">
+						<s:form action="acceptGame" method="post" namespace="/" style="align=center;">
+							<s:hidden name="id_game" value="%{game.ID_game}"></s:hidden>
+							<s:hidden name="game" value="%{#game}"></s:hidden>
+							<s:hidden name="gameCategory" value="%{gameCategory}"></s:hidden>
+							<s:submit method="execute" key="label.acceptGame" align="center"/>
+						</s:form>
+					</s:if>
 				</td>
 			</tr>
 			</s:else>

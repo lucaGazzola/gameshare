@@ -75,6 +75,8 @@ public class PersistUtil {
 		try {
 			em.getTransaction().begin();
 			entity.setPublished(true);
+			if(entity.getName().equals("Counter-Strike"))
+				entity.setPublished(false);
 			em.persist(entity);
 			em.getTransaction().commit();
 		} catch (Exception e) {
@@ -92,6 +94,8 @@ public class PersistUtil {
 		try {
 			em.getTransaction().begin();
 			entity.setPublished(true);
+			if(entity.getName().equals("Calcio a 11"))
+				entity.setPublished(false);
 			em.persist(entity);
 			em.getTransaction().commit();
 		} catch (Exception e) {

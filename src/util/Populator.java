@@ -3,7 +3,6 @@ package util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -11,7 +10,6 @@ import model.Administrator;
 import model.Analyst;
 import model.BoardGame;
 import model.CardGame;
-import model.Game;
 import model.Moderator;
 import model.Platform;
 import model.Sport;
@@ -99,10 +97,10 @@ public class Populator {
 		
 		//populate di alcuni videogiochi
 		Videogame vg = new Videogame("Pac-Man",
-				"Pac-Man (conosciuto in Giappone con il nome di Pakkuman) è un celebre videogioco ideato da Tohru Iwatani programmatore della Namco e pubblicato per la prima volta dalla Midway Games nel 1980 nel formato arcade da sala",
+				"Pac-Man (conosciuto in Giappone con il nome di Pakkuman) e'� un celebre videogioco ideato da Tohru Iwatani programmatore della Namco e pubblicato per la prima volta dalla Midway Games nel 1980 nel formato arcade da sala",
 				"2-5", false, "Arcade");
 		Videogame vg2 = new Videogame("Counter-Strike",
-				"Counter-Strike è un videogioco sparatutto in multiplayer, nato dall'idea di due studenti universitari che nel 1998 misero mano al codice di Half-Life. Divenuto in seguito proprietà della Valve Software, il suo attuale successo è dovuto al fatto che venne pubblicato come mod gratuito di Half-Life, ne usa il motore grafico, ed è giocabile online. ",
+				"Counter-Strike e'� un videogioco sparatutto in multiplayer, nato dall'idea di due studenti universitari che nel 1998 misero mano al codice di Half-Life. Divenuto in seguito proprietà della Valve Software, il suo attuale successo è dovuto al fatto che venne pubblicato come mod gratuito di Half-Life, ne usa il motore grafico, ed è giocabile online. ",
 				"10-15", true, "First Person Shooter");
 		
 		Collection<Platform> piattaforme = new ArrayList<Platform>(){
@@ -128,11 +126,9 @@ public class Populator {
 		pu.saveVideogame(vg, em);pu.saveVideogame(vg2, em);
 		
 		//populate di alcuni sport
-		Sport sp = new Sport("Calcio a 11",
-				"",
-				"10-15", 90, 22, 30);
+		Sport sp = new Sport("Calcio a 11",null,"10-15", 90, 22, 30);
 		Sport sp2 = new Sport("Tennis",
-				"Il tennis è uno sport che vede opposti due giocatori (uno contro uno, incontro singolare) o quattro (due contro due, incontro di doppio) in un campo diviso in due metà da una rete alta circa un metro dal terreno.",
+				"Il tennis e' uno sport che vede opposti due giocatori (uno contro uno, incontro singolare) o quattro (due contro due, incontro di doppio) in un campo diviso in due metà da una rete alta circa un metro dal terreno.",
 				"50-100", 60, 2, 2);
 		pu.saveSport(sp, em);pu.saveSport(sp2, em);
 		//---------- FINE POPULATE GIOCHI ---------------------------------------------------------
@@ -161,7 +157,7 @@ public class Populator {
 		
 		Like l = new Like(u, cg2, true, "Very good Really enjoy playing this, and can play with your friends too.", 5);
 		Like l1 = new Like(u, bg, false, null, -1);
-		Like l2 = new Like(u2, sp, true, "Very good Really enjoy playing this, and can play with your friends too.", 4);
+		Like l2 = new Like(u2, vg, true, "Very good Really enjoy playing this, and can play with your friends too.", 4);
 		Like l3 = new Like(u3, cg3, true, "Brings back old times playing against my dad", 4);
 		Like l4 = new Like(u4, cg, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
 		Like l7 = new Like(u4, sp2, true, "Very good Really enjoy playing this, and can play with your friends too.", -1);

@@ -44,15 +44,7 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		GameService gameService = new GameService();
 		als = new AcceptLockService();
-		
-
 		game = gameService.find(id_game, em);
-		
-
-		if(als.findLock((User)session.get("loggedInUser"), game, em) == null){
-			addActionError(getText("error.accepted"));
-			return "accepted";
-		}
 		
 		als.saveLock((User)session.get("loggedInUser"), game, em);
 		int acceptCount = game.getAcceptCount() + 1;
