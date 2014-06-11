@@ -92,7 +92,6 @@ public class ViewGameAction extends ActionSupport implements SessionAware{
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		}
-		System.out.println(game);
 		EntityManagerUtil.closeEntityManager(em);
 		return "success";
 	}

@@ -43,22 +43,18 @@ public class VoteGameActionTest extends StrutsTestCase{
 	public void testAlreadyVoted() throws Exception {
 		
 		request.setParameter("vote","4");
+		request.setParameter("gameName","Briscola");
     	
     	ActionProxy proxy = getActionProxy("/voteGame");
     	
-    	Game g = gs.findByName("Briscola", em);
-    	
     	Map<String,Object> attributes = ActionContext.getContext().getSession();
     	attributes.put("loggedInUser", u);
-    	
-    	VoteAction action = (VoteAction) proxy.getAction() ;
-    	action.setGame(g);
 
     	String result = proxy.execute();
         
         assertEquals("Result returned from executing the action should have been success", "success", result);
         
-        Like l = ls.findLike(u.getID_user(), g.getID_game(), em);
+        Like l = ls.findLike(u.getID_user(), gs.findByName("Briscola", em).getID_game(), em);
         assertEquals("query result should have been 4 but it wasn't",4,l.getScore());
         
     }
@@ -66,23 +62,19 @@ public class VoteGameActionTest extends StrutsTestCase{
 	public void testNotVoted() throws Exception {
 		
 		request.setParameter("vote","4");
+		request.setParameter("gameName","Tennis");
 		
     	ActionProxy proxy = getActionProxy("/voteGame");
     	
-    	Game g = gs.findByName("Tennis", em);
     	
     	Map<String,Object> attributes = ActionContext.getContext().getSession();
     	attributes.put("loggedInUser", u);
-    	
-    	VoteAction action = (VoteAction) proxy.getAction() ;
-    	action.setGame(g);
-
 
     	String result = proxy.execute();
         
         assertEquals("Result returned from executing the action should have been success", "success", result);
         
-        Like l = ls.findLike(u.getID_user(), g.getID_game(), em);
+        Like l = ls.findLike(u.getID_user(), gs.findByName("Tennis", em).getID_game(), em);
         assertEquals("query result should have been 4 but it wasn't",4,l.getScore());
         
     }
