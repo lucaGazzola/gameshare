@@ -5,9 +5,14 @@ package actions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.File;
+
 import com.opensymphony.xwork2.ActionSupport;
+
 import org.apache.commons.io.FileUtils;
+
 import model.*;
 
 import javax.persistence.*;
@@ -49,8 +54,26 @@ public class AddGameAction extends ActionSupport implements ServletRequestAware 
 	private String suggestedPlayers;
 	private String requiredPlayers;
 	
+	//Image testing
+	private String imagePath;
+	
 	//Card Game attributes
 	private String deck;
+	
+	private boolean containsIllegals(String toExamine) {
+	    Pattern pattern = Pattern.compile("[~#*+%{}<>\\[\\]|\"\\_^]");
+	    Matcher matcher = pattern.matcher(toExamine);
+	    return matcher.find();
+	}
+	
+	private boolean checkIllegalFields(){
+		if(this.containsIllegals(name) || this.containsIllegals(description)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	
 	//Default method invoked by STRUTS2
 	public String execute() {
@@ -58,13 +81,18 @@ public class AddGameAction extends ActionSupport implements ServletRequestAware 
 		int sp, rp, d;
 		PlatformService ps = new PlatformService();
 		boolean onlineVideogame = false;
-		String priceRangePattern = "\\d{1,4}-\\d{1,4}";
+		String priceRangePattern = "\\d{1,4}-\\d{1,4}";	
+		String numbersCheck = "\\d+";
 		
 		if(gameType == null){
 			addActionError(getText("error.missingGameType"));
 			return "missingGameType";			
 		}
-			
+		
+		if(this.checkIllegalFields()){
+			addActionError(getText("error.invalidCharactersError"));
+			return "invalidCharactersError";
+		}
 			
 		if (name.equals("") || priceRange.equals("")){
 			addActionError(getText("error.missingField"));
@@ -87,6 +115,11 @@ public class AddGameAction extends ActionSupport implements ServletRequestAware 
 		
 		switch(gameType){
 		case "videogame":
+			
+			if(this.containsIllegals(videogameType)){
+				addActionError(getText("error.invalidCharactersError"));
+				return "invalidCharactersError";
+			}
 			
 			if(online == null){
 				addActionError(getText("error.missingOnlineField"));
@@ -119,12 +152,21 @@ public class AddGameAction extends ActionSupport implements ServletRequestAware 
 		break;
 		case "card":
 			
+			if(this.containsIllegals(deck)){
+				addActionError(getText("error.invalidCharactersError"));
+				return "invalidCharactersError";
+			}
+			
 			if(suggestedPlayers.equals("") || requiredPlayers.equals("") || duration.equals("") || deck.equals("")){
 				addActionError(getText("error.missingField"));
 				return "errorField";
 			}
-				
 			
+			if(!suggestedPlayers.matches(numbersCheck) || !duration.matches(numbersCheck) || !requiredPlayers.matches(numbersCheck)){
+				addActionError(getText("error.notNumbers"));
+				return "notNumbers";
+			}
+					
 			sp = Integer.parseInt(suggestedPlayers);
 			rp = Integer.parseInt(requiredPlayers);
 			d = Integer.parseInt(duration);
@@ -140,6 +182,11 @@ public class AddGameAction extends ActionSupport implements ServletRequestAware 
 			if(suggestedPlayers.equals("") || requiredPlayers.equals("") || duration.equals("")){
 				addActionError(getText("error.missingField"));
 				return "errorField";
+			}
+			
+			if(!suggestedPlayers.matches(numbersCheck) || !duration.matches(numbersCheck) || !requiredPlayers.matches(numbersCheck)){
+				addActionError(getText("error.notNumbers"));
+				return "notNumbers";
 			}
 			
 			sp = Integer.parseInt(suggestedPlayers);
@@ -159,6 +206,11 @@ public class AddGameAction extends ActionSupport implements ServletRequestAware 
 				return "errorField";
 			}
 			
+			if(!suggestedPlayers.matches(numbersCheck) || !duration.matches(numbersCheck) || !requiredPlayers.matches(numbersCheck)){
+				addActionError(getText("error.notNumbers"));
+				return "notNumbers";
+			}
+			
 			sp = Integer.parseInt(suggestedPlayers);
 			rp = Integer.parseInt(requiredPlayers);
 			d = Integer.parseInt(duration);
@@ -175,7 +227,13 @@ public class AddGameAction extends ActionSupport implements ServletRequestAware 
 		
 		// salvo l'immagine 
         try {
-            String filePath = servletRequest.getSession().getServletContext().getRealPath("/");
+        	String filePath;
+        	System.out.println(imagePath);
+        	if(imagePath == null)
+        		filePath = servletRequest.getSession().getServletContext().getRealPath("/");
+        	else
+        		filePath = imagePath;
+            System.out.println(filePath);
             File fileToCreate = new File(filePath + "images\\game_images\\", g.getID_game()+"-game.jpg");
             FileUtils.copyFile(this.gameImage, fileToCreate);
         } catch (Exception e) {
@@ -320,6 +378,14 @@ public class AddGameAction extends ActionSupport implements ServletRequestAware 
 		this.gameImage = gameImage;
 	}
 
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 
 	public void setGameImageFileName(String gameImageFileName) {
 		this.gameImageFileName = gameImageFileName;

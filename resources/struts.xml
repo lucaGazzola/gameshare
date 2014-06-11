@@ -46,6 +46,8 @@
 			<result name="missingOnlineField">addGame.jsp</result>
 			<result name="missingGameType">addGame.jsp</result>
 			<result name="duplicate">addGame.jsp</result>
+			<result name="invalidCharactersError">addGame.jsp</result>
+			<result name="notNumbers">addGame.jsp</result>
 		</action>
 		
 		<action name="voteGame" class="actions.VoteAction">

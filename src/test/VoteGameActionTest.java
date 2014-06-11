@@ -59,7 +59,7 @@ public class VoteGameActionTest extends StrutsTestCase{
         assertEquals("Result returned from executing the action should have been success", "success", result);
         
         Like l = ls.findLike(u.getID_user(), g.getID_game(), em);
-        assertEquals("query result should have been 4 but it wasn't",l.getScore(),4);
+        assertEquals("query result should have been 4 but it wasn't",4,l.getScore());
         
     }
 	
@@ -83,7 +83,7 @@ public class VoteGameActionTest extends StrutsTestCase{
         assertEquals("Result returned from executing the action should have been success", "success", result);
         
         Like l = ls.findLike(u.getID_user(), g.getID_game(), em);
-        assertEquals("query result should have been 4 but it wasn't",l.getScore(),4);
+        assertEquals("query result should have been 4 but it wasn't",4,l.getScore());
         
     }
 	

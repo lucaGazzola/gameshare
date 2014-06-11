@@ -24,7 +24,6 @@ public class RegisterUserActionTest extends StrutsTestCase{
 		Populator pop = new Populator();
 		pop.delete();
 		pop.popolate();
-        us.removeByEmail("franco@franchi.net",em);
     	request.setParameter("email", "franco@franchi.net");
     	request.setParameter("password", "frenko");
     	request.setParameter("firstname", "test");

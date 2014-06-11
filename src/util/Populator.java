@@ -175,7 +175,7 @@ public class Populator {
 		Like l2 = new Like(u2, vg, true, "Very good Really enjoy playing this, and can play with your friends too.", 4);
 		Like l3 = new Like(u3, cg3, true, "Brings back old times playing against my dad", 4);
 		Like l4 = new Like(u4, cg, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
-		Like l7 = new Like(u4, sp2, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
+		Like l7 = new Like(u4, sp2, true, "Very good Really enjoy playing this, and can play with your friends too.", -1);
 		Like l5 = new Like(u3, cg2, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
 		Like l6 = new Like(u, sp2, true, "I like it very much. I can enjoy my time with my friends during weekends", 4);
 		

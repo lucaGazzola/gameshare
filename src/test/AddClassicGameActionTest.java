@@ -1,8 +1,13 @@
 package test;
 
+import java.io.File;
+
 import javax.persistence.EntityManager;
 
 import model.Game;
+
+
+
 
 
 import org.apache.struts2.StrutsTestCase;
@@ -11,6 +16,7 @@ import service.GameService;
 import service.PlatformService;
 import util.EntityManagerUtil;
 import util.Populator;
+import actions.AddGameAction;
 
 import com.opensymphony.xwork2.ActionProxy;
 
@@ -25,7 +31,6 @@ public class AddClassicGameActionTest extends StrutsTestCase{
 		Populator pop = new Populator();
 		pop.delete();
 		pop.popolate();
-        gs.removeByName("Test",em);
         request.setParameter("name","Test");
     	request.setParameter("description", "very good");
     	request.setParameter("priceRange", "30-40");
@@ -62,10 +67,18 @@ public class AddClassicGameActionTest extends StrutsTestCase{
 
 	public void testCardGameEverythingCorrect() throws Exception {
 	
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
+
+		request.setParameter("imagePath",path+"..\\..\\WebContent");
 		request.setParameter("gameType", "card");
 		request.setParameter("deck","hearthstone");
-	
+		
+		System.out.println(path);
+		
 		ActionProxy proxy = getActionProxy("/addGame");
+		AddGameAction action = (AddGameAction) proxy.getAction() ;
+		action.setGameImage(gameImage);
 
 		String result = proxy.execute();
     
@@ -75,10 +88,40 @@ public class AddClassicGameActionTest extends StrutsTestCase{
     
 	}
 	
+	public void testCardGameInvalidCharacters() throws Exception {
+		
+		request.setParameter("name","Test[]#");
+		request.setParameter("gameType", "card");
+		request.setParameter("deck","hearthstone");
+	
+		ActionProxy proxy = getActionProxy("/addGame");
+
+		String result = proxy.execute();
+    
+		assertEquals("Result returned from executing the action should have been invalidCharactersError", "invalidCharactersError", result);
+    
+	}
+	
+	public void testNumericFields() throws Exception {
+		
+		request.setParameter("suggestedPlayers", "asdd");
+		request.setParameter("gameType", "card");
+		request.setParameter("deck","hearthstone");
+	
+		ActionProxy proxy = getActionProxy("/addGame");
+
+		String result = proxy.execute();
+    
+		assertEquals("Result returned from executing the action should have been notNumbers", "notNumbers", result);
+    
+	}
+	
 	public void testCardGameEmptyDurationField() throws Exception {
 		
 		request.setParameter("gameType", "card");
 		request.setParameter("duration", "");
+		request.setParameter("deck", "hearthstone");
+
 	
 		ActionProxy proxy = getActionProxy("/addGame");
 
@@ -92,6 +135,7 @@ public class AddClassicGameActionTest extends StrutsTestCase{
 		
 		request.setParameter("gameType", "card");
 		request.setParameter("suggestedPlayers", "");
+		request.setParameter("deck","hearthstone");
 	
 		ActionProxy proxy = getActionProxy("/addGame");
 
@@ -105,7 +149,9 @@ public class AddClassicGameActionTest extends StrutsTestCase{
 		
 		request.setParameter("gameType", "card");
 		request.setParameter("requiredPlayers", "");
-	
+		request.setParameter("deck", "hearthstone");
+
+		
 		ActionProxy proxy = getActionProxy("/addGame");
 
 		String result = proxy.execute();
@@ -144,9 +190,15 @@ public void testBoardGameAlreadyPresent() throws Exception {
 
 	public void testBoardGameEverythingCorrect() throws Exception {
 	
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
+
+		request.setParameter("imagePath",path+"..\\..\\WebContent");
 		request.setParameter("gameType", "board");
 	
 		ActionProxy proxy = getActionProxy("/addGame");
+		AddGameAction action = (AddGameAction) proxy.getAction() ;
+		action.setGameImage(gameImage);
 
 		String result = proxy.execute();
     
@@ -173,9 +225,15 @@ public void testBoardGameAlreadyPresent() throws Exception {
 
 	public void testSportEverythingCorrect() throws Exception {
 	
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
+
+		request.setParameter("imagePath",path+"..\\..\\WebContent");
 		request.setParameter("gameType", "sport");
 	
 		ActionProxy proxy = getActionProxy("/addGame");
+		AddGameAction action = (AddGameAction) proxy.getAction() ;
+		action.setGameImage(gameImage);
 
 		String result = proxy.execute();
     

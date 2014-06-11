@@ -26,6 +26,7 @@ public class VoteAction extends ActionSupport implements SessionAware{
 	
 	//servono per il rendering della pagina "game"
 	private int id_game;
+	private String gameName;
 	private List<Object[]> user_reviewList;
 	private int numPlay;
 	private int numLike;
@@ -53,8 +54,9 @@ public class VoteAction extends ActionSupport implements SessionAware{
 		}
 		
 		score = Integer.parseInt(vote);
-		
-		likeService.saveVote(id_game, ((User)session.get("loggedInUser")).getID_user(), score, em);
+		game = gameService.findByName(gameName, em);
+		System.out.println(game);
+		likeService.saveVote(game.getID_game(), ((User)session.get("loggedInUser")).getID_user(), score, em);
 
 		// estraggo le REVIEW e i nomi utenti cui sono associati
 		user_reviewList =  (List<Object[]>)em.createQuery(
@@ -158,6 +160,14 @@ public class VoteAction extends ActionSupport implements SessionAware{
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public String getGameName() {
+		return gameName;
+	}
+
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
 	}
 
 }

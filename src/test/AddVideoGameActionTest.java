@@ -2,11 +2,15 @@ package test;
 
 
 
+import java.io.File;
+
 import javax.persistence.EntityManager;
 
 import model.Game;
 import model.Platform;
 import model.Videogame;
+
+
 
 
 
@@ -18,6 +22,7 @@ import service.GameService;
 import service.PlatformService;
 import util.EntityManagerUtil;
 import util.Populator;
+import actions.AddGameAction;
 
 import com.opensymphony.xwork2.ActionProxy;
 
@@ -32,7 +37,6 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 		Populator pop = new Populator();
 		pop.delete();
 		pop.popolate();
-        gs.removeByName("World of Warcraft",em);
         request.setParameter("gameType","videogame");
         request.setParameter("name","World of Warcraft");
     	request.setParameter("description", "very good");
@@ -108,11 +112,18 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 	
 	public void testEmptyDescription() throws Exception {
 		
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
+
+		request.setParameter("imagePath",path+"..\\..\\WebContent");
 		request.setParameter("online", "true");
 		request.setParameter("description", "");
 		
+		
 		ActionProxy proxy = getActionProxy("/addGame");
-
+		AddGameAction action = (AddGameAction) proxy.getAction() ;
+		action.setGameImage(gameImage);
+		
 		String result = proxy.execute();
     
 		assertEquals("Result returned from executing the action should have been success", "success", result);
@@ -122,12 +133,17 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 	}
 	
 	public void testNoPlatformsSelected() throws Exception {
-		
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
+
+		request.setParameter("imagePath",path+"..\\..\\WebContent");
 		request.setParameter("online", "true");
 		request.setParameter("PC", "false");
 		
 		ActionProxy proxy = getActionProxy("/addGame");
-
+		AddGameAction action = (AddGameAction) proxy.getAction() ;
+		action.setGameImage(gameImage);
+		
 		String result = proxy.execute();
     
 		assertEquals("Result returned from executing the action should have been success", "success", result);
@@ -139,13 +155,18 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 	}
 	
 	public void testOnePlatformSelected() throws Exception {
-		
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
+
+		request.setParameter("imagePath",path+"..\\..\\WebContent");
 		request.setParameter("online", "true");
 		
 		Platform pc;
 		
 		ActionProxy proxy = getActionProxy("/addGame");
-
+		AddGameAction action = (AddGameAction) proxy.getAction() ;
+		action.setGameImage(gameImage);
+		
 		String result = proxy.execute();
     
 		assertEquals("Result returned from executing the action should have been success", "success", result);
@@ -157,7 +178,10 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 	}
 	
 	public void testMorePlatformSelected() throws Exception {
-		
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
+
+		request.setParameter("imagePath",path+"..\\..\\WebContent");
 		request.setParameter("online", "true");
 		request.setParameter("PC", "false");
 		request.setParameter("XBox", "true");
@@ -167,7 +191,9 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 		Platform wii;
 		
 		ActionProxy proxy = getActionProxy("/addGame");
-
+		AddGameAction action = (AddGameAction) proxy.getAction() ;
+		action.setGameImage(gameImage);
+		
 		String result = proxy.execute();
     
 		assertEquals("Result returned from executing the action should have been success", "success", result);
@@ -181,12 +207,17 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 	}
 	
 	public void testNoTypeSelected() throws Exception {
-		
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
+
+		request.setParameter("imagePath",path+"..\\..\\WebContent");
 		request.setParameter("online", "true");
 		request.setParameter("videogameType", "");
 		
 		ActionProxy proxy = getActionProxy("/addGame");
-
+		AddGameAction action = (AddGameAction) proxy.getAction() ;
+		action.setGameImage(gameImage);
+		
 		String result = proxy.execute();
     
 		assertEquals("Result returned from executing the action should have been success", "success", result);
