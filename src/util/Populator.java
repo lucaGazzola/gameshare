@@ -19,16 +19,8 @@ import model.NormalUser;
 
 public class Populator {
 	
-	
-	public void popolate(){
-		
-		PersistUtil pu = new PersistUtil();
+	public void delete(){
 		EntityManager em = EntityManagerUtil.getEntityManager();
-		
-		//---------- POPULATE GIOCHI ---------------------------------------------------------
-		System.out.println("*********** START POPULATE DB ***********");
-		System.out.println("Inizio populate giochi:");
-		
 		em.getTransaction().begin();
 		
 		em.createQuery("DELETE FROM Like").executeUpdate();
@@ -58,8 +50,17 @@ public class Populator {
 		em.createNativeQuery("UPDATE counters SET value = 0 WHERE key = 'ID_platform'").executeUpdate();
 		*/
 		em.getTransaction().commit();
-
-
+		EntityManagerUtil.closeEntityManager(em);
+	}
+	
+	public void popolate(){
+		
+		PersistUtil pu = new PersistUtil();
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		
+		//---------- POPULATE GIOCHI ---------------------------------------------------------
+		System.out.println("*********** START POPULATE DB ***********");
+		System.out.println("Inizio populate giochi:");
 		
 		//populate di alcuni giochi di carte
 		CardGame cg = new CardGame("Briscola",
@@ -142,7 +143,21 @@ public class Populator {
 		NormalUser u2 = new NormalUser("gigi@gmail.com", "test", now, "gigi", "bianchi", 'M', "impiegato", "roma", "roma 3", "roma");
 		NormalUser u3 = new NormalUser("pippo@gmail.com", "test", now, "pippo", "franchi", 'M', "agricoltore", "amsterdam", "kingstone university", "jamaica");
 		NormalUser u4 = new NormalUser("gina@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u5 = new NormalUser("gina1@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u6 = new NormalUser("gina2@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u7 = new NormalUser("gina3@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u8 = new NormalUser("gina4@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u9 = new NormalUser("gina5@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u10 = new NormalUser("gina6@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u11 = new NormalUser("gina7@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u12 = new NormalUser("gina8@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u13 = new NormalUser("gina9@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u14 = new NormalUser("gina10@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		
 		pu.saveNormalUser(u,em);pu.saveNormalUser(u2,em);pu.saveNormalUser(u3,em);pu.saveNormalUser(u4,em);
+		pu.saveNormalUser(u5,em);pu.saveNormalUser(u6,em);pu.saveNormalUser(u7,em);pu.saveNormalUser(u8,em);
+		pu.saveNormalUser(u9,em);pu.saveNormalUser(u10,em);pu.saveNormalUser(u11,em);pu.saveNormalUser(u12,em);
+		pu.saveNormalUser(u13,em);pu.saveNormalUser(u14,em);
 		
 		Administrator a = new Administrator("topogigio@gmail.com", "strapazzami", now, "gigio", "topo", 'M', "presentatore-cantante", "roma", "asilo", "roma");
 		Analyst aa = new Analyst("ragionierugofantozzi@gmail.com", "passworddd","ugo","fantozzi");
@@ -160,12 +175,27 @@ public class Populator {
 		Like l2 = new Like(u2, vg, true, "Very good Really enjoy playing this, and can play with your friends too.", 4);
 		Like l3 = new Like(u3, cg3, true, "Brings back old times playing against my dad", 4);
 		Like l4 = new Like(u4, cg, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
-		Like l7 = new Like(u4, sp2, true, "Very good Really enjoy playing this, and can play with your friends too.", -1);
+		Like l7 = new Like(u4, sp2, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
 		Like l5 = new Like(u3, cg2, true, "Very good Really enjoy playing this, and can play with your friends too.", 3);
 		Like l6 = new Like(u, sp2, true, "I like it very much. I can enjoy my time with my friends during weekends", 4);
+		
+		Like l8 = new Like(u5, cg2, false, null, -1);
+		Like l9 = new Like(u6, cg2, false, null, -1);
+		Like l10 = new Like(u7, cg2, false, null, -1);
+		Like l11 = new Like(u8, cg2, false, null, -1);
+		Like l12 = new Like(u9, cg2, false, null, -1);
+		Like l13 = new Like(u10, cg2, false, null, -1);
+		Like l14 = new Like(u11, cg2, false, null, -1);
+		Like l15 = new Like(u12, cg2, false, null, -1);
+		Like l16 = new Like(u13, cg2, false, null, -1);
+		Like l17 = new Like(u14, cg2, false, null, -1);
+		
 		pu.saveLike(l,em);pu.saveLike(l1,em);pu.saveLike(l2,em);
 		pu.saveLike(l3,em);pu.saveLike(l4,em);pu.saveLike(l5,em);
-		pu.saveLike(l6,em);pu.saveLike(l7,em);
+		pu.saveLike(l6,em);pu.saveLike(l7,em);pu.saveLike(l8,em);
+		pu.saveLike(l9,em);pu.saveLike(l10,em);pu.saveLike(l11,em);
+		pu.saveLike(l12,em);pu.saveLike(l13,em);pu.saveLike(l14,em);
+		pu.saveLike(l15,em);pu.saveLike(l16,em);pu.saveLike(l17,em);
 		//---------- FINE POPULATE LIKE ----------------------------------------------------------
 		
 		EntityManagerUtil.closeEntityManager(em);

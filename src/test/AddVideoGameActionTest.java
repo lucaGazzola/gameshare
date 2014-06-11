@@ -11,6 +11,7 @@ import model.Videogame;
 
 
 
+
 import org.apache.struts2.StrutsTestCase;
 
 import service.GameService;
@@ -29,6 +30,7 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 	public void setUp() throws Exception{
 		super.setUp();
 		Populator pop = new Populator();
+		pop.delete();
 		pop.popolate();
         gs.removeByName("World of Warcraft",em);
         request.setParameter("gameType","videogame");

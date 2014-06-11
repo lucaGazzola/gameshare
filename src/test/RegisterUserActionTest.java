@@ -22,6 +22,7 @@ public class RegisterUserActionTest extends StrutsTestCase{
 	public void setUp() throws Exception{
 		super.setUp();
 		Populator pop = new Populator();
+		pop.delete();
 		pop.popolate();
         us.removeByEmail("franco@franchi.net",em);
     	request.setParameter("email", "franco@franchi.net");

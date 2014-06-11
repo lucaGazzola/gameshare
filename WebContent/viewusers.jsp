@@ -36,10 +36,10 @@
 <table width=600 cellpadding=10 align="center" style="background-color:#F0F0F0; border:1px solid #CCC;">
 	<s:iterator value="userList">
 		<tr>
-			<td width="22%" style="border:1px solid #CCC;">
-				<img alt="profile_image" src="/Struts2Contacts/images/profile_images/<s:property value="ID_user"/>-profile.jpg" width="150" height="150"/>
+			<td width="14%" style="border:1px solid #CCC;">
+				<img alt="profile_image" src="/Struts2Contacts/images/profile_images/<s:property value="ID_user"/>-profile.jpg" width="50" height="50"/>
 			</td>
-			<td width="78%" style="border:1px solid #CCC;">
+			<td width="86%" style="border:1px solid #CCC;">
 				<i><b><s:property value="firstname"/> <s:property value="lastname"/><br></b></i>
 				<br>
 				<button type="button">Add Friend</button> <button type="button">Send Message</button>

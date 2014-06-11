@@ -23,6 +23,7 @@ public class AddClassicGameActionTest extends StrutsTestCase{
 	public void setUp() throws Exception{
 		super.setUp();
 		Populator pop = new Populator();
+		pop.delete();
 		pop.popolate();
         gs.removeByName("Test",em);
         request.setParameter("name","Test");

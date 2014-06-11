@@ -33,6 +33,7 @@ public class VoteGameActionTest extends StrutsTestCase{
 	public void setUp() throws Exception{
 		super.setUp();
 		Populator pop = new Populator();
+		pop.delete();
 		pop.popolate();
     	request.setParameter("isPlay", "1"); 	
     	u = us.findByEmail("gina@gmail.com", em);
