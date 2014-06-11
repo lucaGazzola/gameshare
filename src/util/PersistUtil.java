@@ -192,32 +192,40 @@ public class PersistUtil {
 		try {
 			em.persist(entity);
 			
-			if(entity.getScore() != -1){
-				//aggiorno average score
-				List<Like> likeList = (List<Like>)em.createQuery("SELECT l FROM Like l WHERE l.game.ID_game = :id_game",Like.class)
-						.setParameter("id_game", entity.getGame().getID_game())
-						.getResultList();
+			boolean newVote = false;
+			if(entity.getScore()==-1) newVote=true;
+			
+			//aggiorno average score
+			List<Like> likeList = (List<Like>)em.createQuery("SELECT l FROM Like l WHERE l.game.ID_game = :id_game",Like.class)
+					.setParameter("id_game", entity.getGame().getID_game())
+					.getResultList();
+			
+			Game game = em.createQuery("SELECT g FROM Game g WHERE g.ID_game = :id_game", Game.class)
+					.setParameter("id_game", entity.getGame().getID_game())
+					.getSingleResult();
 				
-				Game game = em.createQuery("SELECT g FROM Game g WHERE g.ID_game = :id_game", Game.class)
-						.setParameter("id_game", entity.getGame().getID_game())
-						.getSingleResult();
-				
-				//inizio calcolo avgscore -----
-				int cummScore = 0;
-				Iterator<Like> it = likeList.iterator();
-				while(it.hasNext()){
-					cummScore =+ it.next().getScore();
-				}	
-				float avgScore = (cummScore+entity.getScore())/(likeList.size()+1);
-				//fine calcolo avgscore -----
-				
-				game.setAvgScore(avgScore);
-				em.merge(game);
-				entity.getGame().setAvgScore(avgScore);
+			//inizio calcolo avgscore -----------------------------------
+			int cummScore = 0;
+			Iterator<Like> it = likeList.iterator();
+			
+			while(it.hasNext()){
+				Like tempLike = it.next();
+				if(!(!newVote && tempLike.getUser().getID_user() == entity.getUser().getID_user()))
+					cummScore =+ tempLike.getScore();
 			}
 			
-			
+			float avgScore = 0;
+			if(newVote)
+				avgScore = (cummScore+entity.getScore())/(likeList.size()+1);
+			else
+				avgScore = (cummScore+entity.getScore())/likeList.size();
+			//fine calcolo avgscore -----------------------------------
+				
+			game.setAvgScore(avgScore);
+			em.merge(game);
+			entity.getGame().setAvgScore(avgScore);
 			em.getTransaction().commit();
+			
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			System.out.println("Errore nel salvataggio, '"+entity.toString()+"'");
