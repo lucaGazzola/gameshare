@@ -36,12 +36,15 @@
 	
 <div id="body" align="center">
 	<!-- inizio tabella games separati x categoria -->
+	
+	<!-- titolo -->
 	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;z-index: 10;">
 		<tr>
-			<td align="center"><h2>Game List</h2></td>
+			<td align="center" width="100%" style="border:1px solid #CCC;z-index: 10;">
+				<h2>Game List</h2>
+			</td>
 		</tr>
 	</table>
-	<br>
 	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;z-index: 10;">
 		<!--  riga 1 -->
 		<tr>
@@ -150,14 +153,14 @@
 	
 	<br><br>
 	<!-- inizio tabella unaccepted games -->
+	<!-- titolo -->
 	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;z-index: 10;">
 		<tr>
-			<td align="center">
+			<td align="center" style="width:100%;vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
 				<h2>Games waiting approval</h2>
 			</td>
 		</tr>
 	</table>
-	<br>
 	<table width=600px style="background-color:#F0F0F0;border:1px solid #CCC;z-index: 10;">
 		<!--  riga 1 -->
 		<tr>

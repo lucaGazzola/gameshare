@@ -200,7 +200,8 @@ public class RegisterUserAction extends ActionSupport {
 			em.persist(u);
 			em.getTransaction().begin();
 			em.getTransaction().commit();
-		
+			
+			addActionMessage("You are now registered in GameShare, login with your credentials! Enjoy, play and share!");
 			return "success";
 		}else{
 			addActionError(getText("error.userRegistered"));

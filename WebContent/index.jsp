@@ -19,6 +19,10 @@
 <br>
 <s:actionerror />
 
+<s:if test="hasActionMessages()">
+      <s:actionmessage/>
+</s:if>
+
 <!-- TABELLA GRIGIA PRINCIPALE -->
 <table width=600 style="background-color:#F0F0F0;border:1px solid #CCC;">
 <tr>

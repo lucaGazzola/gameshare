@@ -96,7 +96,7 @@
 						<u><i><b>Played</b></i></u>
 						<s:if test="score == -1">
 							<s:form action="voteGame" method="post" namespace="/">
-	    						<s:select key="label.gameScore" name="vote" headerKey="0" headerValue="-- Please Select --" list="{'1', '2', '3', '4', '5'}" />
+	    						<s:select key="label.gameScore" name="vote" list="{'1', '2', '3', '4', '5'}" />
 								<s:hidden name="id_game" value="%{game.ID_game}"></s:hidden>
 								<s:hidden name="game" value="%{#game}"></s:hidden>
 								<s:hidden name="user_reviewList" value="%{#user_reviewList}"></s:hidden>

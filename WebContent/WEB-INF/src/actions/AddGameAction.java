@@ -228,12 +228,10 @@ public class AddGameAction extends ActionSupport implements ServletRequestAware 
 		// salvo l'immagine 
         try {
         	String filePath;
-        	System.out.println(imagePath);
         	if(imagePath == null)
         		filePath = servletRequest.getSession().getServletContext().getRealPath("/");
         	else
         		filePath = imagePath;
-            System.out.println(filePath);
             File fileToCreate = new File(filePath + "images\\game_images\\", g.getID_game()+"-game.jpg");
             FileUtils.copyFile(this.gameImage, fileToCreate);
         } catch (Exception e) {
