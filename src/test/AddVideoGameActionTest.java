@@ -115,7 +115,7 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 		String path = getClass().getClassLoader().getResource(".").getPath();
         File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
 
-		request.setParameter("imagePath",path+"..\\..\\WebContent");
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");
 		request.setParameter("online", "true");
 		request.setParameter("description", "");
 		
@@ -136,7 +136,7 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 		String path = getClass().getClassLoader().getResource(".").getPath();
         File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
 
-		request.setParameter("imagePath",path+"..\\..\\WebContent");
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");
 		request.setParameter("online", "true");
 		request.setParameter("PC", "false");
 		
@@ -158,7 +158,7 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 		String path = getClass().getClassLoader().getResource(".").getPath();
         File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
 
-		request.setParameter("imagePath",path+"..\\..\\WebContent");
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");
 		request.setParameter("online", "true");
 		
 		Platform pc;
@@ -181,7 +181,7 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 		String path = getClass().getClassLoader().getResource(".").getPath();
         File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
 
-		request.setParameter("imagePath",path+"..\\..\\WebContent");
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");
 		request.setParameter("online", "true");
 		request.setParameter("PC", "false");
 		request.setParameter("XBox", "true");
@@ -210,7 +210,7 @@ public class AddVideoGameActionTest extends StrutsTestCase{
 		String path = getClass().getClassLoader().getResource(".").getPath();
         File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
 
-		request.setParameter("imagePath",path+"..\\..\\WebContent");
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");
 		request.setParameter("online", "true");
 		request.setParameter("videogameType", "");
 		

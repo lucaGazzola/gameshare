@@ -94,6 +94,7 @@
 			<result name="success">game.jsp</result>
 			<result name="published">gameAccepted.jsp</result>
 			<result name="lock">game.jsp</result>
+			<result name="alreadyPublished">game.jsp</result>
 		</action>
 	</package>
 </struts>
