@@ -47,6 +47,8 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 		als = new AcceptLockService();
 		game = gameService.findByName(gameName, em);
 		
+		System.out.println(gameName);
+		System.out.println((User)session.get("loggedInUser")+" "+game);
 		if(als.findLock((User)session.get("loggedInUser"), game, em) != null){
 			addActionError(getText("error.lock"));
 			return "lock";
