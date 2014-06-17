@@ -199,22 +199,21 @@ public class RegisterUserAction extends ActionSupport implements ServletRequestA
 				e.printStackTrace();
 			}
 
-			String encodedPassword = DigestUtils.md5Hex(password) ;
-			
-			//user object creation
-			u = new NormalUser(email, encodedPassword, date, firstname, lastname, gender, job, residence, school, hometown);
-			
-			//persist user
-			em.persist(u);
-			em.getTransaction().begin();
-			em.getTransaction().commit();
-			
-			
-			//aggiungo messaggio di successo
-			addActionMessage("You are now registered in GameShare, login with your credentials! Enjoy, play and share!");
 
+			
 			// salvo l'immagine 
 	        try {
+				String encodedPassword = DigestUtils.md5Hex(password) ;
+				
+				//user object creation
+				u = new NormalUser(email, encodedPassword, date, firstname, lastname, gender, job, residence, school, hometown);
+				
+				//persist user
+				em.persist(u);
+				em.getTransaction().begin();
+				em.getTransaction().commit();
+				
+				
 	        	String filePath;
 	        	if(imagePath == null)
 	        		filePath = servletRequest.getSession().getServletContext().getRealPath("/");
@@ -222,12 +221,21 @@ public class RegisterUserAction extends ActionSupport implements ServletRequestA
 	        		filePath = imagePath;
 	            File fileToCreate = new File(filePath + "images\\profile_images\\", u.getID_user()+"-profile.jpg");
 	            FileUtils.copyFile(this.userImage, fileToCreate);
+	            
+	            //aggiungo messaggio di successo
+				addActionMessage("You are now registered in GameShare, login with your credentials! Enjoy, play and share!");
+	            
 	            return "success";
 	            
 	        } catch (Exception e) {
 	            addActionError("Missing profile picture");
+	            em.remove(u);
+				em.getTransaction().begin();
+				em.getTransaction().commit();
 	            return "errorPictureMissing";
 	        }
+
+            
 		}else{
 			addActionError(getText("error.userRegistered"));
 			return "errorDuplicate";
