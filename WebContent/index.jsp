@@ -13,9 +13,16 @@
 <div id="body" align="center">
 <div style="background:#F0F0F0;border:1px solid #CCC;"><h2>Game Share, game social network</h2></div>
 
-<s:form action="populateAction" method="post" namespace="/">
-	<s:submit method="execute" value="Populate DB" align="center"/>
-</s:form>
+<%-- <s:form action="populateAction" method="post" namespace="/"> --%>
+<%-- 	<s:submit method="execute" value="Populate DB" align="center"/> --%>
+<%-- </s:form> --%>
+
+<s:url action="populateAction" method="erase" namespace="/" var="urlTagErase"></s:url>
+<s:url action="populateAction" method="execute" namespace="/" var="urlTagPopulator"></s:url>
+<br>
+<s:a href="%{urlTagPopulator}"><button type="button">Populate DB</button></s:a>
+<s:a href="%{urlTagErase}"><button type="button">Erase DB</button></s:a>
+<br>
 <br>
 <s:actionerror />
 

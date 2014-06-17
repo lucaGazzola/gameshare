@@ -47,8 +47,6 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 		als = new AcceptLockService();
 		game = gameService.findByName(gameName, em);
 		
-		System.out.println(gameName);
-		System.out.println((User)session.get("loggedInUser")+" "+game);
 		if(als.findLock((User)session.get("loggedInUser"), game, em) != null){
 			addActionError(getText("error.lock"));
 			return "lock";
@@ -65,13 +63,11 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 		if(acceptCount >= threshold){
 			game.setPublished(true);
 			gameService.update(game, em);
-			System.out.println(acceptCount+" "+game.isPublished());
 			EntityManagerUtil.closeEntityManager(em);
 			return "published";
 		}
 		
-		
-		System.out.println(game.getAcceptCount());
+
 		gameService.update(game, em);
 		EntityManagerUtil.closeEntityManager(em);
 		return "success";
