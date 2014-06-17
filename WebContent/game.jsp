@@ -99,6 +99,7 @@
 	    						<s:select key="label.gameScore" name="vote" list="{'1', '2', '3', '4', '5'}" />
 								<s:hidden name="id_game" value="%{game.ID_game}"></s:hidden>
 								<s:hidden name="game" value="%{#game}"></s:hidden>
+								<s:hidden name="gameName" value="%{game.name}"></s:hidden>
 								<s:hidden name="user_reviewList" value="%{#user_reviewList}"></s:hidden>
 								<s:hidden name="numPlay" value="%{numPlay}"></s:hidden>
 								<s:hidden name="numLike" value="%{numLike}"></s:hidden>
