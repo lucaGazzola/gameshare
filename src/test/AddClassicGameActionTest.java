@@ -70,7 +70,7 @@ public class AddClassicGameActionTest extends StrutsTestCase{
 		String path = getClass().getClassLoader().getResource(".").getPath();
         File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
 
-		request.setParameter("imagePath",path+"..\\..\\WebContent");
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");
 		request.setParameter("gameType", "card");
 		request.setParameter("deck","hearthstone");
 		
@@ -193,7 +193,7 @@ public void testBoardGameAlreadyPresent() throws Exception {
 		String path = getClass().getClassLoader().getResource(".").getPath();
         File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
 
-		request.setParameter("imagePath",path+"..\\..\\WebContent");
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");
 		request.setParameter("gameType", "board");
 	
 		ActionProxy proxy = getActionProxy("/addGame");
@@ -228,7 +228,7 @@ public void testBoardGameAlreadyPresent() throws Exception {
 		String path = getClass().getClassLoader().getResource(".").getPath();
         File gameImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
 
-		request.setParameter("imagePath",path+"..\\..\\WebContent");
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");
 		request.setParameter("gameType", "sport");
 	
 		ActionProxy proxy = getActionProxy("/addGame");
