@@ -143,16 +143,16 @@ public class Populator {
 		NormalUser u = new NormalUser("franco@franco.net", "prolol", now, "luca", "franchi", 'M', "studente", "milano", "bicocca", "milano");
 		NormalUser u2 = new NormalUser("gigi@gmail.com", "test", now, "gigi", "bianchi", 'M', "impiegato", "roma", "roma 3", "roma");
 		NormalUser u3 = new NormalUser("pippo@gmail.com", "test", now, "pippo", "franchi", 'M', "agricoltore", "amsterdam", "kingstone university", "jamaica");
-		NormalUser u4 = new NormalUser("gina@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
-		NormalUser u5 = new NormalUser("gina1@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
-		NormalUser u6 = new NormalUser("gina2@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u4 = new NormalUser("gina@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "milano", "elementari", "casablanca");
+		NormalUser u5 = new NormalUser("gina1@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "firenze", "elementari", "casablanca");
+		NormalUser u6 = new NormalUser("gina2@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "firenze", "elementari", "casablanca");
 		NormalUser u7 = new NormalUser("gina3@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
 		NormalUser u8 = new NormalUser("gina4@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
-		NormalUser u9 = new NormalUser("gina5@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u9 = new NormalUser("gina5@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "milano", "elementari", "casablanca");
 		NormalUser u10 = new NormalUser("gina6@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
 		NormalUser u11 = new NormalUser("gina7@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
-		NormalUser u12 = new NormalUser("gina8@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
-		NormalUser u13 = new NormalUser("gina9@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
+		NormalUser u12 = new NormalUser("gina8@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "firenze", "elementari", "casablanca");
+		NormalUser u13 = new NormalUser("gina9@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "firenze", "elementari", "casablanca");
 		NormalUser u14 = new NormalUser("gina10@gmail.com", "test", now, "gina", "rossi", 'F', "attrice-cantante", "roma", "elementari", "casablanca");
 		
 		pu.saveNormalUser(u,em);pu.saveNormalUser(u2,em);pu.saveNormalUser(u3,em);pu.saveNormalUser(u4,em);

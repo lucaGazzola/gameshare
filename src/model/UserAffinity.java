@@ -10,6 +10,15 @@ import javax.persistence.*;
 public class UserAffinity implements Serializable {
   
 	private static final long serialVersionUID = 1L;
+	
+	@ManyToOne
+    private NormalUser firstUser;
+
+	@ManyToOne
+    private NormalUser secondUser;
+    
+    @Column(name = "value")
+    private int value;
 
 	@Id @Column(name="ID_userAffinity")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="userAffinityGen") 
@@ -19,45 +28,43 @@ public class UserAffinity implements Serializable {
 		
 	}
 	
-	public UserAffinity(User firstUser, User secondUser, boolean value) {
+	public UserAffinity(NormalUser firstUser, NormalUser secondUser, int value) {
 		super();
 		this.firstUser = firstUser;
 		this.secondUser = secondUser;
 		this.value = value;
 	}
 
-	@ManyToOne
-    private User firstUser;
-
-	@ManyToOne
-    private User secondUser;
-    
-    @Column(name = "value")
-    private boolean value;
-
-	public User getFirstUser() {
+	public NormalUser getFirstUser() {
 		return firstUser;
 	}
 
-	public void setFirstUser(User firstUser) {
+	public void setFirstUser(NormalUser firstUser) {
 		this.firstUser = firstUser;
 	}
 
-	public User getSecondUser() {
+	public NormalUser getSecondUser() {
 		return secondUser;
 	}
 
-	public void setSecondUser(User secondUser) {
+	public void setSecondUser(NormalUser secondUser) {
 		this.secondUser = secondUser;
 	}
 
-	public boolean isValue() {
+	public int getValue() {
 		return value;
 	}
 
-	public void setValue(boolean value) {
+	public void setValue(int value) {
 		this.value = value;
 	}
 
-   
+	public long getID_userAffinity() {
+		return ID_userAffinity;
+	}
+
+	public void setID_userAffinity(long iD_userAffinity) {
+		ID_userAffinity = iD_userAffinity;
+	}
+  
 }

@@ -15,9 +15,11 @@
 
 <s:url action="populateAction" method="erase" namespace="/" var="urlTagErase"></s:url>
 <s:url action="populateAction" method="execute" namespace="/" var="urlTagPopulator"></s:url>
+<s:url action="affinityAction" method="execute" namespace="/" var="urlTagAffinity"></s:url>
 <br>
 <s:a href="%{urlTagPopulator}"><button type="button">Populate DB</button></s:a>
 <s:a href="%{urlTagErase}"><button type="button">Erase DB</button></s:a>
+<s:a href="%{urlTagAffinity}"><button type="button">Calculate Affinities</button></s:a>
 <br>
 <br>
 <s:actionerror />

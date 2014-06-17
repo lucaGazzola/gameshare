@@ -3,6 +3,7 @@
 	<persistence-unit name="gameshareExample" transaction-type="RESOURCE_LOCAL">
  	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>model.AcceptLock</class>
+		<class>model.UserAffinity</class>
 		<class>model.Administrator</class>
 		<class>model.SystemUser</class>
 		<class>model.Moderator</class>

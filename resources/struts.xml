@@ -91,6 +91,10 @@
 			<result name="success">index.jsp</result>
 		</action>
 		
+		<action name="affinityAction" class="actions.AffinityAction">
+			<result name="success">index.jsp</result>
+		</action>
+		
 		<action name="AddGamePage" class="actions.AddGamePageAction">
 			<result name="success">addGame.jsp</result>
 		</action>
