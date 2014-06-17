@@ -11,6 +11,13 @@
 	<package name="default" extends="struts-default" namespace="/">
 		
 		<action name="register" class="actions.RegisterUserAction">
+			<interceptor-ref name="fileUpload">
+		        <param name="maximumSize">2097152</param>
+		        <param name="allowedTypes">
+		           image/png,image/gif,image/jpeg,image/pjpeg
+		        </param>
+		    </interceptor-ref>
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="success">index.jsp</result>
 			<result name="missingGender">index.jsp</result>
 			<result name="errorDuplicate">index.jsp</result>
@@ -18,6 +25,8 @@
 			<result name="invalidEmailAddress">index.jsp</result>
 			<result name="invalidCharactersError">index.jsp</result>
 			<result name="passwordTooShort">index.jsp</result>
+			<result name="errorPictureMissing">index.jsp</result>
+			<result name="input">index.jsp</result>
 		</action>
 		<action name="login" class="actions.LoginAction">
 			<result name="success">loginConfirm.jsp</result>

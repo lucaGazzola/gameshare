@@ -13,10 +13,6 @@
 <div id="body" align="center">
 <div style="background:#F0F0F0;border:1px solid #CCC;"><h2>Game Share, game social network</h2></div>
 
-<%-- <s:form action="populateAction" method="post" namespace="/"> --%>
-<%-- 	<s:submit method="execute" value="Populate DB" align="center"/> --%>
-<%-- </s:form> --%>
-
 <s:url action="populateAction" method="erase" namespace="/" var="urlTagErase"></s:url>
 <s:url action="populateAction" method="execute" namespace="/" var="urlTagPopulator"></s:url>
 <br>
@@ -55,19 +51,21 @@
 	<!-- 	colonna registrazione -->
 	<td style="border:1px solid #CCC;">
 	<h3>Register</h3>
-	<s:form action="register" method="post" namespace="/">
-	<s:textfield name="email" key="label.email" size="20"/>
-	<s:password name="password" key="label.password" size="20"/>
-	<s:date name="birthdate" var="formattedVal"/>
-    <s:textfield name="birthdate" value="%{#formattedVal}" key="label.birthdate" />
-	<s:textfield name="hometown" key="label.hometown" size="20"/>
-	<s:radio key="label.gender" name="gender" list="{'M','F'}" />
-	<s:textfield name="job" key="label.job" size="20"/>
-	<s:textfield name="school" key="label.school" size="20"/>
-	<s:textfield name="firstname" key="label.firstname" size="20"/>
-	<s:textfield name="lastname" key="label.lastname" size="20"/>
-	<s:textfield name="residence" key="label.residence" size="20"/>
-	<s:submit method="execute" key="label.register" align="right"/>
+	<s:form action="register" method="post" namespace="/" enctype="multipart/form-data">
+		<s:textfield name="email" key="label.email" size="20"/>
+		<s:password name="password" key="label.password" size="20"/>
+		<s:date name="birthdate" var="formattedVal"/>
+	    <s:textfield name="birthdate" value="%{#formattedVal}" key="label.birthdate" />
+		<s:textfield name="hometown" key="label.hometown" size="20"/>
+		<s:radio key="label.gender" name="gender" list="{'M','F'}" />
+		<s:textfield name="job" key="label.job" size="20"/>
+		<s:textfield name="school" key="label.school" size="20"/>
+		<s:textfield name="firstname" key="label.firstname" size="20"/>
+		<s:textfield name="lastname" key="label.lastname" size="20"/>
+		<s:textfield name="residence" key="label.residence" size="20"/>
+		<s:file name="userImage" key="label.uploadUserImage"  size="5" label="User Image" />
+		<br>
+		<s:submit method="execute" key="label.register" align="right"/>
 	</s:form>
 	</td>
 	
@@ -75,9 +73,9 @@
 	<td style="vertical-align:top; border:1px solid #CCC;">
 	<h3>Login</h3>
 	<s:form action="login" method="post" namespace="/">
-	<s:textfield name="email" key="label.email" size="20"/>
-	<s:password name="password" key="label.password" size="20"/>
-	<s:submit method="login" key="label.login" align="right"/>
+		<s:textfield name="email" key="label.email" size="20"/>
+		<s:password name="password" key="label.password" size="20"/>
+		<s:submit method="login" key="label.login" align="right"/>
 	</s:form>
 	</td>
 </s:else>

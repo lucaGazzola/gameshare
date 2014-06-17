@@ -58,7 +58,7 @@ Game type:
 		<s:checkbox name="XBox" fieldValue="true" label="XBox"/>
 		<s:checkbox name="PS" fieldValue="true" label="PS"/>
 		<s:checkbox name="Wii" fieldValue="true" label="Wii"/>
-		<s:file name="gameImage" key="label.uploadImage" label="User Image" />
+		<s:file name="gameImage" key="label.uploadImage" label="Game Image" />
 		<s:submit method="execute" key="label.addGame" align="center"/>
 	</s:form>
 </div>

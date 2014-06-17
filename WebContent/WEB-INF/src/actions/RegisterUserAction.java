@@ -7,18 +7,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.File;
 
-import com.opensymphony.xwork2.ActionSupport;
+import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 
-import model.*;
-
-import javax.persistence.*;
+import model.NormalUser;
+import model.User;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 import util.EntityManagerUtil;
 
-public class RegisterUserAction extends ActionSupport {
+import com.opensymphony.xwork2.ActionSupport;
+
+public class RegisterUserAction extends ActionSupport implements ServletRequestAware {
 
 	EntityManager em = EntityManagerUtil.getEntityManager();
 	
@@ -39,6 +44,10 @@ public class RegisterUserAction extends ActionSupport {
 	private String school;
 	private Pattern pattern;
 	private Matcher matcher;
+    private File userImage;
+    private String userImageFileName;
+    private String imagePath;
+    private HttpServletRequest servletRequest;    
 	private static final String EMAIL_PATTERN = 
 		"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -122,7 +131,7 @@ public class RegisterUserAction extends ActionSupport {
 	public void setSchool(String school) {
 		this.school = school;
 	}
-	
+
 	private boolean containsIllegals(String toExamine) {
 	    Pattern pattern = Pattern.compile("[~#*+%{}<>\\[\\]|\"\\_^]");
 	    Matcher matcher = pattern.matcher(toExamine);
@@ -191,7 +200,6 @@ public class RegisterUserAction extends ActionSupport {
 			}
 
 			String encodedPassword = DigestUtils.md5Hex(password) ;
-			System.out.println(encodedPassword);
 			
 			//user object creation
 			u = new NormalUser(email, encodedPassword, date, firstname, lastname, gender, job, residence, school, hometown);
@@ -201,12 +209,58 @@ public class RegisterUserAction extends ActionSupport {
 			em.getTransaction().begin();
 			em.getTransaction().commit();
 			
+			
+			//aggiungo messaggio di successo
 			addActionMessage("You are now registered in GameShare, login with your credentials! Enjoy, play and share!");
-			return "success";
+
+			// salvo l'immagine 
+	        try {
+	        	String filePath;
+	        	if(imagePath == null)
+	        		filePath = servletRequest.getSession().getServletContext().getRealPath("/");
+	        	else
+	        		filePath = imagePath;
+	            File fileToCreate = new File(filePath + "images\\profile_images\\", u.getID_user()+"-profile.jpg");
+	            FileUtils.copyFile(this.userImage, fileToCreate);
+	            return "success";
+	            
+	        } catch (Exception e) {
+	            addActionError("Missing profile picture");
+	            return "errorPictureMissing";
+	        }
 		}else{
 			addActionError(getText("error.userRegistered"));
 			return "errorDuplicate";
 		}
 
-	}	
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest arg0) {
+		this.servletRequest = arg0;
+	}
+
+	public File getUserImage() {
+		return userImage;
+	}
+
+	public String getUserImageFileName() {
+		return userImageFileName;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setUserImage(File userImage) {
+		this.userImage = userImage;
+	}
+
+	public void setUserImageFileName(String userImageFileName) {
+		this.userImageFileName = userImageFileName;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 }
