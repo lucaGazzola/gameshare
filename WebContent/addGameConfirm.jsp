@@ -21,8 +21,8 @@
 	     <a href="/Struts2Contacts/loginConfirm.jsp">Home</a> | 
 	     <s:a href="%{urlTagGames}">Games</s:a> | 
 	     <a href="/Struts2Contacts/searchGame.jsp">Search</a> | 
-	     Messages | 
-	     Friends |
+	     <font color="gray">Messages | 
+	     Friends |</font>
 	    </div>
 	    
 	    <div style="float: right; position:relative; top:5px; right:7px;">

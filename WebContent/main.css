@@ -12,3 +12,8 @@ a:active {color:black;text-decoration:underline;}  /* selected link */
 	border:1px solid #CCC;
 	align:center;
 }
+
+.not_implemented{
+	color:gray;
+	font-color:gray;
+}

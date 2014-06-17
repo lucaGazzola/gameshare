@@ -85,18 +85,5 @@
 </table>
 
 </div>
-
-<%-- <s:form action="viewGame" method="post" namespace="/"> --%>
-<%-- 	<s:textfield name="id_game" size="5"/> --%>
-<%-- 	<s:submit method="execute" value="View Game" align="center"/> --%>
-<%-- </s:form> --%>
-
-<%-- <s:form action="add" method="post" namespace="/"> --%>
-<%-- 	<s:textfield name="firstname" key="label.firstname" size="20"/> --%>
-<%-- 	<s:textfield name="lastname" key="label.lastname" size="20"/> --%>
-<%-- 	<s:textfield name="address" key="label.address" size="20"/> --%>
-<%-- 	<s:submit method="execute" key="label.add" align="center"/> --%>
-<%-- </s:form> --%>
-
 </body>
 </html>

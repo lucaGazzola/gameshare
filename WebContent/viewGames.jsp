@@ -22,8 +22,8 @@
 	     <a href="/Struts2Contacts/loginConfirm.jsp">Home</a> | 
 	     <s:a href="%{urlTagGames}">Games</s:a> | 
 	     <a href="/Struts2Contacts/searchGame.jsp">Search</a> | 
-	     Messages | 
-	     Friends |
+	     <font color="gray">Messages | 
+	     Friends |</font>
 	    </div>
 	    
 	    <div style="float: right; position:relative; top:5px; right:7px;">
@@ -52,7 +52,8 @@
 				<b>Board Games</b>
 				
 				<table width="100%">
-				<s:iterator value="boardgameList" var="game">
+				<s:iterator value="boardgameList" var="game" status="ctr">
+				<s:if test="#ctr.index < 8">
 				<tr>
 					<td width="15%">
 						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
@@ -64,17 +65,19 @@
 						</a>
 					</td>
 				</tr>
+				</s:if>
 				</s:iterator> 
 				</table>
 				<br><p></p>
-				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>
 			</td>
 			
 			<td width="50%" style="vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
 				<b>Card Games</b>
 				
 				<table width="100%">
-				<s:iterator value="cardgameList" var="game">
+				<s:iterator value="cardgameList" var="game" status="ctr">
+				<s:if test="#ctr.index < 8">
 				<tr>
 					<td width="15%">
 						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
@@ -86,10 +89,11 @@
 						</a>
 					</td>
 				</tr>
+				</s:if>
 				</s:iterator> 
 				</table>
 				<br><p></p>
-				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>
 			</td>
 		</tr>
 		<!-- fine riga1 -->
@@ -100,7 +104,8 @@
 				<b>Video Games</b>
 				
 				<table width="100%">
-				<s:iterator value="videogameList" var="game">
+				<s:iterator value="videogameList" var="game" status="ctr">
+				<s:if test="#ctr.index < 8">
 				<tr>
 					<td width="15%">
 						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
@@ -112,17 +117,19 @@
 						</a>
 					</td>
 				</tr>
+				</s:if>
 				</s:iterator> 
 				</table>
 				<br><p></p>
-				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>
 			</td>
 			
 			<td width="50%" style="vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
 				<b>Sport</b>
 				
 				<table width="100%">
-				<s:iterator value="sportList" var="game">
+				<s:iterator value="sportList" var="game" status="ctr">
+				<s:if test="#ctr.index < 8">
 				<tr>
 					<td width="15%">
 						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
@@ -134,10 +141,11 @@
 						</a>
 					</td>
 				</tr>
+				</s:if>
 				</s:iterator> 
 				</table>
 				<br><p></p>
-				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>
 			</td>
 		</tr>
 		<!-- fine riga2 -->		
@@ -168,7 +176,8 @@
 				<b>Board Games</b>
 				
 				<table width="100%">
-				<s:iterator value="unaccepted_boardgameList" var="game">
+				<s:iterator value="unaccepted_boardgameList" var="game" status="ctr">
+				<s:if test="#ctr.index < 8">
 				<tr>
 					<td width="15%">
 						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
@@ -180,17 +189,19 @@
 						</a>
 					</td>
 				</tr>
+				</s:if>
 				</s:iterator> 
 				</table>
 				<br><p></p>
-				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>
 			</td>
 			
 			<td width="50%" style="vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
 				<b>Card Games</b>
 				
 				<table width="100%">
-				<s:iterator value="unaccepted_cardgameList" var="game">
+				<s:iterator value="unaccepted_cardgameList" var="game" status="ctr">
+				<s:if test="#ctr.index < 8">
 				<tr>
 					<td width="15%">
 						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
@@ -202,10 +213,11 @@
 						</a>
 					</td>
 				</tr>
+				</s:if>
 				</s:iterator> 
 				</table>
 				<br><p></p>
-				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>
 			</td>
 		</tr>
 		<!-- fine riga1 -->
@@ -216,7 +228,8 @@
 				<b>Video Games</b>
 				
 				<table width="100%">
-				<s:iterator value="unaccepted_videogameList" var="game">
+				<s:iterator value="unaccepted_videogameList" var="game" status="ctr">
+				<s:if test="#ctr.index < 8">
 				<tr>
 					<td width="15%">
 						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
@@ -228,17 +241,19 @@
 						</a>
 					</td>
 				</tr>
+				</s:if>
 				</s:iterator> 
 				</table>
 				<br><p></p>
-				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>
 			</td>
 			
 			<td width="50%" style="vertical-align:top;border:1px solid #CCC;position: relative;z-index: 10;">
 				<b>Sport</b>
 				
 				<table width="100%">
-				<s:iterator value="unaccepted_sportList" var="game">
+				<s:iterator value="unaccepted_sportList" var="game" status="ctr">
+				<s:if test="#ctr.index < 8">
 				<tr>
 					<td width="15%">
 						<img alt="game_image" src="/Struts2Contacts/images/game_images/<s:property value="ID_game"/>-game.jpg" width="30" height="30"/>
@@ -250,10 +265,11 @@
 						</a>
 					</td>
 				</tr>
+				</s:if>
 				</s:iterator> 
 				</table>
 				<br><p></p>
-				<div style="position: absolute; bottom: 0px;"><b><i>View all</i></b></div>
+				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>
 			</td>
 		</tr>
 		<!-- fine riga2 -->
