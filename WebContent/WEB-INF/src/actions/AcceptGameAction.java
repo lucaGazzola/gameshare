@@ -22,10 +22,11 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 	//Data coming from the form, automatically injected by STRUTS
 	private long id_game;
 	private Game game;
+	private String gameName;
 	private String gameCategory;
 	private AcceptLockService als;
 	
-	static int threshold = 2;
+	static int threshold = 3;
 	
 	private Map<String,Object> session;
 	
@@ -44,7 +45,17 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		GameService gameService = new GameService();
 		als = new AcceptLockService();
-		game = gameService.find(id_game, em);
+		game = gameService.findByName(gameName, em);
+		
+		if(als.findLock((User)session.get("loggedInUser"), game, em) != null){
+			addActionError(getText("error.lock"));
+			return "lock";
+		}
+		
+		if(game.isPublished()){
+			addActionError(getText("error.alreadyPublished"));
+			return "alreadyPublished";
+		}
 		
 		als.saveLock((User)session.get("loggedInUser"), game, em);
 		int acceptCount = game.getAcceptCount() + 1;
@@ -52,11 +63,13 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 		if(acceptCount >= threshold){
 			game.setPublished(true);
 			gameService.update(game, em);
+			System.out.println(acceptCount+" "+game.isPublished());
+			EntityManagerUtil.closeEntityManager(em);
 			return "published";
 		}
 		
 		
-		
+		System.out.println(game.getAcceptCount());
 		gameService.update(game, em);
 		EntityManagerUtil.closeEntityManager(em);
 		return "success";
@@ -80,6 +93,14 @@ public class AcceptGameAction extends ActionSupport implements SessionAware{
 
 	public void setGame(Game game) {
 		this.game = game;
+	}
+
+	public String getGameName() {
+		return gameName;
+	}
+
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
 	}
 
 	public void setGameCategory(String gameCategory) {

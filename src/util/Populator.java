@@ -23,6 +23,7 @@ public class Populator {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		em.getTransaction().begin();
 		
+		em.createQuery("DELETE FROM AcceptLock").executeUpdate();
 		em.createQuery("DELETE FROM Like").executeUpdate();
 		em.createQuery("DELETE FROM NormalUser").executeUpdate();
 		em.createQuery("DELETE FROM Administrator").executeUpdate();

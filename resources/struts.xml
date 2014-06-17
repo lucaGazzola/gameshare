@@ -93,6 +93,7 @@
 		<action name="acceptGame" class="actions.AcceptGameAction">
 			<result name="success">game.jsp</result>
 			<result name="published">gameAccepted.jsp</result>
+			<result name="lock">game.jsp</result>
 		</action>
 	</package>
 </struts>
