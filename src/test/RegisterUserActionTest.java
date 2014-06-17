@@ -2,6 +2,8 @@ package test;
 
 
 
+import java.io.File;
+
 import javax.persistence.EntityManager;
 
 import model.User;
@@ -11,6 +13,7 @@ import org.apache.struts2.StrutsTestCase;
 import service.UserService;
 import util.EntityManagerUtil;
 import util.Populator;
+import actions.RegisterUserAction;
 
 import com.opensymphony.xwork2.ActionProxy;
 
@@ -120,7 +123,10 @@ public class RegisterUserActionTest extends StrutsTestCase{
     }
 	
 	public void testEmptyOptionalFields() throws Exception {
-		
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File userImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
+
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");
     	request.setParameter("firstname", "");
     	request.setParameter("lastname", "");
     	request.setParameter("job", "");
@@ -129,7 +135,8 @@ public class RegisterUserActionTest extends StrutsTestCase{
     	request.setParameter("residence", "");
     	
     	ActionProxy proxy = getActionProxy("/register");
-
+    	RegisterUserAction action = (RegisterUserAction) proxy.getAction() ;
+		action.setUserImage(userImage);
     	String result = proxy.execute();
         
         assertEquals("Result returned from executing the action should have been success", "success", result);
@@ -139,9 +146,13 @@ public class RegisterUserActionTest extends StrutsTestCase{
 	}
 	
 	public void testEverythingCorrect() throws Exception {
-		    	
-    	ActionProxy proxy = getActionProxy("/register");
+		String path = getClass().getClassLoader().getResource(".").getPath();
+        File userImage = new File(path+"\\..\\..\\WebContent\\images\\test.jpg");
 
+		request.setParameter("imagePath",path+"..\\..\\WebContent\\");    	
+    	ActionProxy proxy = getActionProxy("/register");
+    	RegisterUserAction action = (RegisterUserAction) proxy.getAction() ;
+		action.setUserImage(userImage);
     	String result = proxy.execute();
         
         assertEquals("Result returned from executing the action should have been success", "success", result);
