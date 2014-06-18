@@ -13,6 +13,7 @@ import javax.persistence.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.struts2.interceptor.SessionAware;
 
+import service.AffinityService;
 import util.EntityManagerUtil;
 
 public class LoginAction extends ActionSupport implements SessionAware{
@@ -25,6 +26,8 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	private String email;
 	private String password;
 	private Map<String,Object> session;
+	private List<User> affinityList;
+	private AffinityService as = new AffinityService();
 	
 
 	@Override
@@ -80,7 +83,10 @@ public class LoginAction extends ActionSupport implements SessionAware{
 					user = u;
 					//inserisco l'utente nella session
 					session.put("loggedInUser", user);
-					
+					affinityList = as.getUserAffinities(u.getID_user(), em);
+					for(User u : affinityList){
+						System.out.println(u.getID_user());
+					}
 					//inserisco nella session la lista dei played games
 					List<Game> playGameList = 
 							(List<Game>)em.createQuery("SELECT l.game FROM Like l WHERE l.user.ID_user = :id_user AND l.play = 'TRUE'",Game.class)

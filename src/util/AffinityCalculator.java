@@ -1,12 +1,15 @@
 package util;
 
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import model.Game;
 import model.Like;
 import model.NormalUser;
 import model.UserAffinity;
@@ -20,7 +23,8 @@ public class AffinityCalculator {
 		EntityManager em = EntityManagerUtil.getEntityManager();
         Calendar calendar1 = Calendar.getInstance();
         Calendar calendar2 = Calendar.getInstance();
-		int value=0, i=0, j=0;
+		int i=0, j=0;
+		double value=0;
 		
 		List<NormalUser> results1 = (List<NormalUser>)em.createQuery("SELECT p FROM NormalUser p").getResultList();
 		List<NormalUser> results2 = (List<NormalUser>)em.createQuery("SELECT p FROM NormalUser p").getResultList();
@@ -57,6 +61,8 @@ public class AffinityCalculator {
 						}
 					}
 				}
+				List<Game> games = (List<Game>)em.createQuery("SELECT p FROM Game p").getResultList();
+				value = (value / (games.size()+4+2))*10;
 				UserAffinity ua = new UserAffinity(source,target,value);
 				em.getTransaction().begin();
 				em.persist(ua);

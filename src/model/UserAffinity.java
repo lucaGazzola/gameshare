@@ -18,7 +18,7 @@ public class UserAffinity implements Serializable {
     private NormalUser secondUser;
     
     @Column(name = "value")
-    private int value;
+    private double value;
 
 	@Id @Column(name="ID_userAffinity")
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="userAffinityGen") 
@@ -28,7 +28,7 @@ public class UserAffinity implements Serializable {
 		
 	}
 	
-	public UserAffinity(NormalUser firstUser, NormalUser secondUser, int value) {
+	public UserAffinity(NormalUser firstUser, NormalUser secondUser, double value) {
 		super();
 		this.firstUser = firstUser;
 		this.secondUser = secondUser;
@@ -51,11 +51,11 @@ public class UserAffinity implements Serializable {
 		this.secondUser = secondUser;
 	}
 
-	public int getValue() {
+	public double getValue() {
 		return value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 
