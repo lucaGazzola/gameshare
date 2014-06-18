@@ -91,17 +91,31 @@
 		</tr>
 		<tr>
 			<td width="50%" style="position:relative;vertical-align:top;border:1px solid #CCC;">
+				<font color="gray">
 				<b>Suggested games</b><br><br>
 				- Briscola<br>
 				- Tresette
-				
+				</font>
 				<br><br><p></p>
 				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>
 			</td>
 			<td width="50%"style="position:relative;vertical-align:top;border:1px solid #CCC;">
 				<b>Suggested friends</b><br><br>
-				- Gina Lollobrigida<br>
-				- Gigi Rizzi
+				<table width="100%">
+				<s:iterator value="#session.affinityList" var="user" status="ctr">
+				<s:if test="#ctr.index < 5">
+				<tr>
+					<td width="15%">
+						<img alt="user_image" src="/Struts2Contacts/images/profile_images/<s:property value="ID_user"/>-profile.jpg" width="30" height="30"/>
+					</td>
+					<td width="85%">
+					<s:property value="firstname"/> <s:property value="lastname"/> <button type="button" disabled>Add Friend</button> <button type="button" disabled>Message</button>
+					
+					</td>
+				</tr>
+				</s:if>
+				</s:iterator>
+				</table>
 				
 				<br><br><p></p>
 				<div style="position: absolute; bottom: 0px;"><font color="gray"><b><i>View all</i></b></font></div>

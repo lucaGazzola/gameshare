@@ -41,8 +41,10 @@ public class PersistUtil {
 	
 	public boolean saveCardGame(CardGame entity, EntityManager em) {
 		try {
-			em.getTransaction().begin();
 			entity.setPublished(true);
+			if(entity.getName().equals("Brisafuccola") || entity.getName().equals("Brascola") || entity.getName().equals("Brucola"))
+				entity.setPublished(false);
+			em.getTransaction().begin();
 			em.persist(entity);
 			em.getTransaction().commit();
 		} catch (Exception e) {

@@ -65,7 +65,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 	public String logout(){
 		// rimuovo dalla session user e playgamelist
-		if(session.remove("loggedInUser") != null && session.remove("playGameList") != null){
+		if(session.remove("loggedInUser") != null && session.remove("playGameList") != null && session.remove("affinityList") != null){
 			return "successLogout";
 		}
 		else{
@@ -84,6 +84,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 					//inserisco l'utente nella session
 					session.put("loggedInUser", user);
 					affinityList = as.getUserAffinities(u.getID_user(), em);
+					session.put("affinityList", affinityList);
 					for(User u : affinityList){
 						System.out.println(u.getID_user());
 					}

@@ -43,7 +43,7 @@
 				<td width="86%" style="border:1px solid #CCC;">
 					<i><b><s:property value="firstname"/> <s:property value="lastname"/><br></b></i>
 					<br>
-					<button type="button">Add Friend</button> <button type="button">Send Message</button>
+					<button type="button" disabled>Add Friend</button> <button type="button" disabled>Send Message</button>
 				</td>
 			</tr>
 		</s:iterator>
